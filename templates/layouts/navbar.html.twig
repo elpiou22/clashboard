@@ -1,0 +1,26 @@
+{% block head %}
+  <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
+{% endblock head %}
+
+<nav class="navbar">
+  <div class="navbar_container">
+    <div class="nav-left">
+      <div class="nav-item"><a href="{{ path('home') }}"><img src="{{ null }}" alt=" " class="basic"></a></div>
+      <div class="nav-item"><a href="{{ path('home') }}"class="basic">Home</a></div>
+      <div class="nav-item"><a href="{{ path('cwl_home') }}"class="basic">CWL</a></div>
+      <div class="nav-item"><a href="{{ null }}"class="basic"></a></div>
+    </div>
+
+    <div class="nav-right">
+      {% if app.user %}
+        <div class="nav-item"><a href="{{ path('acc_profile') }}"class="basic">Mon profil</a></div>
+        <div class="nav-item"><a href="{{ path('app_logout') }}"class="basic">Déconnexion</a></div>
+      {% else %}
+        <div class="nav-item"><a href="{{ path('acc_login') }}"class="basic">Connexion</a></div>
+        <div class="nav-item"><a href="{{ path('acc_signin') }}"class="basic">Créer un compte</a></div>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+

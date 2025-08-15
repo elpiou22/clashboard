@@ -1,0 +1,33 @@
+footer {
+  width: 100%;
+  background-color: #222;
+  color: white;
+  padding: 15px 0;
+  text-align: center;
+  position: relative; /* ou static, pas fixed ici */
+  display: flex;
+  justify-content: center;
+  gap: 30px; /* espace entre les liens */
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+footer a {
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+}
+footer a:hover {
+  text-decoration: underline;
+}
+
+footer ul{
+  list-style: none;
+}
+
+
+
+
+.body_container{
+  flex: 1;
+}
+

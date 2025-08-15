@@ -1,0 +1,19 @@
+
+
+.beige{
+  background-color: #e7e8dc;
+}
+
+.green{
+  background-color: #cacbb6;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #b8b9af;
+  border-radius: 5px;
+}
+
+.grn_btn{
+  background: linear-gradient(to bottom, #70b422 50%, #5e9d15 50%);
+  border: 2px solid #49652a !important;
+
+}

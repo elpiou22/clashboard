@@ -1,0 +1,211 @@
+.body_container{
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+
+  flex-direction: column;
+}
+
+.all_container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 85%;
+  border-radius: 8px;
+  font-weight: bold;
+
+}
+
+.content_container, .rules_container{
+  display: flex;
+  flex-direction: column;
+  width: 98%;
+  padding: 1%;
+}
+
+.title_container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1%;
+  font-size: 300%;
+  color: black;
+  font-weight: bold;
+}
+
+.green{
+  display: flex;
+  padding: 1%;
+}
+
+.clan_tag_container{
+
+}
+
+.rules_container{
+  display: flex;
+}
+
+.main_rules_container, .exceptions_rules_container{
+  display: flex;
+  flex-direction: column;
+}
+
+.main_rules_container{
+  margin-bottom: 1%;
+}
+
+.rule-row{
+  display: flex;
+  background: linear-gradient(to bottom, #c9c1ad 50%, #b4a981 50%);
+  border-width: 1px;
+  border-radius: 4px;
+  border-color: black;
+  border-style: solid;
+  margin: 1%;
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-bottom: 0.5%;
+  padding-top: 0.5%;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.rule-row > *:first-child{
+  margin-left: 0;
+}
+.rule-row > *{
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+.more > *:first-child{
+  margin-left: 0;
+}
+.more > *{
+  margin-left: 1%;
+  margin-right: 1%;
+}
+.more{
+  display: flex;
+  align-items: center;
+  margin-left:0.5%;
+  font-weight: bold;
+}
+.more label{
+  width: 50%;
+}
+
+/* box */
+.remove-rule{
+  margin-left: auto;
+  padding: 5px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.result_box, .operator_box, .rule-row > *:first-child{
+  width: 5%;
+  display: flex;
+  font-weight: bold;
+}
+
+.result_box select, .logical_operator, [name="stars[]"], [name="exceptions_stars[]"], [name="exceptions_townhalllevels_A[]"],[name="exceptions_townhalllevels_D[]"]{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+
+}
+
+.comparison_operator{
+  display: flex;
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 9px;
+  padding-left: 9px;
+  border-radius: 5px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  text-align: center;
+}
+
+/*
+.result_box select{
+  background: linear-gradient(to bottom, #3f913f 50%, #276c27 50%);
+  border: 2px solid #024f02;
+}
+
+ */
+
+.logical_operator, .remove-rule, .comparison_operator, [name="exceptions_townhalllevels_A[]"], [name="exceptions_townhalllevels_D[]"]{
+  background: linear-gradient(to bottom, #c74b1d 50%, #af4219 50%);
+  border: 2px solid #792c10;
+}
+.star{
+  font-size: 150%;
+}
+select{
+  all: unset;
+  box-sizing: border-box;
+
+ }
+
+.generate_btn_container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 300%;
+  margin-top: 1%;
+}
+[name="stars[]"], [name="exceptions_stars[]"]{
+  background: linear-gradient(to bottom, #70b422 50%, #5e9d15 50%);
+  border: 2px solid #49652a !important;
+}
+#add-simple-rule, #add-exception-rule, button[type="submit"]{
+  background: linear-gradient(to bottom, #70b422 50%, #5e9d15 50%);
+  border: 2px solid #49652a !important;
+  font-size: 100%;
+  width: 20%;
+  border-radius: 5px;
+  font-weight: bold;
+  padding:4px;
+  cursor: pointer;
+}
+
+
+.btn_value_none{
+  background: linear-gradient(to bottom, #c74b1d 50%, #af4219 50%);
+  border: 2px solid #792c10;
+}
+
+.btn_value_0{
+  background: linear-gradient(to bottom, #bd4d4d 50%, #a44444 50%);
+  border: 2px solid darkred;
+}
+
+.btn_value_1{
+  background: linear-gradient(to bottom, #3f913f 50%, #276c27 50%);
+  border: 2px solid #024f02;
+}
+
+.btn_value_-1{
+  background: linear-gradient(to bottom, #bd4d4d 50%, #a44444 50%);
+  border: 2px solid darkred;
+}
+.btn_value_11{
+  background: linear-gradient(to bottom, #3f913f 50%, #276c27 50%);
+  border: 2px solid #024f02;
+}

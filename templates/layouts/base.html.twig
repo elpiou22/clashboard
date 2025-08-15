@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% block html %}
+    <html lang="fr">
+        <head>
+        {% block head %}
+
+            <title>
+                {{ block('title') }}
+            </title>
+
+            <link rel="stylesheet"
+                {% block style %}
+                    href="{{ asset('css/style.css') }}"
+                {% endblock style %}
+            >
+
+
+
+        {% endblock head %}
+        <style>
+            body{
+                background-image: linear-gradient(rgba(77, 77, 77, 0.7), rgba(80, 80, 80, 0.7)), url("{{ asset('img/forum_cwl_background.jpg') }}");
+            }
+        </style>
+        <link rel="stylesheet" href="{{ asset('css/background.css') }}">
+        </head>
+    <body>
+    {% include './layouts/navbar.html.twig' %}
+    {% block body %}
+
+    {% endblock body %}
+    {% include './layouts/footer.html.twig' %}
+    </body>
+    </html>
+{% endblock html%}

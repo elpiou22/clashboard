@@ -1,0 +1,310 @@
+[
+  [
+    {
+      "mapPosition": 1,
+      "playerName": "TinkyWinky",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 2,
+      "playerName": "Qin",
+      "bonusValue": "?"
+    },
+    {
+      "mapPosition": 4,
+      "playerName": "Simon",
+      "bonusValue": "?"
+    },
+    {
+      "mapPosition": 5,
+      "playerName": "Dombil",
+      "bonusValue": "?"
+    },
+    {
+      "mapPosition": 6,
+      "playerName": "Adri",
+      "bonusValue": "?"
+    },
+    {
+      "mapPosition": 7,
+      "playerName": "Mr. Morale",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 8,
+      "playerName": "Oretys",
+      "bonusValue": "?"
+    },
+    {
+      "mapPosition": 9,
+      "playerName": "Frank",
+      "bonusValue": "?"
+    },
+    {
+      "mapPosition": 10,
+      "playerName": "..: jojo2 :..",
+      "bonusValue": "?"
+    },
+    {
+      "mapPosition": 12,
+      "playerName": "Razor",
+      "bonusValue": "?"
+    },
+    {
+      "mapPosition": 14,
+      "playerName": "ARES55",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 15,
+      "playerName": "matthieu",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 16,
+      "playerName": "Romain97160",
+      "bonusValue": "?"
+    },
+    {
+      "mapPosition": 17,
+      "playerName": "Arrow",
+      "bonusValue": "?"
+    },
+    {
+      "mapPosition": 18,
+      "playerName": "Lilian",
+      "bonusValue": 1
+    }
+  ],
+  [
+    {
+      "mapPosition": 1,
+      "playerName": "TinkyWinky",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 2,
+      "playerName": "Qin",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 3,
+      "playerName": "로켓고드Xqr™",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 4,
+      "playerName": "Simon",
+      "bonusValue": "?"
+    },
+    {
+      "mapPosition": 5,
+      "playerName": "Dombil",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 6,
+      "playerName": "Adri",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 7,
+      "playerName": "Mr. Morale",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 8,
+      "playerName": "Oretys",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 9,
+      "playerName": "Frank",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 10,
+      "playerName": "..: jojo2 :..",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 12,
+      "playerName": "Razor",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 14,
+      "playerName": "ARES55",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 15,
+      "playerName": "matthieu",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 17,
+      "playerName": "Arrow",
+      "bonusValue": "?"
+    },
+    {
+      "mapPosition": 18,
+      "playerName": "Lilian",
+      "bonusValue": 1
+    }
+  ],
+  [
+    {
+      "mapPosition": 1,
+      "playerName": "TinkyWinky",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 2,
+      "playerName": "Qin",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 3,
+      "playerName": "로켓고드Xqr™",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 4,
+      "playerName": "Simon",
+      "bonusValue": "?"
+    },
+    {
+      "mapPosition": 5,
+      "playerName": "Dombil",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 6,
+      "playerName": "Mr. Morale",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 7,
+      "playerName": "Adri",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 8,
+      "playerName": "Oretys",
+      "bonusValue": 0
+    },
+    {
+      "mapPosition": 9,
+      "playerName": "Frank",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 10,
+      "playerName": "..: jojo2 :..",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 12,
+      "playerName": "Razor",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 14,
+      "playerName": "ARES55",
+      "bonusValue": 0
+    },
+    {
+      "mapPosition": 15,
+      "playerName": "matthieu",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 16,
+      "playerName": "Romain97160",
+      "bonusValue": 0
+    },
+    {
+      "mapPosition": 17,
+      "playerName": "Arrow",
+      "bonusValue": 1
+    }
+  ],
+  [
+    {
+      "mapPosition": 1,
+      "playerName": "TinkyWinky",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 2,
+      "playerName": "Qin",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 3,
+      "playerName": "로켓고드Xqr™",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 4,
+      "playerName": "Simon",
+      "bonusValue": "?"
+    },
+    {
+      "mapPosition": 5,
+      "playerName": "Dombil",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 6,
+      "playerName": "Mr. Morale",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 7,
+      "playerName": "Adri",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 8,
+      "playerName": "Oretys",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 9,
+      "playerName": "Frank",
+      "bonusValue": 0
+    },
+    {
+      "mapPosition": 10,
+      "playerName": "..: jojo2 :..",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 12,
+      "playerName": "Razor",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 14,
+      "playerName": "ARES55",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 15,
+      "playerName": "matthieu",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 16,
+      "playerName": "Romain97160",
+      "bonusValue": 1
+    },
+    {
+      "mapPosition": 18,
+      "playerName": "Lilian",
+      "bonusValue": 1
+    }
+  ]
+]

@@ -1,0 +1,646 @@
+{% extends 'layouts/base.html.twig' %}
+{% block title %} Home {% endblock title %}
+{% block head %}
+  <link rel="stylesheet" href="{{ asset('css/margins.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/colors.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/home_cwl.css') }}">
+  <script src="{{ asset('js/cwl_home.js') }}" defer></script>
+
+
+{% endblock head %}
+{% block body %}
+  <div class="body_container">
+    <form action="{{ path('view_cwl_bonus_data') }}" class="all_container" method="POST">
+      <div class="content_container beige">
+        <div class="title_container green">
+          <span>CWL bonus tool</span>
+        </div>
+        <div class="clan_tag_container green">
+          <label>
+            Your Clan Tag:
+            <textarea name = "clan_id" placeholder="Clan ID" required >#P990YPPV</textarea>
+          </label>
+        </div>
+      </div>
+
+      <br>
+
+
+
+      <div class="rules_container beige">
+      <div class="main_rules_container green">
+        <span>Main rules</span>
+
+        <div id="rules-container">
+          <div id="classicals-rules-container">
+            <!-- 0e ligne -->
+            <div class="rule-row">
+              <label>
+                <select name="stars[]">
+                  <option value=" " selected></option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+              </label>
+              <span class="star">⭐</span>
+
+              <label class="operator_box">
+                <select name="logical_operator[]" class="logical_operator">
+                  <option value=" "></option>
+                  <option value="AND">AND</option>
+                </select>
+              </label>
+
+              <div class="more">
+                <span>attackerTH</span>
+                <label>
+                  <select name="comparison_operator[]" class="comparison_operator">
+                    <option value=" "></option>
+                    <option value="=">=</option>
+                    <option value=">=">>=</option>
+                    <option value="<="><=</option>
+                    <option value="<"><</option>
+                    <option value=">">></option>
+                  </select>
+                </label>
+
+                <span>defenderTH</span>
+              </div>
+
+              <span>=></span>
+
+              <label class="result_box">
+                <select name="result[]">
+                  <option value=" "></option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="-1" selected>-1</option>
+                </select>
+              </label>
+              <button type="button" class="remove-rule">Remove</button>
+            </div>
+
+
+            <!-- 1e ligne -->
+            <div class="rule-row">
+              <label>
+                <select name="stars[]">
+                  <option value=" "></option>
+                  <option value="0" selected>0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+              </label>
+              <span class="star">⭐</span>
+
+              <label class="operator_box">
+                <select name="logical_operator[]" class="logical_operator">
+                  <option value=" "></option>
+                  <option value="AND">AND</option>
+                </select>
+              </label>
+
+              <div class="more">
+                <span>attackerTH</span>
+                <label>
+                  <select name="comparison_operator[]" class="comparison_operator">
+                    <option value=" "></option>
+                    <option value="=">=</option>
+                    <option value=">=">>=</option>
+                    <option value="<="><=</option>
+                    <option value="<"><</option>
+                    <option value=">">></option>
+                  </select>
+                </label>
+
+                <span>defenderTH</span>
+              </div>
+
+              <span>=></span>
+
+              <label class="result_box">
+                <select name="result[]">
+                  <option value=" "></option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="-1" selected>-1</option>
+                </select>
+              </label>
+              <button type="button" class="remove-rule">Remove</button>
+            </div>
+
+            <!-- 2e ligne -->
+            <div class="rule-row">
+              <label>
+                <select name="stars[]">
+                  <option value=" "></option>
+                  <option value="0">0</option>
+                  <option value="1" selected>1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+              </label>
+              <span class="star">⭐</span>
+
+              <label class="operator_box">
+                <select name="logical_operator[]" class="logical_operator">
+                  <option value=" "></option>
+                  <option value="AND">AND</option>
+                </select>
+              </label>
+
+              <div class="more">
+                <span>attackerTH</span>
+
+                <label>
+                  <select name="comparison_operator[]" class="comparison_operator">
+                    <option value=" "></option>
+                    <option value="=">=</option>
+                    <option value=">=">>=</option>
+                    <option value="<="><=</option>
+                    <option value="<"><</option>
+                    <option value=">">></option>
+                  </select>
+                </label>
+
+                <span>defenderTH</span>
+              </div>
+
+              <span>=></span>
+
+              <label class="result_box">
+                <select name="result[]">
+                  <option value=" "></option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="-1" selected>-1</option>
+                </select>
+              </label>
+              <button type="button" class="remove-rule">Remove</button>
+            </div>
+
+            <!-- 3e ligne -->
+            <div class="rule-row">
+              <label>
+                <select name="stars[]">
+                  <option value=" "></option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2" selected>2</option>
+                  <option value="3">3</option>
+                </select>
+              </label>
+              <span class="star">⭐</span>
+
+              <label class="operator_box">
+                <select name="logical_operator[]" class="logical_operator">
+                  <option value=" "></option>
+                  <option value="AND" selected>AND</option>
+                </select>
+              </label>
+
+              <div class="more">
+                <span>attackerTH</span>
+
+                <label>
+                  <select name="comparison_operator[]" class="comparison_operator">
+                    <option value=" "></option>
+                    <option value="=" selected>=</option>
+                    <option value=">=">>=</option>
+                    <option value="<="><=</option>
+                    <option value="<"><</option>
+                    <option value=">">></option>
+                  </select>
+                </label>
+
+                <span>defenderTH</span>
+              </div>
+
+              <span>=></span>
+
+              <label class="result_box">
+                <select name="result[]">
+                  <option value=" "></option>
+                  <option value="0" selected>0</option>
+                  <option value="1">1</option>
+                  <option value="-1">-1</option>
+                </select>
+              </label>
+              <button type="button" class="remove-rule">Remove</button>
+            </div>
+
+
+            <!-- 4e ligne -->
+            <div class="rule-row">
+              <label>
+                <select name="stars[]">
+                  <option value=" "></option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2" selected>2</option>
+                  <option value="3">3</option>
+                </select>
+              </label>
+              <span class="star">⭐</span>
+
+              <label class="operator_box">
+                <select name="logical_operator[]" class="logical_operator">
+                  <option value=" "></option>
+                  <option value="AND" selected>AND</option>
+                </select>
+              </label>
+
+              <div class="more">
+                <span>attackerTH</span>
+
+                <label>
+                  <select name="comparison_operator[]" class="comparison_operator">
+                    <option value=" "></option>
+                    <option value="=">=</option>
+                    <option value=">=">>=</option>
+                    <option value="<="><=</option>
+                    <option value="<" selected><</option>
+                    <option value=">">></option>
+                  </select>
+                </label>
+
+                <span>defenderTH</span>
+              </div>
+
+              <span>=></span>
+
+              <label class="result_box">
+                <select name="result[]">
+                  <option value=" "></option>
+                  <option value="0">0</option>
+                  <option value="1" selected>1</option>
+                  <option value="-1">-1</option>
+                </select>
+              </label>
+              <button type="button" class="remove-rule">Remove</button>
+            </div>
+
+            <!-- 5e ligne -->
+            <div class="rule-row">
+              <label>
+                <select name="stars[]">
+                  <option value=" "></option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2" selected>2</option>
+                  <option value="3" selected>3</option>
+                </select>
+              </label>
+              <span class="star">⭐</span>
+
+              <label class="operator_box">
+                <select name="logical_operator[]" class="logical_operator">
+                  <option value=" "></option>
+                  <option value="AND">AND</option>
+                </select>
+              </label>
+
+              <div class="more">
+                <span>attackerTH</span>
+
+                <label>
+                  <select name="comparison_operator[]" class="comparison_operator">
+                    <option value=" " selected></option>
+                    <option value="=">=</option>
+                    <option value=">=">>=</option>
+                    <option value="<="><=</option>
+                    <option value="<"><</option>
+                    <option value=">">></option>
+                  </select>
+                </label>
+
+                <span>defenderTH</span>
+              </div>
+
+              <span>=></span>
+
+              <label class="result_box">
+                <select name="result[]">
+                  <option value=" "></option>
+                  <option value="0">0</option>
+                  <option value="1" selected>1</option>
+                  <option value="-1">-1</option>
+                </select>
+              </label>
+              <button type="button" class="remove-rule">Remove</button>
+            </div>
+          </div>
+        </div>
+        <div class="btn_container">
+          <button type="button" id="add-simple-rule">Add Rule</button>
+        </div>
+      </div>
+
+      <div class="exceptions_rules_container green">
+        <H1>Rules exceptions:</H1>
+
+        <div id="exceptions-rules-container">
+          <!-- 6e ligne -->
+          <div class="rule-row">
+            <label>
+              <select name="exceptions_stars[]">
+                <option value=" "></option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2" selected>2</option>
+                <option value="3">3</option>
+              </select>
+            </label>
+            <span class="star">⭐</span>
+            <span>and</span>
+
+            <span>attackerTH</span>
+
+            <label>
+              <select name="exceptions_townhalllevels_A[]" class="townhalllevels_A">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16" selected>16</option>
+                <option value="17">17</option>
+              </select>
+            </label>
+
+
+            <span>and defenderTH</span>
+            <label>
+              <select name="exceptions_townhalllevels_D[]" class="townhalllevels_D">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17" selected>17</option>
+              </select>
+            </label>
+            <span>=></span>
+
+            <label class="result_box">
+              <select name="exceptions_result[]">
+                <option value=" "></option>
+                <option value="0" selected>0</option>
+                <option value="1">1</option>
+                <option value="-1">-1</option>
+              </select>
+            </label>
+            <button type="button" class="remove-rule">Remove</button>
+          </div>
+        </div>
+        <button type="button" id="add-exception-rule">Add Rule</button>
+      </div>
+      <div class="generate_btn_container">
+        <button type="submit">Generate</button>
+      </div>
+    </div>
+    </form>
+  </div>
+
+  <script>
+    /**
+     * Attache le comportement de masquage/réaffichage de la div "more"
+     * en fonction de la valeur du select logical_operator dans une ligne de règle.
+     */
+    function attachLogicalOperatorListener(ruleRow) {
+      const logicalSelect = ruleRow.querySelector('.logical_operator');
+      const moreDiv = ruleRow.querySelector('.more');
+      if (logicalSelect && moreDiv) {
+        logicalSelect.addEventListener('change', function() {
+          if (this.value.trim() === "") {
+            moreDiv.style.display = 'none';
+          } else {
+            moreDiv.style.display = 'flex';
+          }
+        });
+        // État initial
+        if (logicalSelect.value.trim() === "") {
+          moreDiv.style.display = 'none';
+        } else {
+          moreDiv.style.display = 'flex';
+        }
+      }
+    }
+
+    // Attacher l'événement à toutes les lignes de règles initiales
+    document.querySelectorAll('.rule-row').forEach(function(ruleRow) {
+      attachLogicalOperatorListener(ruleRow);
+    });
+
+    document.querySelectorAll('.remove-rule').forEach(function(button) {
+      button.addEventListener('click', function() {
+        this.parentElement.remove();
+      });
+    });
+
+
+    /**
+     * Crée une nouvelle ligne de règle.
+     */
+    function createClassicalRuleRow() {
+      const ruleRow = document.createElement('div');
+      ruleRow.classList.add('rule-row');
+      ruleRow.innerHTML = `
+    <label>
+      <select name="stars[]">
+        <option value=" "></option>
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+    </label>
+    <span class="star">⭐</span>
+
+    <label class="operator_box">
+      <select name="logical_operator[]" class="logical_operator">
+        <option value=" "></option>
+        <option value="AND">AND</option>
+      </select>
+    </label>
+
+    <div class="more">
+      <span>attackerTH</span>
+
+      <label>
+        <select name="comparison_operator[]" class="comparison_operator">
+          <option value="=">=</option>
+          <option value=">=">>=</option>
+          <option value="<="><=</option>
+          <option value="<"><</option>
+          <option value=">">></option>
+        </select>
+      </label>
+
+      <span>defenderTH</span>
+    </div>
+
+    <span>=></span>
+
+    <label class="result_box">
+      <select name="result[]" class="btn_value_none">
+        <option value=" "></option>
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="-1">-1</option>
+      </select>
+    </label>
+  `;
+
+      // Ajout du bouton "Remove"
+      const removeButton = document.createElement('button');
+      removeButton.type = 'button';
+      removeButton.textContent = 'Remove';
+      removeButton.classList.add('remove-rule');
+
+      removeButton.addEventListener('click', function() {
+        ruleRow.remove();
+      });
+
+      ruleRow.appendChild(removeButton);
+
+      return ruleRow;
+    }
+
+
+    // Ajouter une nouvelle règle lors du clic sur "Add Rule"
+    document.getElementById('add-simple-rule').addEventListener('click', function() {
+      const newRuleRow = createClassicalRuleRow();
+      document.getElementById('classicals-rules-container').appendChild(newRuleRow);
+      attachLogicalOperatorListener(newRuleRow);
+    });
+
+    /**
+     * Crée une nouvelle ligne de règle.
+     */
+    function createExceptionRuleRow() {
+      const ruleRow = document.createElement('div');
+      ruleRow.classList.add('rule-row');
+      ruleRow.innerHTML = `
+                <label>
+              <select name="exceptions_stars[]">
+                <option value=" " selected></option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </label>
+            <span class="star">⭐</span>
+            <span>and</span>
+
+
+            <span>attackerTH</span>
+
+            <label>
+              <select name="exceptions_townhalllevels_A[]" class="exceptions_townhalllevels_A">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+              </select>
+            </label>
+
+
+            <span>and defenderTH</span>
+            <label>
+              <select name="exceptions_townhalllevels_D[]" class="exceptions_townhalllevels_D">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+              </select>
+            </label>
+            <span>=></span>
+
+            <label class="result_box">
+              <select name="exceptions_result[]" class="btn_value_none">
+                <option value=" " selected></option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="-1">-1</option>
+              </select>
+            </label>
+  `;
+
+      // Ajout du bouton "Remove"
+      const removeButton = document.createElement('button');
+      removeButton.type = 'button';
+      removeButton.textContent = 'Remove';
+      removeButton.classList.add('remove-rule');
+
+      removeButton.addEventListener('click', function() {
+        ruleRow.remove();
+      });
+
+      ruleRow.appendChild(removeButton);
+
+      return ruleRow;
+    }
+
+
+    // Ajouter une nouvelle règle lors du clic sur "Add Rule"
+    document.getElementById('add-exception-rule').addEventListener('click', function() {
+      const newRuleRow = createExceptionRuleRow();
+      document.getElementById('exceptions-rules-container').appendChild(newRuleRow);
+      attachLogicalOperatorListener(newRuleRow);
+    });
+
+  </script>
+
+{% endblock body %}

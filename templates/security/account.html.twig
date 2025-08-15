@@ -1,0 +1,53 @@
+{% extends './layouts/base.html.twig' %}
+{% block title %} Profil {% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="{{ asset('css/margins.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/colors.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
+{% endblock head %}
+
+
+{% block body %}
+  <div class="body_container">
+    <div class="all_container">
+
+      <div class="title_container">
+        <h1>Account information</h1>
+      </div>
+
+      <div class="profile_container beige">
+        <div class="pp">
+          {% if user.profilePicture %}
+            <img src="{{ asset('uploads/profile_pictures/'~user.profilePicture) }}" alt="Film">
+          {% else %}
+            <img style="max-height: 200px; max-width: 200px; height: auto; width: auto" src="{{ asset('img/default_pp.png') }}" alt="pp">
+          {% endif %}
+        </div>
+
+        <div class="profile_informations green">
+          <div class="title_info">
+            <span>Pseudo:</span>
+            <span>{{ user.getPseudo }}</span>
+          </div>
+          <div class="title_info">
+            <span>Email:</span>
+            <span>{{ user.getEmail }}</span>
+          </div>
+          <div class="title_info">
+            <span>BirthDate:</span>
+            <span>{{ user.getBirthdate | date }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="buttons_container">
+        <button>
+          <a href={{ path('acc_send_email_reset') }}>Change password</a>
+        </button>
+        <button>
+          <a href={{ path('acc_update_profile') }}>Modify account</a>
+        </button>
+      </div>
+    </div>
+  </div>
+{% endblock body %}

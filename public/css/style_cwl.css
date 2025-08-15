@@ -1,0 +1,361 @@
+/* Style général de la page */
+
+
+body {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+
+  color: #333;
+  padding: 0;
+
+  display: flex;
+  /*
+  justify-content: center;
+  align-items: center;
+  */
+  flex-direction: column;
+}
+
+.body_container {
+  flex: 1; /* occupe tout l’espace vertical restant */
+  display: flex; /* ou ce que tu veux, selon ce que tu avais déjà */
+  flex-direction: column;
+  margin-top: 3% !important;
+}
+
+.data_container{
+  display: flex;
+  flex-direction: row;
+}
+
+
+
+/* Style pour l'en-tête */
+h1 {
+  text-align: center;
+  color: #2a7bbf;
+  font-size: 3em;
+}
+
+h3 {
+  text-align: center;
+  color: #555;
+  font-size: 1.5em;
+}
+
+/* Section du formulaire */
+.cwl_form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+}
+
+.cwl_form form {
+  width: 100%;
+}
+
+.cwl_form label {
+  display: block;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.cwl_form textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.cwl_form button {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.2em;
+  background-color: #2a7bbf;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cwl_form button:hover {
+  background-color: #1a5c8c;
+}
+
+.cwl_form button:active {
+  background-color: #145e75;
+}
+
+.value-1 {
+  background: linear-gradient(to bottom, #5dd75d 50%, #50b950 50%);
+  border: 2px solid darkgreen;
+
+}
+
+.value-0 {
+  background: linear-gradient(to bottom, #bd4d4d 50%, #a44444 50%);
+  border: 2px solid darkred;
+}
+
+.value-no {
+  background: linear-gradient(to bottom, #d77b24 50%, #b76e28 50%);
+  border: 2px solid #8f5003;
+}
+
+.value-11 {
+  background: linear-gradient(to bottom, #3f913f 50%, #276c27 50%);
+  border: 2px solid #024f02;
+}
+
+
+#cwl_table {
+  border-collapse: collapse;
+  position: relative;
+}
+
+
+#cwl_table, th, td {
+  font-weight: bold;
+  border: 2px solid #3a2a1e;
+}
+
+th{
+  padding: 5px;
+  text-align: center;
+  background: linear-gradient(to bottom, #c74b1d 50%, #af4219 50%);
+
+}
+
+
+
+.td_member, .td_value, .td_icon, .td_more, .td_total{
+  padding: 0;
+  background: linear-gradient(to bottom, #c9c1ad 50%, #b4a981 50%);
+}
+
+
+.cwl_td, .td_more{
+  padding: 5px;
+  text-align: center;
+  transition: padding 0.3s ease;
+  position: relative;
+}
+
+.small_box{
+  border-radius: 5px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: medium;
+  transition: all 0.3s ease;
+}
+
+.small_box:hover{
+  cursor: pointer;
+}
+
+.result_day_data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: transparent;
+}
+
+
+.cwl_hovered{
+  padding:1px;
+}
+
+.message_icon {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  border-radius: 50%;
+  background-color: white;
+  padding: 2px;
+}
+
+/* pop up //////////////////////////////////////////////////////////// */
+
+.popup {
+  display: none;
+  position: absolute;
+  width: 150px;
+  height: auto;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 1000;
+  text-align: center;
+}
+
+.popup_container{
+  display: grid;
+  grid-template-rows: 1fr 1fr 0.5fr;
+  gap: 10px;
+}
+
+.infos_container, .posts_container {
+  padding: 5px;
+  border: 1px solid #ccc;
+}
+
+.infos_content, .posts_content{
+  font-size: small;
+}
+
+.contest_button{
+  cursor: pointer;
+}
+
+
+/* hr */
+.forum_hr {
+  border: 0;
+  border-top: 1px solid #ddd;
+
+}
+
+.viewcwl_hr {
+
+  border: 0;
+  border-top: 1px solid #ddd;
+}
+
+.hide_icon_container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hide_icon {
+  height: 50%;
+  width: 50%;
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+
+
+
+
+
+/* aaaaaa */
+.hide_icon:hover{
+  cursor: pointer;
+}
+
+.options_container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 4px;
+  background-color: #3d3d3d;
+  color: white;
+
+}
+
+.edit_mode_container, .options_col_container, .total_col_container{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.edit_mode_selector, .options_col_selector, .show_members_selector, .total_col_selector {
+  display: flex;
+  align-items: center;
+}
+
+input[type="checkbox"], label {
+  cursor: pointer;
+}
+
+.member{
+  display: flex;
+}
+
+.show_members_container{
+  display: flex;
+  flex-direction: column;
+}
+
+.show_members_name_container {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.show_members_selector {
+  display: flex;
+  align-items: center;
+}
+
+
+
+.member{
+  display: none;
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.4s ease-out;
+}
+
+.member{
+  cursor: pointer;
+  align-items: center;
+
+}
+
+
+#cwl_table td:nth-child(10), #cwl_table th:nth-child(10) {
+  display: none;
+}
+
+#cwl_table td:nth-child(11), #cwl_table th:nth-child(11) {
+  display: none;
+}
+
+.input_more{
+  align-content: center;
+  text-align: center;
+}
+
+.result_day_data{
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+
+.title_container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 85%;
+  font-weight: bold;
+  font-size: 300%;
+  color: black;
+  margin-bottom: 2%;
+}

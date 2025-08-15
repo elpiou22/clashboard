@@ -1,0 +1,14 @@
+.result_day_data{
+  font-weight: bold;
+  color: black;
+}
+
+.basic{
+  text-decoration: none;
+  color: #212121;
+  font-family: "Roboto", sans-serif;
+}
+
+.underline{
+  text-decoration: underline !important;
+}

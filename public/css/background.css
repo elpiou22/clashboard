@@ -1,0 +1,8 @@
+body {
+  background-color: #2e2e2e;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-position-y: -200px;
+  background-attachment: fixed;
+}

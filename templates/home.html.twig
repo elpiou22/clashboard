@@ -1,0 +1,56 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block head %}
+
+  <link rel="stylesheet" href="{{ asset('css/margins.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/colors.css') }}">
+{% endblock head %}
+
+{% block title %} Home {% endblock title %}
+
+{% block body %}
+
+
+  <div class="body_container">
+    <div class="cwl_container beige">
+      <div class="title_container green">
+        <span>Simplifiez votre gestion de bonus de ligues !</span>
+      </div>
+      <div class="content_container green">
+        <div class="link_container">
+          <a href="{{ path('cwl_home') }}">Lien vers l'outil</a>
+        </div>
+        <div class="img_container">
+          <img src="{{ asset('img/cwl_example.png') }}"></img>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="cwl_container beige">
+      <div class="title_container green">
+        <span>Discutez et contestez les résultats générés !</span>
+      </div>
+      <div class="content_container green">
+        <div class="link_container">
+          <span>Une discussion par attaque !</span>
+        </div>
+        <div class="img_container">
+          <div class="first_img">
+            <img src="{{ asset('img/contest.png') }}"></img>
+          </div>
+          <div class="second_img">
+            <img src="{{ asset('img/forum.png') }}"></img>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+{% endblock body %}

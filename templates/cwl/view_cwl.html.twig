@@ -1,0 +1,240 @@
+{% extends 'layouts/base.html.twig' %}
+{% block title %} CWL {% endblock title %}
+{% block head %}
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="{{ asset('css/style_cwl.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/margins.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/widths.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
+  <script src="{{ asset('js/change_width_td.js') }}" defer></script>
+  <script src="{{ asset('js/get_cell_index.js') }}" defer></script>
+  <script src="{{ asset('js/fades-in-out.js') }}" defer></script>
+  <script src="{{ asset('js/hide_show_th.js') }}" defer></script>
+  <script src="{{ asset('js/total_col.js') }}" defer></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    let clanId = {{ clanId|json_encode|raw }};
+  </script>
+
+
+{% endblock head %}
+
+
+{% block body %}
+
+  <div id="clanId" style="display: none;">{{ clanId }}</div>
+
+  <div class="body_container">
+
+    <div class="title_container">
+      <span class="underline">CLAN NAME</span>
+      <span class="underline">(#{{ clanId }})</span>
+      <span> - </span>
+      <span class="underline">Mois</span>
+    </div>
+    <div class="data_container">
+
+
+
+
+    <div class="table_container">
+      <table id="cwl_table">
+        <thead>
+        <tr>
+          <th>Hide</th>
+          <th>Membre</th>
+          <th>J1</th>
+          <th>J2</th>
+          <th>J3</th>
+          <th>J4</th>
+          <th>J5</th>
+          <th>J6</th>
+          <th>J7</th>
+          <th class="th_more">More</th>
+          <th class="th_total">Total</th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+        {% set index = 0 %}
+
+        {% for index in 0..length_members %}
+          <tr>
+            <td class="td_icon">
+              <div class="hide_icon_container">
+                <img src="{{ asset('./svg/hide.svg') }}" class="hide_icon">
+              </div>
+            </td>
+
+            <td class="td_member cwl_td">{{ membersInCWL[index] }}</td>
+            {# @todo ici changer l'index par un tag et non un pseudo #}
+
+            {% set day = 1 %}
+            {% set data_Per_Player = data_All_Players[membersInCWL[index]] %}
+            {% for attack in data_Per_Player %}
+
+              {% for index_i in 1 .. 8 %}
+                {# @todo  change 1 .. 8 #}
+                {% if day != attack.getday() %}
+                  {# @todo besoin de tester si afk plusieurs jours au milieu #}
+                  <td class ="td_value"></td>
+                  {% set day = day + 1 %}
+                {% endif %}
+              {% endfor %}
+
+                {% set value = attack.getResult() is defined ? attack.getResult() : '?' %}
+
+                <td class="td_value cwl_td">
+
+                  {% set nbPosts = attack.getNbPosts() %}
+                  {% if nbPosts > 0 %}
+                    <img src="{{ asset('./svg/messages_icon.svg') }}" class="message_icon">
+                  {% endif %}
+                  <div
+                    {% if value == "1" %}
+                      class="value-1 small_box show_popup"
+                    {% elseif value == "0" %}
+                      class="value-0 small_box show_popup"
+                    {% elseif value == "-1" %}
+                      class="value-0 small_box show_popup"
+                    {% elseif value == '?' %}
+                      class="value-no small_box show_popup"
+                    {% elseif value == '1.1' %}
+                      class="value-11 small_box show_popup"
+                    {% endif %}
+                  >
+                    <input type="text" value="{{ value }}" class="result_day_data" data-key="name" disabled>
+
+                    <div id="nbPosts" style="display: none">{{ nbPosts }}</div>
+
+                    {# 11/08/2025 - ajout champ pour focus les atq #}
+                    <div class="hidden_value attackerTH" style="display:none;">{{ attack.getAttackerTH() }}</div>
+                    <div class="hidden_value defenderTH" style="display:none;">{{ attack.getDefenderTH() }}</div>
+                    <div class="hidden_value stars" style="display:none;">{{ attack.getAttackStars() }}</div>
+                    <div class="hidden_value percentage" style="display:none;">{{ attack.getPercentage() }}</div>
+                  </div>
+                </td>
+                {% set day = day + 1 %}
+
+            {% endfor %}
+            {%  if day < 8 %}
+              {% for index_j in day+1 .. 8 %}
+                {# @todo besoin de tester si afk plusieurs jours a la fin #}
+                <td class ="td_value"></td>
+              {% endfor %}
+            {%  endif %}
+
+            <td class ="td_more">
+              <label class="label_more small_box">
+                <input class="input_more small_box" id="input_more">
+              </label>
+            </td>
+            <td class ="td_total">
+              {# 11/08/2025 - ajout cursor default pour ecraser le cursor pointer du smallbox #}
+              <div class="small_box sum_days" style="cursor: default;">
+
+              </div>
+            </td>
+
+          </tr>
+          {% set index = index + 1 %}
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="options_container">
+      <div class="edit_mode_container">
+        <div class="edit_mode_selector">
+          <input type="checkbox" id="edit_mode" name="edit_mode" value="selector" onchange="options_checkbox_changed('edit_mode')">
+        </div>
+        <div class="edit_mode_text">
+          <label for="edit_mode">
+            Enable Edit Mode
+          </label>
+        </div>
+        <button id="saveButton" style="display:none;">Save Changes</button>
+      </div>
+
+      <hr style="width: 100%;">
+
+      <div class="options_col_container">
+        <div class="options_col_selector">
+          <input type="checkbox" id="options_col" name="options_col" value="selector" onchange="options_checkbox_changed('options')">
+        </div>
+        <div class="options_col_text">
+          <label for="options_col">
+            Enable Bonuses Column
+          </label>
+        </div>
+      </div>
+
+      <hr style="width: 100%;">
+
+      <div class="total_col_container">
+        <div class="total_col_selector">
+          <input type="checkbox" id="total_col" name="total_col" value="selector" onchange="options_checkbox_changed('total')" checked>
+        </div>
+        <div class="total_col_text">
+          <label for="total_col">
+            Enable Total Column
+          </label>
+        </div>
+      </div>
+
+      <hr style="width: 100%;">
+
+      <div class="show_members_container">
+        <div class="show_members_title">
+          <span>
+            Hidden members
+          </span>
+        </div>
+        <div class="show_members_name_container">
+          {% for index in 0..length_members %}
+            <div class="member member_number_{{ index }}">
+              <div class="show_members_selector">
+                <img src="{{ asset('./svg/hide.svg') }}" class="show_icon">
+              </div>
+              <div class="show_members_text">
+                <span>
+                  {{ membersInCWL[index] }}
+                </span>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+    </div>
+  </div>
+  <div class="popup" id="popup">
+
+    <div class="popup_container">
+
+      <div class="infos_container">
+        <div class="infos_title">
+          Informations:
+        </div>
+        <hr class="viewcwl_hr">
+        <div class="infos_content">blablablabla</div>
+      </div>
+
+      <div class="posts_container">
+        <div class="posts_title">
+          Posts:
+        </div>
+        <hr class="viewcwl_hr">
+        <div class="posts_content" id="posts_content"></div>
+
+      </div>
+
+      <button class="contest_button" id="sendButton">
+        Contester
+      </button>
+    </div>
+  </div>
+{% endblock body %}

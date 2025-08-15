@@ -1,0 +1,119 @@
+{% extends './layouts/base.html.twig' %}
+
+{% block title %} Login {% endblock title %}
+
+{% block head %}
+  <link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/margins.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/login.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/colors.css') }}">
+{% endblock head %}
+
+{% block body %}
+
+
+  <div class="body_container">
+    <div class="login_container">
+      <div class="title">
+        <p class="title_text basic">Identifiez-vous:</p>
+      </div>
+      <div class="forms beige">
+        <div class="title_btns green">
+          <div class="form-toggle-btns">
+            <button onclick="showLoginForm()" class="btn-login">Connexion</button>
+            <button onclick="showRegisterForm()" class="btn-login">Inscription</button>
+          </div>
+        </div>
+
+        {# Formulaire de Connexion #}
+        <div id="login-form" class="form-container active">
+          <form action="{{ path('acc_login') }}" method="post" class="formform">
+            <div class="credentials_container">
+              <label for="username">Email :</label>
+              <input type="text" id="username" name="registration_form[email]" value="admin@admin.admin" required autofocus>
+            </div>
+
+            <div class="credentials_container">
+              <label for="password">Mot de passe :</label>
+              <input type="password" id="password" name="_password" value="admin" required>
+              <a href="{{ path('acc_send_email_reset') }}" class="reset_pwd">Réinitiliser le mot de passe</a>
+            </div>
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}"
+            >
+            <div class="remember_me_container ">
+              <label for="remember_me">Se souvenir de moi :</label>
+              <input type="checkbox" id="remember_me" name="_remember_me" value="on">
+            </div>
+
+            <button type="submit" class="btn-login grn_btn">Se connecter</button>
+          </form>
+        </div>
+
+        {# Formulaire d'Inscription #}
+        <div id="register-form" class="form-container">
+          {{ form_start(registrationForm, {'attr': {'class': 'formform', 'enctype': 'multipart/form-data'}}) }}
+
+          <div class="credentials_container">
+            {{ form_label(registrationForm.email) }}
+            {{ form_widget(registrationForm.email, {'attr': {'placeholder': 'Email'}}) }}
+          </div>
+
+          <div class="credentials_container">
+            {{ form_label(registrationForm.pseudo) }}
+            {{ form_widget(registrationForm.pseudo, {'attr': {'placeholder': 'Pseudo'}}) }}
+          </div>
+
+          <div class="credentials_container">
+            {{ form_label(registrationForm.birthdate) }}
+            {{ form_widget(registrationForm.birthdate) }}
+          </div>
+
+          <div class="credentials_container">
+            {{ form_label(registrationForm.profilePictureFile) }}
+            {{ form_widget(registrationForm.profilePictureFile) }}
+          </div>
+
+          <div class="credentials_container">
+            {{ form_label(registrationForm.roles) }}
+            {{ form_widget(registrationForm.roles) }}
+          </div>
+
+          <div class="credentials_container">
+            {{ form_label(registrationForm.password) }}
+            {{ form_widget(registrationForm.password, {'attr': {'placeholder': 'Mot de passe'}}) }}
+          </div>
+
+          <button type="submit" class="btn-login grn_btn">S'inscrire</button>
+
+          {{ form_end(registrationForm) }}
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <script>
+    function showLoginForm() {
+      document.getElementById('login-form').classList.add('active');
+      document.getElementById('register-form').classList.remove('active');
+      //document.querySelector('.title_text').textContent = 'Connexion:';
+      //console.log("show login form");
+    }
+
+    function showRegisterForm() {
+      document.getElementById('register-form').classList.add('active');
+      document.getElementById('login-form').classList.remove('active');
+      //document.querySelector('.title_text').textContent = 'Inscription:';
+      //console.log("show register form")
+    }
+    let mode = "{{ mode }}";
+    if (mode === "login") {
+      showLoginForm();
+    } else {
+      showRegisterForm();
+    }
+  </script>
+{% endblock body %}
