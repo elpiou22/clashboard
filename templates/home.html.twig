@@ -1,13 +1,11 @@
 {% extends 'layouts/base.html.twig' %}
-
-{% block head %}
-
+{% block extra_styles %}
   <link rel="stylesheet" href="{{ asset('css/margins.css') }}">
   <link rel="stylesheet" href="{{ asset('css/home.css') }}">
   <link rel="stylesheet" href="{{ asset('css/colors.css') }}">
-{% endblock head %}
+{% endblock extra_styles %}
+{% block title %}Home{% endblock title %}
 
-{% block title %} Home {% endblock title %}
 
 {% block body %}
 
@@ -22,7 +20,7 @@
           <a href="{{ path('cwl_home') }}">Lien vers l'outil</a>
         </div>
         <div class="img_container">
-          <img src="{{ asset('img/cwl_example.png') }}"></img>
+          <img src="{{ asset('img/cwl_example.png') }}" alt="tool_example"></img>
         </div>
       </div>
     </div>
@@ -39,10 +37,10 @@
         </div>
         <div class="img_container">
           <div class="first_img">
-            <img src="{{ asset('img/contest.png') }}"></img>
+            <img src="{{ asset('img/contest.png') }}" alt="how to contest a result"></img>
           </div>
           <div class="second_img">
-            <img src="{{ asset('img/forum.png') }}"></img>
+            <img src="{{ asset('img/forum.png') }}" alt="forum img"></img>
           </div>
 
         </div>

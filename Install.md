@@ -19,23 +19,16 @@
 - `php bin/console doctrine:fixtures:load`
 
 ## 5️⃣ Lancement de l'application
-#### Sous Windows:
-- `./starter.bat`
-#### Sous Linux / MacOs:
-- `cd public`
-- `php -S localhost:8000`
+- `./scripts/starter.bat`
 
 ## 6️⃣ Lancement des tests
 #### PhpStan *(Vérification POO + incohérences de code + pas de duplication de code + méthodes cohérentes + typage des variables)*
-- `php vendor/bin/phpstan analyse src tests --level=max`
+- `./scripts/verif_poo.bat`
 #### PhpUnit *(Tests Unitaires)*
-- `php bin/phpunit`
+- `./scripts/tests_unitaires.bat`
 
 ## ℹ️ Si une nouvelle mise à jour est disponible:
-- `git pull origin main`
-- `composer install --no-dev --optimize-autoloader`
-- `php bin/console doctrine:migrations:migrate`
-- `php bin/console cache:clear --env=prod`
+- `./scripts/repo_maj.bat`
 
 
 

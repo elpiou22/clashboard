@@ -85,6 +85,7 @@ function getTagsOfDay(day, jsonData){
     //let data = fs.readFileSync('../json/leagueRounds.json', 'utf8');
     //let jsonData = JSON.parse(data);
     let tags = jsonData[day]['warTags'];
+    // console.log(tags);
     return tags
 }
 

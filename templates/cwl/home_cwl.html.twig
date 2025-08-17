@@ -1,13 +1,11 @@
 {% extends 'layouts/base.html.twig' %}
 {% block title %} Home {% endblock title %}
-{% block head %}
+{% block extra_styles %}
   <link rel="stylesheet" href="{{ asset('css/margins.css') }}">
   <link rel="stylesheet" href="{{ asset('css/colors.css') }}">
   <link rel="stylesheet" href="{{ asset('css/home_cwl.css') }}">
   <script src="{{ asset('js/cwl_home.js') }}" defer></script>
-
-
-{% endblock head %}
+{% endblock extra_styles %}
 {% block body %}
   <div class="body_container">
     <form action="{{ path('view_cwl_bonus_data') }}" class="all_container" method="POST">
@@ -36,7 +34,7 @@
             <!-- 0e ligne -->
             <div class="rule-row">
               <label>
-                <select name="stars[]">
+                <select name="stars[]" aria-label="Nombre d’étoiles">
                   <option value=" " selected></option>
                   <option value="0">0</option>
                   <option value="1">1</option>
@@ -47,7 +45,7 @@
               <span class="star">⭐</span>
 
               <label class="operator_box">
-                <select name="logical_operator[]" class="logical_operator">
+                <select name="logical_operator[]" class="logical_operator" aria-label="Logical Operator">
                   <option value=" "></option>
                   <option value="AND">AND</option>
                 </select>
@@ -56,7 +54,7 @@
               <div class="more">
                 <span>attackerTH</span>
                 <label>
-                  <select name="comparison_operator[]" class="comparison_operator">
+                  <select name="comparison_operator[]" class="comparison_operator" aria-label="Comparaison operator">
                     <option value=" "></option>
                     <option value="=">=</option>
                     <option value=">=">>=</option>
@@ -72,7 +70,7 @@
               <span>=></span>
 
               <label class="result_box">
-                <select name="result[]">
+                <select name="result[]" aria-label="Resultat">
                   <option value=" "></option>
                   <option value="0">0</option>
                   <option value="1">1</option>
@@ -86,7 +84,7 @@
             <!-- 1e ligne -->
             <div class="rule-row">
               <label>
-                <select name="stars[]">
+                <select name="stars[]" aria-label="Nombre d’étoiles">
                   <option value=" "></option>
                   <option value="0" selected>0</option>
                   <option value="1">1</option>
@@ -96,8 +94,8 @@
               </label>
               <span class="star">⭐</span>
 
-              <label class="operator_box">
-                <select name="logical_operator[]" class="logical_operator">
+              <label class="operator_box" >
+                <select name="logical_operator[]" class="logical_operator" aria-label="Logical operator">
                   <option value=" "></option>
                   <option value="AND">AND</option>
                 </select>
@@ -106,7 +104,7 @@
               <div class="more">
                 <span>attackerTH</span>
                 <label>
-                  <select name="comparison_operator[]" class="comparison_operator">
+                  <select name="comparison_operator[]" class="comparison_operator" aria-label="Comparison operator">
                     <option value=" "></option>
                     <option value="=">=</option>
                     <option value=">=">>=</option>
@@ -122,7 +120,7 @@
               <span>=></span>
 
               <label class="result_box">
-                <select name="result[]">
+                <select name="result[]" aria-label="Resultat">
                   <option value=" "></option>
                   <option value="0">0</option>
                   <option value="1">1</option>
@@ -135,7 +133,7 @@
             <!-- 2e ligne -->
             <div class="rule-row">
               <label>
-                <select name="stars[]">
+                <select name="stars[]" aria-label="Nombre d’étoiles">
                   <option value=" "></option>
                   <option value="0">0</option>
                   <option value="1" selected>1</option>
@@ -146,7 +144,7 @@
               <span class="star">⭐</span>
 
               <label class="operator_box">
-                <select name="logical_operator[]" class="logical_operator">
+                <select name="logical_operator[]" class="logical_operator" aria-label="Logical operator">
                   <option value=" "></option>
                   <option value="AND">AND</option>
                 </select>
@@ -156,7 +154,7 @@
                 <span>attackerTH</span>
 
                 <label>
-                  <select name="comparison_operator[]" class="comparison_operator">
+                  <select name="comparison_operator[]" class="comparison_operator" aria-label="Comparaison operator">
                     <option value=" "></option>
                     <option value="=">=</option>
                     <option value=">=">>=</option>
@@ -172,7 +170,7 @@
               <span>=></span>
 
               <label class="result_box">
-                <select name="result[]">
+                <select name="result[]" aria-label="Resultat">
                   <option value=" "></option>
                   <option value="0">0</option>
                   <option value="1">1</option>
@@ -185,7 +183,7 @@
             <!-- 3e ligne -->
             <div class="rule-row">
               <label>
-                <select name="stars[]">
+                <select name="stars[]" aria-label="Nombre d’étoiles">
                   <option value=" "></option>
                   <option value="0">0</option>
                   <option value="1">1</option>
@@ -196,7 +194,7 @@
               <span class="star">⭐</span>
 
               <label class="operator_box">
-                <select name="logical_operator[]" class="logical_operator">
+                <select name="logical_operator[]" class="logical_operator" aria-label="Logical operator">
                   <option value=" "></option>
                   <option value="AND" selected>AND</option>
                 </select>
@@ -206,7 +204,7 @@
                 <span>attackerTH</span>
 
                 <label>
-                  <select name="comparison_operator[]" class="comparison_operator">
+                  <select name="comparison_operator[]" class="comparison_operator" aria-label="comparaison operator">
                     <option value=" "></option>
                     <option value="=" selected>=</option>
                     <option value=">=">>=</option>
@@ -222,7 +220,7 @@
               <span>=></span>
 
               <label class="result_box">
-                <select name="result[]">
+                <select name="result[]" aria-label="Resultat">
                   <option value=" "></option>
                   <option value="0" selected>0</option>
                   <option value="1">1</option>
@@ -236,7 +234,7 @@
             <!-- 4e ligne -->
             <div class="rule-row">
               <label>
-                <select name="stars[]">
+                <select name="stars[]" aria-label="Nombre d’étoiles">
                   <option value=" "></option>
                   <option value="0">0</option>
                   <option value="1">1</option>
@@ -247,7 +245,7 @@
               <span class="star">⭐</span>
 
               <label class="operator_box">
-                <select name="logical_operator[]" class="logical_operator">
+                <select name="logical_operator[]" class="logical_operator" aria-label="logical operator">
                   <option value=" "></option>
                   <option value="AND" selected>AND</option>
                 </select>
@@ -257,7 +255,7 @@
                 <span>attackerTH</span>
 
                 <label>
-                  <select name="comparison_operator[]" class="comparison_operator">
+                  <select name="comparison_operator[]" class="comparison_operator" aria-label="comparaison operator">
                     <option value=" "></option>
                     <option value="=">=</option>
                     <option value=">=">>=</option>
@@ -273,7 +271,7 @@
               <span>=></span>
 
               <label class="result_box">
-                <select name="result[]">
+                <select name="result[]" aria-label="resultat">
                   <option value=" "></option>
                   <option value="0">0</option>
                   <option value="1" selected>1</option>
@@ -286,7 +284,7 @@
             <!-- 5e ligne -->
             <div class="rule-row">
               <label>
-                <select name="stars[]">
+                <select name="stars[]" aria-label="Nombre d’étoiles">
                   <option value=" "></option>
                   <option value="0">0</option>
                   <option value="1">1</option>
@@ -297,7 +295,7 @@
               <span class="star">⭐</span>
 
               <label class="operator_box">
-                <select name="logical_operator[]" class="logical_operator">
+                <select name="logical_operator[]" class="logical_operator" aria-label="logical operator">
                   <option value=" "></option>
                   <option value="AND">AND</option>
                 </select>
@@ -307,7 +305,7 @@
                 <span>attackerTH</span>
 
                 <label>
-                  <select name="comparison_operator[]" class="comparison_operator">
+                  <select name="comparison_operator[]" class="comparison_operator" aria-label="comparaison operator">
                     <option value=" " selected></option>
                     <option value="=">=</option>
                     <option value=">=">>=</option>
@@ -323,7 +321,7 @@
               <span>=></span>
 
               <label class="result_box">
-                <select name="result[]">
+                <select name="result[]" aria-label="resultat">
                   <option value=" "></option>
                   <option value="0">0</option>
                   <option value="1" selected>1</option>
@@ -346,7 +344,7 @@
           <!-- 6e ligne -->
           <div class="rule-row">
             <label>
-              <select name="exceptions_stars[]">
+              <select name="exceptions_stars[]" aria-label="Nombre d’étoiles">
                 <option value=" "></option>
                 <option value="0">0</option>
                 <option value="1">1</option>
@@ -360,7 +358,7 @@
             <span>attackerTH</span>
 
             <label>
-              <select name="exceptions_townhalllevels_A[]" class="townhalllevels_A">
+              <select name="exceptions_townhalllevels_A[]" class="townhalllevels_A" aria-label="hotel de ville">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -384,7 +382,7 @@
 
             <span>and defenderTH</span>
             <label>
-              <select name="exceptions_townhalllevels_D[]" class="townhalllevels_D">
+              <select name="exceptions_townhalllevels_D[]" class="townhalllevels_D" aria-label="hotel de ville">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -407,7 +405,7 @@
             <span>=></span>
 
             <label class="result_box">
-              <select name="exceptions_result[]">
+              <select name="exceptions_result[]" aria-label="resultat">
                 <option value=" "></option>
                 <option value="0" selected>0</option>
                 <option value="1">1</option>
@@ -471,7 +469,7 @@
       ruleRow.classList.add('rule-row');
       ruleRow.innerHTML = `
     <label>
-      <select name="stars[]">
+      <select name="stars[]" aria-label="Nombre d’étoiles">
         <option value=" "></option>
         <option value="0">0</option>
         <option value="1">1</option>
@@ -482,7 +480,7 @@
     <span class="star">⭐</span>
 
     <label class="operator_box">
-      <select name="logical_operator[]" class="logical_operator">
+      <select name="logical_operator[]" class="logical_operator" aria-label="logical operator">
         <option value=" "></option>
         <option value="AND">AND</option>
       </select>
@@ -492,7 +490,7 @@
       <span>attackerTH</span>
 
       <label>
-        <select name="comparison_operator[]" class="comparison_operator">
+        <select name="comparison_operator[]" class="comparison_operator" aria-label="comparaison operator">
           <option value="=">=</option>
           <option value=">=">>=</option>
           <option value="<="><=</option>
@@ -507,7 +505,7 @@
     <span>=></span>
 
     <label class="result_box">
-      <select name="result[]" class="btn_value_none">
+      <select name="result[]" class="btn_value_none" aria-label="resultat">
         <option value=" "></option>
         <option value="0">0</option>
         <option value="1">1</option>
@@ -547,7 +545,7 @@
       ruleRow.classList.add('rule-row');
       ruleRow.innerHTML = `
                 <label>
-              <select name="exceptions_stars[]">
+              <select name="exceptions_stars[]" aria-label="Nombre d’étoiles">
                 <option value=" " selected></option>
                 <option value="0">0</option>
                 <option value="1">1</option>
@@ -562,7 +560,7 @@
             <span>attackerTH</span>
 
             <label>
-              <select name="exceptions_townhalllevels_A[]" class="exceptions_townhalllevels_A">
+              <select name="exceptions_townhalllevels_A[]" class="exceptions_townhalllevels_A" aria-label="hotel de ville">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -586,7 +584,7 @@
 
             <span>and defenderTH</span>
             <label>
-              <select name="exceptions_townhalllevels_D[]" class="exceptions_townhalllevels_D">
+              <select name="exceptions_townhalllevels_D[]" class="exceptions_townhalllevels_D" aria-label="hotel de ville">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -609,7 +607,7 @@
             <span>=></span>
 
             <label class="result_box">
-              <select name="exceptions_result[]" class="btn_value_none">
+              <select name="exceptions_result[]" class="btn_value_none" aria-label="resultat">
                 <option value=" " selected></option>
                 <option value="0">0</option>
                 <option value="1">1</option>

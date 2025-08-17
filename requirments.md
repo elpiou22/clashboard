@@ -14,6 +14,8 @@
 - composer require symfony/css-selector
 - composer require --dev orm-fixtures
 - composer require --dev phpstan/phpstan
+- composer require --dev symfony/security-checker
+
 
 
 

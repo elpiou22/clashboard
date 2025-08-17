@@ -1,6 +1,6 @@
 {% extends 'layouts/base.html.twig' %}
 {% block title %} CWL {% endblock title %}
-{% block head %}
+{% block extra_styles %}
   <meta charset="UTF-8">
   <link rel="stylesheet" href="{{ asset('css/style_cwl.css') }}">
   <link rel="stylesheet" href="{{ asset('css/margins.css') }}">
@@ -17,7 +17,7 @@
   </script>
 
 
-{% endblock head %}
+{% endblock extra_styles %}
 
 
 {% block body %}
@@ -63,7 +63,7 @@
           <tr>
             <td class="td_icon">
               <div class="hide_icon_container">
-                <img src="{{ asset('./svg/hide.svg') }}" class="hide_icon">
+                <img src="{{ asset('./svg/hide.svg') }}" class="hide_icon" alt="Hide icon">
               </div>
             </td>
 
@@ -89,7 +89,7 @@
 
                   {% set nbPosts = attack.getNbPosts() %}
                   {% if nbPosts > 0 %}
-                    <img src="{{ asset('./svg/messages_icon.svg') }}" class="message_icon">
+                    <img src="{{ asset('./svg/messages_icon.svg') }}" class="message_icon" alt="message icon">
                   {% endif %}
                   <div
                     {% if value == "1" %}
@@ -104,7 +104,7 @@
                       class="value-11 small_box show_popup"
                     {% endif %}
                   >
-                    <input type="text" value="{{ value }}" class="result_day_data" data-key="name" disabled>
+                    <input type="text" value="{{ value }}" class="result_day_data" data-key="name" disabled aria-label={{ value }}>
 
                     <div id="nbPosts" style="display: none">{{ nbPosts }}</div>
 
@@ -127,7 +127,7 @@
 
             <td class ="td_more">
               <label class="label_more small_box">
-                <input class="input_more small_box" id="input_more">
+                <input class="input_more small_box" id="input_more" aria-label="more">
               </label>
             </td>
             <td class ="td_total">
@@ -148,7 +148,7 @@
     <div class="options_container">
       <div class="edit_mode_container">
         <div class="edit_mode_selector">
-          <input type="checkbox" id="edit_mode" name="edit_mode" value="selector" onchange="options_checkbox_changed('edit_mode')">
+          <input type="checkbox" id="edit_mode" name="edit_mode" value="selector" onchange="options_checkbox_changed('edit_mode')" aria-label="edit mode">
         </div>
         <div class="edit_mode_text">
           <label for="edit_mode">
@@ -162,7 +162,7 @@
 
       <div class="options_col_container">
         <div class="options_col_selector">
-          <input type="checkbox" id="options_col" name="options_col" value="selector" onchange="options_checkbox_changed('options')">
+          <input type="checkbox" id="options_col" name="options_col" value="selector" onchange="options_checkbox_changed('options')" aria-label="options">
         </div>
         <div class="options_col_text">
           <label for="options_col">
@@ -175,7 +175,7 @@
 
       <div class="total_col_container">
         <div class="total_col_selector">
-          <input type="checkbox" id="total_col" name="total_col" value="selector" onchange="options_checkbox_changed('total')" checked>
+          <input type="checkbox" id="total_col" name="total_col" value="selector" onchange="options_checkbox_changed('total')" checked aria-label="total">
         </div>
         <div class="total_col_text">
           <label for="total_col">
@@ -196,7 +196,7 @@
           {% for index in 0..length_members %}
             <div class="member member_number_{{ index }}">
               <div class="show_members_selector">
-                <img src="{{ asset('./svg/hide.svg') }}" class="show_icon">
+                <img src="{{ asset('./svg/hide.svg') }}" class="show_icon" alt="hide icon">
               </div>
               <div class="show_members_text">
                 <span>

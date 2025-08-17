@@ -1,6 +1,6 @@
 <?php
 
-/*
+
 namespace App\Tests\Controller;
 
 use App\DataFixtures\AttackFixtures;
@@ -11,6 +11,7 @@ use Liip\TestFixturesBundle\Test\FixturesTrait;
 
 class PostControllerTest extends BaseTests
 {
+  /*
   use FixturesTrait;
 
   public function testCreatePost(): void
@@ -68,6 +69,6 @@ class PostControllerTest extends BaseTests
     $this->assertResponseIsSuccessful();
     $this->assertSelectorExists('body'); // on peut affiner si on sait ce qu'il y a dans le template
   }
+  */
 }
 
-*/

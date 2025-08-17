@@ -1,12 +1,12 @@
 {% extends 'layouts/base.html.twig' %}
 {% block title %} Forum {% endblock title %}
-{% block head %}
+{% block extra_styles %}
   <link rel="stylesheet" href="{{ asset('css/margins.css') }}">
   <link rel="stylesheet" href="{{ asset('css/forum_cwl.css') }}">
   <link rel="stylesheet" href="{{ asset('css/colors.css') }}">
   <script src="{{ asset('js/forum.js') }}" defer></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-{% endblock head %}
+{% endblock extra_styles %}
 
 
 {% block body %}
