@@ -17,8 +17,8 @@
 
       <div class="profile_container beige">
         <div class="pp">
-          {% if user.profilePicture %}
-            <img src="{{ asset('uploads/profile_pictures/'~user.profilePicture) }}" alt="Film">
+          {% if user.getProfilePicture  %}
+            <img style="max-height: 200px; max-width: 200px; height: auto; width: auto; border-radius: 20px" src="{{ asset('uploads/profile_pictures/'~user.profilePicture) }}" alt="Film">
           {% else %}
             <img style="max-height: 200px; max-width: 200px; height: auto; width: auto" src="{{ asset('img/default_pp.png') }}" alt="pp">
           {% endif %}
@@ -42,10 +42,10 @@
 
       <div class="buttons_container">
         <button>
-          <a href={{ path('acc_send_email_reset') }}>Change password</a>
+          <a href={{ path('password_request') }}>Change password</a>
         </button>
         <button>
-          <a href={{ path('acc_update_profile') }}>Modify account</a>
+          <a href={{ path('update_profile') }}>Modify account</a>
         </button>
       </div>
     </div>

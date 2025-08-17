@@ -6,19 +6,13 @@
 {% block body %}
 
 
-
-    <div class="container">
-
-
-        <div id="register-form" class="form-container active">
-            {{ form_start(registrationForm) }}
-            {{ form_widget(registrationForm) }}
-            <button type="submit">Modifier</button>
-            {{ form_end(registrationForm) }}
-        </div>
-    </div>
-
-
+    {{ form_start(registrationForm, {'attr': {'enctype': 'multipart/form-data', 'class': 'formform'}}) }}
+    {{ form_row(registrationForm.email) }}
+    {{ form_row(registrationForm.pseudo) }}
+    {{ form_row(registrationForm.birthdate) }}
+    {{ form_row(registrationForm.profilePictureFile) }}
+    <button type="submit" class="btn-login grn_btn">Enregistrer</button>
+    {{ form_end(registrationForm) }}
 
 
 

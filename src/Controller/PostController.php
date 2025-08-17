@@ -118,6 +118,13 @@ class PostController extends AbstractController
       EntityManagerInterface $entityManager
   ): JsonResponse
   {
+    if (!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
+      return new JsonResponse(['error' => 'auth_required'], 401);
+    }
+
+
+
+
     $data = json_decode($request->getContent(), true);
     $postId = $data['post_id'] ?? null;
     $voteType = $data['vote_type'] ?? null; // 'up' ou 'down'

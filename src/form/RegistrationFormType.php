@@ -9,6 +9,8 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+
 
 
 class RegistrationFormType extends AbstractType
@@ -21,9 +23,11 @@ class RegistrationFormType extends AbstractType
             ->add('birthdate', null, [
                 'widget' => 'single_text'
             ])
-            ->add('profilePictureFile', FileType::class, [
+            ->add('profilePictureFile', VichImageType::class, [
                 'label' => 'Photo de profil',
-                'required' => true,
+                'required' => false,
+                'download_uri' => false,
+                'image_uri' => false,
             ])
 
             ->add('roles', ChoiceType::class, [

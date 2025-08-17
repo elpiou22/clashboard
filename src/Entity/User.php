@@ -47,6 +47,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
+    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function getId(): ?int
     {
@@ -115,6 +117,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setProfilePictureFile(?File $profilePictureFile): void
     {
         $this->profilePictureFile = $profilePictureFile;
+        if ($profilePictureFile !== null) {
+          $this->updatedAt = new \DateTimeImmutable();
+        }
     }
 
     /**
@@ -175,4 +180,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return (string) $this->email;
     }
+
+
+
+  public function getUpdatedAt(): ?\DateTimeImmutable { return $this->updatedAt; }
+  public function setUpdatedAt(?\DateTimeImmutable $d): self { $this->updatedAt = $d; return $this; }
+
+  public function __serialize(): array
+  {
+    return [
+        'id' => $this->id,
+        'email' => $this->email,
+        'password' => $this->password,
+        'roles' => $this->roles,
+        'pseudo' => $this->pseudo,
+      // On peut stocker la date en string (ISO) pour éviter les pb de sérialisation
+        'birthdate' => $this->birthdate?->format('c'),
+        'profilePicture' => $this->profilePicture, // le NOM de fichier (string), pas l'objet File
+    ];
+  }
+
+  public function __unserialize(array $data): void
+  {
+    $this->id = $data['id'];
+    $this->email = $data['email'];
+    $this->password = $data['password'];
+    $this->roles = $data['roles'];
+    $this->pseudo = $data['pseudo'];
+    $this->birthdate = isset($data['birthdate']) ? new \DateTimeImmutable($data['birthdate']) : null;
+    $this->profilePicture = $data['profilePicture'] ?? null;
+  }
+
 }

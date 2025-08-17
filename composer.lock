@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3c9d751c2a25512e96b6d777b180876b",
+    "content-hash": "0dbfb3852da7e7c5d67ae0627eb67d97",
     "packages": [
         {
             "name": "doctrine/cache",
@@ -2243,16 +2243,16 @@
         },
         {
             "name": "symfony/deprecation-contracts",
-            "version": "v3.5.1",
+            "version": "v3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/deprecation-contracts.git",
-                "reference": "74c71c939a79f7d5bf3c1ce9f5ea37ba0114c6f6"
+                "reference": "63afe740e99a13ba87ec199bb07bbdee937a5b62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/74c71c939a79f7d5bf3c1ce9f5ea37ba0114c6f6",
-                "reference": "74c71c939a79f7d5bf3c1ce9f5ea37ba0114c6f6",
+                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/63afe740e99a13ba87ec199bb07bbdee937a5b62",
+                "reference": "63afe740e99a13ba87ec199bb07bbdee937a5b62",
                 "shasum": ""
             },
             "require": {
@@ -2260,12 +2260,12 @@
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-main": "3.5-dev"
-                },
                 "thanks": {
-                    "name": "symfony/contracts",
-                    "url": "https://github.com/symfony/contracts"
+                    "url": "https://github.com/symfony/contracts",
+                    "name": "symfony/contracts"
+                },
+                "branch-alias": {
+                    "dev-main": "3.6-dev"
                 }
             },
             "autoload": {
@@ -2290,7 +2290,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.5.1"
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.6.0"
             },
             "funding": [
                 {
@@ -2306,7 +2306,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-25T14:20:29+00:00"
+            "time": "2024-09-25T14:21:43+00:00"
         },
         {
             "name": "symfony/doctrine-bridge",
@@ -4058,19 +4058,20 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.31.0",
+            "version": "v1.32.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "85181ba99b2345b0ef10ce42ecac37612d9fd341"
+                "reference": "6d857f4d76bd4b343eac26d6b539585d2bc56493"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/85181ba99b2345b0ef10ce42ecac37612d9fd341",
-                "reference": "85181ba99b2345b0ef10ce42ecac37612d9fd341",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/6d857f4d76bd4b343eac26d6b539585d2bc56493",
+                "reference": "6d857f4d76bd4b343eac26d6b539585d2bc56493",
                 "shasum": ""
             },
             "require": {
+                "ext-iconv": "*",
                 "php": ">=7.2"
             },
             "provide": {
@@ -4082,8 +4083,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -4118,7 +4119,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.31.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.32.0"
             },
             "funding": [
                 {
@@ -4134,7 +4135,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-09T11:45:10+00:00"
+            "time": "2024-12-23T08:48:59+00:00"
         },
         {
             "name": "symfony/polyfill-php83",
@@ -5694,24 +5695,23 @@
         },
         {
             "name": "twig/twig",
-            "version": "v3.16.0",
+            "version": "v3.21.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "475ad2dc97d65d8631393e721e7e44fb544f0561"
+                "reference": "285123877d4dd97dd7c11842ac5fb7e86e60d81d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/475ad2dc97d65d8631393e721e7e44fb544f0561",
-                "reference": "475ad2dc97d65d8631393e721e7e44fb544f0561",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/285123877d4dd97dd7c11842ac5fb7e86e60d81d",
+                "reference": "285123877d4dd97dd7c11842ac5fb7e86e60d81d",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0.2",
+                "php": ">=8.1.0",
                 "symfony/deprecation-contracts": "^2.5|^3",
                 "symfony/polyfill-ctype": "^1.8",
-                "symfony/polyfill-mbstring": "^1.3",
-                "symfony/polyfill-php81": "^1.29"
+                "symfony/polyfill-mbstring": "^1.3"
             },
             "require-dev": {
                 "phpstan/phpstan": "^2.0",
@@ -5758,7 +5758,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v3.16.0"
+                "source": "https://github.com/twigphp/Twig/tree/v3.21.1"
             },
             "funding": [
                 {
@@ -5770,24 +5770,24 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-11-29T08:27:05+00:00"
+            "time": "2025-05-03T07:21:55+00:00"
         },
         {
             "name": "vich/uploader-bundle",
-            "version": "v2.5.0",
+            "version": "v2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dustin10/VichUploaderBundle.git",
-                "reference": "4f1c098b3ec46b1aaf137bec6ecb49dbbaff4e0d"
+                "reference": "8a8cce134fc686caadf6828956f8ddd2b383fe74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/4f1c098b3ec46b1aaf137bec6ecb49dbbaff4e0d",
-                "reference": "4f1c098b3ec46b1aaf137bec6ecb49dbbaff4e0d",
+                "url": "https://api.github.com/repos/dustin10/VichUploaderBundle/zipball/8a8cce134fc686caadf6828956f8ddd2b383fe74",
+                "reference": "8a8cce134fc686caadf6828956f8ddd2b383fe74",
                 "shasum": ""
             },
             "require": {
-                "doctrine/persistence": "^3.0",
+                "doctrine/persistence": "^3.0 || ^4.0",
                 "ext-simplexml": "*",
                 "jms/metadata": "^2.4",
                 "php": "^8.1",
@@ -5806,17 +5806,18 @@
                 "league/flysystem": "<2.0"
             },
             "require-dev": {
-                "dg/bypass-finals": "^1.8",
+                "dg/bypass-finals": "^1.9",
+                "doctrine/common": "^3.0",
                 "doctrine/doctrine-bundle": "^2.7",
                 "doctrine/mongodb-odm": "^2.4",
-                "doctrine/orm": "^2.13",
+                "doctrine/orm": "^2.13 || ^3.0",
                 "ext-sqlite3": "*",
                 "knplabs/knp-gaufrette-bundle": "dev-master",
                 "league/flysystem-bundle": "^2.4 || ^3.0",
                 "league/flysystem-memory": "^2.0 || ^3.0",
                 "matthiasnoback/symfony-dependency-injection-test": "^5.1",
                 "mikey179/vfsstream": "^1.6.11",
-                "phpunit/phpunit": "^9.6",
+                "phpunit/phpunit": "^10.5 || ^11.5 || ^12.0",
                 "symfony/asset": "^5.4 || ^6.0 || ^7.0",
                 "symfony/browser-kit": "^5.4 || ^6.0 || ^7.0",
                 "symfony/css-selector": "^5.4 || ^6.0 || ^7.0",
@@ -5824,15 +5825,14 @@
                 "symfony/dom-crawler": "^5.4 || ^6.0 || ^7.0",
                 "symfony/form": "^5.4 || ^6.0 || ^7.0",
                 "symfony/framework-bundle": "^5.4 || ^6.0 || ^7.0",
-                "symfony/phpunit-bridge": "^7.0",
+                "symfony/phpunit-bridge": "^7.2",
                 "symfony/security-csrf": "^5.4 || ^6.0 || ^7.0",
                 "symfony/translation": "^5.4 || ^6.0 || ^7.0",
                 "symfony/twig-bridge": "^5.4 || ^6.0 || ^7.0",
                 "symfony/twig-bundle": "^5.4 || ^6.0 || ^7.0",
                 "symfony/validator": "^5.4 || ^6.0 || ^7.0",
                 "symfony/var-dumper": "^5.4 || ^6.0 || ^7.0",
-                "symfony/yaml": "^5.4 || ^6.0 || ^7.0",
-                "yoast/phpunit-polyfills": "^2.0"
+                "symfony/yaml": "^5.4 || ^6.0 || ^7.0"
             },
             "suggest": {
                 "doctrine/doctrine-bundle": "For integration with Doctrine",
@@ -5876,9 +5876,9 @@
             ],
             "support": {
                 "issues": "https://github.com/dustin10/VichUploaderBundle/issues",
-                "source": "https://github.com/dustin10/VichUploaderBundle/tree/v2.5.0"
+                "source": "https://github.com/dustin10/VichUploaderBundle/tree/v2.7.0"
             },
-            "time": "2024-12-09T07:56:52+00:00"
+            "time": "2025-06-12T06:59:34+00:00"
         }
     ],
     "packages-dev": [

@@ -36,7 +36,12 @@
             <div class="credentials_container">
               <label for="password">Mot de passe :</label>
               <input type="password" id="password" name="_password" value="admin" required>
-              <a href="{{ path('acc_send_email_reset') }}" class="reset_pwd">Réinitiliser le mot de passe</a>
+              {#
+              {% if error %}
+                  <div class="error-message">{{ error }}</div>
+              {% endif %}
+              #}
+              <a href="{{ path('password_request') }}" class="reset_pwd">Réinitiliser le mot de passe</a>
             </div>
             <input type="hidden" name="_csrf_token"
                    value="{{ csrf_token('authenticate') }}"
@@ -52,7 +57,7 @@
 
         {# Formulaire d'Inscription #}
         <div id="register-form" class="form-container">
-          {{ form_start(registrationForm, {'attr': {'class': 'formform', 'enctype': 'multipart/form-data'}}) }}
+          {{ form_start(registrationForm, {action: path('acc_signin'), 'attr': {'class': 'formform', 'enctype': 'multipart/form-data'}}) }}
 
           <div class="credentials_container">
             {{ form_label(registrationForm.email) }}
@@ -74,10 +79,12 @@
             {{ form_widget(registrationForm.profilePictureFile) }}
           </div>
 
+          {% if registrationForm.roles is defined %}
           <div class="credentials_container">
             {{ form_label(registrationForm.roles) }}
             {{ form_widget(registrationForm.roles) }}
           </div>
+          {% endif %}
 
           <div class="credentials_container">
             {{ form_label(registrationForm.password) }}

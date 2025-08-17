@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Attack;
+use App\Entity\Clans;
 use App\Entity\ParamRequest;
 use App\Entity\Post;
 use App\Form\CellIndexType;
@@ -303,9 +304,26 @@ class CwlController extends AbstractController
         ]);
     $replies_replyIds = array_map(fn($p) => $p->getReplyOf(), $replies);
 
+    $clan = $entityManager->getRepository(Clans::class)->findOneBy([
+        'clan_id' => $clanId
+    ]);
+    $clanName = "";
+    if ($clan){
+      $clanName = $clan->getName();
+    }
+
+    $clanInfos = $clanName . " (#". $clanId . ")";
+
+    $attackInfos = "th" . $attack->getAttackerTH(). " vs ". "th". $attack->getDefenderTH() . "\n " .$attack->getAttackStars() . " ⭐ - " . $attack->getPercentage() . "%";
+
     return $this->render('./cwl/forum_cwl.html.twig', ['attack' => $attack,
         'posts' => $posts,
         'replies' => $replies,
+        'clanInfos' => $clanInfos,
+        'attackInfos' => $attackInfos,
+        'attackResult' => $attack->getResult(),
+        'attackerName' => $attack->getPseudo(),
+        'attackDay' => $day,
         'replies_replyIds' => $replies_replyIds,
         'entityManager' => $entityManager
     ]);
