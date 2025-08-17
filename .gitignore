@@ -1,7 +1,7 @@
 
 
 /.env.*
-
+!/.env.prod
 
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
