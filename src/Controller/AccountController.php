@@ -76,7 +76,7 @@ class AccountController extends AbstractController
       $mail = (new Email())
           ->from(new Address('no-reply@clashboard.com', 'ClashBoard'))
           ->to($user->getEmail())
-          ->subject('Bienvenue'. $user->getPseudo())
+          ->subject('Bienvenue '. $user->getPseudo())
           ->html(
               "<p>Bonjour ". $user->getPseudo() . "</p>
                     <p>Votre compte est bien créé avec l'email:" . $user->getEmail() . "</p>"
