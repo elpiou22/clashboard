@@ -6,6 +6,7 @@ use App\Repository\TweetRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Clan;
 
 #[ORM\Entity(repositoryClass: TweetRepository::class)]
 class Post
@@ -41,8 +42,9 @@ class Post
   #[ORM\Column]
   private ?int $nb_replies = 0;
 
-  #[ORM\Column(length: 255)]
-  private ?string $clanId = null;
+  #[ORM\ManyToOne(targetEntity: Clan::class)]
+  #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
+  private ?Clan $clan = null;
 
   #[ORM\Column(length: 255)]
   private ?string $cwlId = null;
@@ -118,14 +120,15 @@ class Post
       return $this;
   }
 
-  public function getClanId(): ?string
+  public function getClan(): ?Clan
   {
-    return $this->clanId;
+    return $this->clan;
   }
 
-  public function setClanId(?string $clanId): void
+  public function setClan(?Clan $clan): self
   {
-    $this->clanId = $clanId;
+    $this->clan = $clan;
+    return $this;
   }
 
   public function getCwlId(): ?string

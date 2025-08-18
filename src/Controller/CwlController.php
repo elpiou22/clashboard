@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Attack;
-use App\Entity\Clans;
+use App\Entity\Clan;
 use App\Entity\ParamRequest;
 use App\Entity\Post;
 use App\Form\CellIndexType;
@@ -42,71 +42,146 @@ class CwlController extends AbstractController
     $data = json_decode($output, true);
     $membersInCWL = $data[0];
     $excelData    = $data[1];
-    $data_length  = count($excelData);
+    $clanName     = $data[2];
+    //$data_length  = count($excelData);
 
+    $clanRepo = $entityManager->getRepository(Clan::class);
+    $clan = $clanRepo->findOneBy(['clan_id' => $clanID]);
 
-    // Récupérer toutes les attaques existantes pour ce clan et cette date
-    $repository = $entityManager->getRepository(Attack::class);
-    $existingAttacks = $repository->createQueryBuilder('a')
-        ->where('a.clanID = :clanID')
+    if (!$clan) {
+      $clan = new Clan();
+      $clan->setClanId($clanID);
+      $clan->setName($clanName ?? 'Unknown');
+      $entityManager->persist($clan);
+      // on flush ici pour garantir un id pour la FK + pouvoir l’utiliser dans la requête DQL suivante
+      $entityManager->flush();
+    } else {
+      // on met à jour le nom si on en reçoit un de plus frais
+      if (!empty($clanName) && $clan->getName() !== $clanName) {
+        $clan->setName($clanName);
+        $entityManager->persist($clan);
+        $entityManager->flush();
+      }
+    }
+
+    // 4) Charger les attaques existantes pour ce clan et cette date
+    $attackRepo = $entityManager->getRepository(Attack::class);
+    $existingAttacks = $attackRepo->createQueryBuilder('a')
+        ->where('a.clan = :clan')
         ->andWhere('a.date = :date')
-        ->setParameter('clanID', $clanID)
-        ->setParameter('date', "2501")
+        ->setParameter('clan', $clan)
+        ->setParameter('date', $date)
         ->getQuery()
         ->getResult();
 
-    // Création d'un index pour accéder rapidement aux attaques existantes
+    // index [pseudo][day] => Attack
     $existingIndex = [];
     foreach ($existingAttacks as $attack) {
       $existingIndex[$attack->getPseudo()][$attack->getDay()] = $attack;
     }
-    //dd($existingIndex);
 
     $batchSize = 50;
-    $counter = 0;
+    $pending   = 0;
 
     foreach ($excelData as $i => $dayData) {
       $dayNumber = $i + 1;
-      foreach ($dayData as $contest) {
-        $playerName  = $contest['playerName'];
-        $bonusValue  = $contest['bonusValue'];
-        $mapPosition = $contest['mapPosition'];
 
+      foreach ($dayData as $contest) {
+        // expected keys: playerName, bonusValue, mapPosition, tag, attackerTH, defenderTH, percentage, attackStars
+        $playerName  = $contest['playerName']  ?? '';
+        $bonusValue  = $contest['bonusValue']  ?? '';
+        $mapPosition = $contest['mapPosition'] ?? 0;
+
+        if ($playerName === '') {
+          continue; // on ignore les lignes vides
+        }
 
         if (isset($existingIndex[$playerName][$dayNumber])) {
+          // MAJ si nécessaire
           $attack = $existingIndex[$playerName][$dayNumber];
+
+          $needPersist = false;
+
           if ($attack->getResult() !== $bonusValue) {
             $attack->setResult($bonusValue);
+            $needPersist = true;
+          }
+          if ($attack->getMapPosition() !== (int)$mapPosition) {
+            $attack->setMapPosition((int)$mapPosition);
+            $needPersist = true;
+          }
+
+          // champs ajoutés (on met à jour si différents)
+          if (array_key_exists('tag', $contest) && $attack->getTag() !== $contest['tag']) {
+            $attack->setTag($contest['tag']);
+            $needPersist = true;
+          }
+          if (array_key_exists('attackerTH', $contest) && $attack->getAttackerTH() !== (int)$contest['attackerTH']) {
+            $attack->setAttackerTH((int)$contest['attackerTH']);
+            $needPersist = true;
+          }
+          if (array_key_exists('defenderTH', $contest) && $attack->getDefenderTH() !== (int)$contest['defenderTH']) {
+            $attack->setDefenderTH((int)$contest['defenderTH']);
+            $needPersist = true;
+          }
+          if (array_key_exists('percentage', $contest) && $attack->getPercentage() !== (int)$contest['percentage']) {
+            $attack->setPercentage((int)$contest['percentage']);
+            $needPersist = true;
+          }
+          if (array_key_exists('attackStars', $contest) && $attack->getAttackStars() !== (int)$contest['attackStars']) {
+            $attack->setAttackStars((int)$contest['attackStars']);
+            $needPersist = true;
+          }
+
+          if ($needPersist) {
             $entityManager->persist($attack);
-            $counter++;
+            $pending++;
           }
         } else {
-
-
-          //dump($playerName);
+          // Création
           $attack = new Attack();
           $attack->setPseudo($playerName);
-          $attack->setDate("2501");
+          $attack->setDate($date);            // ⚠ utilise bien le $date reçu en paramètre
           $attack->setDay($dayNumber);
           $attack->setResult($bonusValue);
-          $attack->setClanID($clanID);
-          $attack->setMapPosition($mapPosition);
-          // 11/08/2025 - ajout champ pour forum:
-          $attack->setTag($contest['tag']);
-          $attack->setAttackerTH($contest['attackerTH']);
-          $attack->setDefenderTH($contest['defenderTH']);
-          $attack->setPercentage($contest['percentage']);
-          $attack->setAttackStars($contest['attackStars']);
+          $attack->setMapPosition((int)$mapPosition);
+
+          // liaison FK
+          $attack->setClan($clan);
+
+          // champs forum
+          if (isset($contest['tag']))         { $attack->setTag($contest['tag']); }
+          if (isset($contest['attackerTH']))  { $attack->setAttackerTH((int)$contest['attackerTH']); }
+          if (isset($contest['defenderTH']))  { $attack->setDefenderTH((int)$contest['defenderTH']); }
+          if (isset($contest['percentage']))  { $attack->setPercentage((int)$contest['percentage']); }
+          if (isset($contest['attackStars'])) { $attack->setAttackStars((int)$contest['attackStars']); }
 
           $entityManager->persist($attack);
-          $counter++;
+          $pending++;
 
-          continue;
+          // on enrichit l'index en mémoire pour éviter doublons dans la même passe
+          $existingIndex[$playerName][$dayNumber] = $attack;
+        }
+
+        if ($pending >= $batchSize) {
+          $entityManager->flush();
+          $entityManager->clear(); // si tu clears, pense à re-récupérer $clan !
+          // ⚠️ après clear(), il faut ré-attacher $clan pour la suite
+          $clan = $clanRepo->findOneBy(['clan_id' => $clanID]);
+          $pending = 0;
         }
       }
     }
-    $entityManager->flush();
-    $entityManager->clear();
+
+    if ($pending >= $batchSize) {
+      $entityManager->flush();
+      $pending = 0;
+    }
+
+    if ($pending > 0) {
+      $entityManager->flush();
+    }
+
     return [$membersInCWL, $excelData];
   }
 
@@ -117,7 +192,8 @@ class CwlController extends AbstractController
       EntityManagerInterface $entityManager,
   ): ?Response
   {
-    // Récupération sous forme de tableaux
+
+
     $stars = $request->request->all('stars');
     $logicalOperators = $request->request->all('logical_operator');
     $comparisonOperators = $request->request->all('comparison_operator');
@@ -219,11 +295,20 @@ class CwlController extends AbstractController
     }
 
 
-    $results = $entityManager->getRepository(Attack::class)->findBy([
-        'clanID' => $clanID,
-        'date' => "2501" //@todo
-    ]);
+    $clan = $entityManager->getRepository(Clan::class)
+        ->findOneBy(['clan_id' => $clanID]);
 
+    $clanName = "Undefined";
+    if (!$clan) {
+      // si aucun clan trouvé
+      $results = [];
+    } else {
+      $clanName = $clan->getName();
+      $results = $entityManager->getRepository(Attack::class)->findBy([
+          'clan' => $clan,
+          'date' => "2501",
+      ]);
+    }
 
 
     $data_Per_Player = [];
@@ -246,14 +331,18 @@ class CwlController extends AbstractController
 
     //dump($data_Per_Player['Ancien Piou']);
 
+
+
     $form = $this->createForm(CellIndexType::class);
+
 
     return $this->render('./cwl/view_cwl.html.twig', [
         'membersInCWL' => $membersInCWL,
         'length_members' => count($membersInCWL) -1,
         'data_All_Players' => $data_Per_Player,
         'form' => $form->createView(),
-        'clanId' => $clanID
+        'clanId' => $clanID,
+        'clanName' => $clanName
     ]);
 
 
@@ -273,16 +362,26 @@ class CwlController extends AbstractController
     $mapPosition = substr($url, 4, 2);
     $day = substr($url, 6, 1);
 
+    $clan = $entityManager->getRepository(Clan::class)->findOneBy([
+        'clan_id' => $clanId
+    ]);
+
+
+    if (!$clan) {
+      throw $this->createNotFoundException("Clan $clanId introuvable");
+    }
+
     $attack = $entityManager->getRepository(Attack::class)->findOneBy([
-        'clanID' => $clanId,
+        'clan' => $clan,
         'date' => $date,
         'mapPosition' => $mapPosition,
         'day' => $day
     ]);
 
 
+
     $posts = $entityManager->getRepository(Post::class)->findBy([
-        'clanId' => $clanId,
+        'clan' => $clan,
         'day' => $day,
         'playerMapPosition' => $mapPosition,
         'reply_of' => 0,
@@ -293,7 +392,7 @@ class CwlController extends AbstractController
         ]);
     $postIds = array_map(fn($p) => $p->getId(), $posts);
     $replies = $entityManager->getRepository(Post::class)->findBy([
-        'clanId' => $clanId,
+        'clan' => $clan,
         'day' => $day,
         'playerMapPosition' => $mapPosition,
         'reply_of' => $postIds,
@@ -304,14 +403,8 @@ class CwlController extends AbstractController
         ]);
     $replies_replyIds = array_map(fn($p) => $p->getReplyOf(), $replies);
 
-    $clan = $entityManager->getRepository(Clans::class)->findOneBy([
-        'clan_id' => $clanId
-    ]);
-    $clanName = "";
-    if ($clan){
-      $clanName = $clan->getName();
-    }
 
+    $clanName = $clan->getName();
     $clanInfos = $clanName . " (#". $clanId . ")";
 
     $attackInfos = "th" . $attack->getAttackerTH(). " vs ". "th". $attack->getDefenderTH() . "\n " .$attack->getAttackStars() . " ⭐ - " . $attack->getPercentage() . "%";
@@ -328,5 +421,6 @@ class CwlController extends AbstractController
         'entityManager' => $entityManager
     ]);
   }
+
 
 }

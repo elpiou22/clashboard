@@ -42,6 +42,7 @@ function getParsedData(allData, clanTag = '%23P990YPPV', tostop = null) {
     let dataExported = [];
 
     let alliesPlayers, opponentsPlayers;
+    let clanName;
 
 
     for (let i = 0; i < allData.length; i++) {
@@ -50,9 +51,11 @@ function getParsedData(allData, clanTag = '%23P990YPPV', tostop = null) {
         if (data.clan.tag.slice(1) === clanTag.slice(3)) {
             alliesData    = data['clan']['members'];
             opponentsData = data['opponent']['members'];
+            clanName      = data['clan']['name'];
         } else if (data.opponent.tag.slice(1) === clanTag.slice(3)) {
             alliesData    = data['opponent']['members'];
             opponentsData = data['clan']['members'];
+            clanName      = data['opponent']['name'];
         } else {
             console.log("Erreur dans getParsedData()");
             return;
@@ -164,7 +167,7 @@ function getParsedData(allData, clanTag = '%23P990YPPV', tostop = null) {
         */
         dataExported.push([alliesPlayers, opponentsPlayers]);
     }
-    return dataExported;
+    return [dataExported, clanName];
     //return [allAlliesPlayers, allOpponentsPlayers];
 }
 
@@ -444,15 +447,16 @@ function exportToExcel(allData) {
 
 
 async function parseDataAndExportToExcel(allData, clanTag, rules) {
-    let dataWithBonuses = setBonusValue(getParsedData(allData = allData, clanTag = clanTag, tostop = null), rules);
+    let parsed_data = getParsedData(allData = allData, clanTag = clanTag, tostop = null);
+    let dataWithBonuses = setBonusValue(parsed_data[0], rules);
 
-    //writeInFile(dataWithBonuses, "letest.json");
+    //writeInFile(parsed_data[1], "letest.json");
     let membersInCWL = deleteUselessMembers(dataWithBonuses);
     //writeInFile(getParsedData(allData = allData, clanTag = clanTag, tostop = null)[0], "letest.json")
     //writeInFile(exportToExcel(dataWithBonuses), "letest.json");
 
     let dataParsed = exportToExcel(dataWithBonuses);
-    return [dataParsed, membersInCWL];
+    return [dataParsed, membersInCWL, parsed_data[1]];
 }
 
 

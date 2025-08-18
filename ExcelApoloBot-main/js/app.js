@@ -40,8 +40,9 @@ async function run(clanID, rules) {
     let data_parsed = await get_data_parsed(data, clanID, rules);
     let dataToExcel = data_parsed[0];
     let membersInCWL = data_parsed[1];
+    let clanName    = data_parsed[2];
 
-    process.stdout.write(JSON.stringify([membersInCWL, dataToExcel]));
+    process.stdout.write(JSON.stringify([membersInCWL, dataToExcel, clanName]));
   } catch (error) {
     process.stdout.write(JSON.stringify("Error, in script app.js" + error));
   }

@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use App\Entity\Attack;
+use App\Entity\Clan;
 use App\Entity\PasswordResetRequest;
 use App\Entity\Post;
 use App\Form\MovieType;
@@ -64,13 +65,23 @@ class PostController extends AbstractController
       $this->addFlash('error', '$reply_of_id empty');
       return $this->redirectToRoute('home');
     }
+
+    $clan = $entityManager->getRepository(Clan::class)->findOneBy([
+        'clan_id' => $clanId
+    ]);
+    if (!$clan) {
+      throw $this->createNotFoundException("Clan $clanId introuvable");
+    }
+
+
+
     $post = new Post();
     $post->setText((string)$content);
     $post->setDate(new \DateTime());
     $post->setAuthor(1); // @todo
     $post->setUpvote(0);
     $post->setDownvote(0);
-    $post->setClanId($clanId);
+    $post->setClan($clan);
     $post->setCwlId($cwlId);
     $post->setPlayerMapPosition($playerMapPosition);
     $post->setDay($day);
@@ -80,7 +91,7 @@ class PostController extends AbstractController
     $entityManager->persist($post);
 
     $attack = $entityManager->getRepository(Attack::class)->findOneBy([
-      'clanID' => $clanId,
+      'clan' => $clan,
       'date' => $cwlId,
       'day' => $day,
       'mapPosition' => $playerMapPosition,
@@ -105,7 +116,7 @@ class PostController extends AbstractController
     $this->addFlash('success', 'tweet created');
 
     return $this->redirectToRoute('contest', [
-        'clanId' => $clanId,
+        'clanId' => $clan->getClanId(),
         'url' => $segments[2],
     ]);
   }

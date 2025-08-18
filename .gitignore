@@ -1,13 +1,14 @@
 
 
-/.env.*
-!/.env.prod
+###/.env.*
+
 
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
 /var/
 /vendor/
 /backup.sql
+/back.sql
 
 
 ###> phpunit/phpunit ###

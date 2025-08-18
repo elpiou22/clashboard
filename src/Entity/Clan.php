@@ -6,7 +6,7 @@ use App\Repository\ClansRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ClansRepository::class)]
-class Clans
+class Clan
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

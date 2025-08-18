@@ -1,0 +1,35 @@
+services:
+  mariadb:
+    image: mariadb:11
+    container_name: clashboard-db
+    environment:
+      MARIADB_ROOT_PASSWORD: "toto"
+      MARIADB_DATABASE: "clashboard"
+      MARIADB_USER: "clashboard"
+      MARIADB_PASSWORD: "clashboard"
+      TZ: "Europe/Paris"
+    ports:
+      - "3306:3306"   # si 3306 est déjà pris chez eux, remplacer par "3307:3306"
+    volumes:
+      - cb_db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb-admin ping -h 127.0.0.1 -uroot -p$${MARIADB_ROOT_PASSWORD} --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 40s
+    restart: unless-stopped
+
+  mailer:
+    image: axllent/mailpit:latest
+    container_name: clashboard-mailer
+    ports:
+      - "1025:1025"   # SMTP
+      - "8025:8025"   # UI http://localhost:8025
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  cb_db_data:

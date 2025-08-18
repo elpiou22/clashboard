@@ -22,8 +22,9 @@ class Attack
   #[ORM\Column(length: 255)]
   private ?string $date = null;
 
-  #[ORM\Column(length: 255)]
-  private ?string $clanID = null;
+  #[ORM\ManyToOne(targetEntity: Clan::class)]
+  #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
+  private ?Clan $clan = null;
 
   #[ORM\Column]
   private ?int $day = null;
@@ -115,14 +116,15 @@ class Attack
       return $this;
   }
 
-  public function getClanID(): ?string
+  public function getClan(): ?Clan
   {
-    return $this->clanID;
+    return $this->clan;
   }
 
-  public function setClanID(?string $clanID): void
+  public function setClan(?Clan $clan): self
   {
-    $this->clanID = $clanID;
+    $this->clan = $clan;
+    return $this;
   }
 
   public function getNbPosts(): ?int

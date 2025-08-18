@@ -2,22 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\Clans;
+use App\Entity\Clan;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Clans>
+ * @extends ServiceEntityRepository<Clan>
  */
 class ClansRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Clans::class);
+        parent::__construct($registry, Clan::class);
     }
 
 //    /**
-//     * @return Clans[] Returns an array of Clans objects
+//     * @return Clan[] Returns an array of Clan objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -31,7 +31,7 @@ class ClansRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Clans
+//    public function findOneBySomeField($value): ?Clan
 //    {
 //        return $this->createQueryBuilder('c')
 //            ->andWhere('c.exampleField = :val')
