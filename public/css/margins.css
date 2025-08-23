@@ -1,3 +1,22 @@
+:root{
+  --body-container-margin: 5%;
+}
+
+@media (max-width: 1800px) {
+  :root{
+
+  }
+}
+
+@media (max-width: 768px) {
+  :root{
+    --body-container-margin: 1%;
+  }
+}
+
+
+
+
 
 html, body {
   /*height: 100%;*/
@@ -19,9 +38,10 @@ body {
 }
 
 
+
 .body_container{
-  margin-right: 5%;
-  margin-left: 5%;
+  margin-right: var(--body-container-margin);
+  margin-left: var(--body-container-margin);
   margin-top: 5%;
   margin-bottom: 5%;
   height: auto !important;
@@ -29,6 +49,7 @@ body {
   overflow: visible;
   padding-bottom: 2rem;
 }
+
 
 
 .table_container{

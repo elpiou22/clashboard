@@ -140,13 +140,10 @@ class AccountController extends AbstractController
     #[IsGranted("IS_AUTHENTICATED_FULLY")]
     public function profile(): Response
     {
-
         $user = $this->getUser();
-
         if (!$user) {
             throw $this->createNotFoundException('Utilisateur non trouvé');
         }
-
         return $this->render('security/account.html.twig', [
             'user' => $user,
         ]);

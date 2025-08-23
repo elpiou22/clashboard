@@ -133,9 +133,6 @@ class PostController extends AbstractController
       return new JsonResponse(['error' => 'auth_required'], 401);
     }
 
-
-
-
     $data = json_decode($request->getContent(), true);
     $postId = $data['post_id'] ?? null;
     $voteType = $data['vote_type'] ?? null; // 'up' ou 'down'
@@ -145,12 +142,9 @@ class PostController extends AbstractController
     }
 
     $post = $entityManager->getRepository(Post::class)->find($postId);
-
     if (!$post) {
       return new JsonResponse(['error' => 'Post not found'], 404);
     }
-
-    // Mise à jour du vote_weight
     if ($voteType === 'up') {
       $post->upvote();
     } else {

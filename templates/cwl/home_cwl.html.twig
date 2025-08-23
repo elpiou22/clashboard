@@ -15,7 +15,7 @@
         </div>
         <div class="clan_tag_container green">
           <label>
-            Your Clan Tag:
+            <span>Your Clan Tag:</span>
             <textarea name = "clan_id" placeholder="Clan ID" required >#P990YPPV</textarea>
           </label>
         </div>
@@ -23,65 +23,68 @@
 
       <br>
 
-
-
       <div class="rules_container beige">
       <div class="main_rules_container green">
-        <span>Main rules</span>
+        <h2>Main rules</h2>
 
         <div id="rules-container">
           <div id="classicals-rules-container">
             <!-- 0e ligne -->
-            <div class="rule-row">
-              <label>
-                <select name="stars[]" aria-label="Nombre d’étoiles">
-                  <option value=" " selected></option>
-                  <option value="0">0</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                </select>
-              </label>
-              <span class="star">⭐</span>
-
-              <label class="operator_box">
-                <select name="logical_operator[]" class="logical_operator" aria-label="Logical Operator">
-                  <option value=" "></option>
-                  <option value="AND">AND</option>
-                </select>
-              </label>
-
-              <div class="more">
-                <span>attackerTH</span>
+            <div class="rule-row-container">
+              <div class="rule-row">
                 <label>
-                  <select name="comparison_operator[]" class="comparison_operator" aria-label="Comparaison operator">
+                  <select name="stars[]" aria-label="Nombre d’étoiles">
+                    <option value=" " selected></option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
+                </label>
+                <span class="star">⭐</span>
+
+                <label class="operator_box">
+                  <select name="logical_operator[]" class="logical_operator" aria-label="Logical Operator">
                     <option value=" "></option>
-                    <option value="=">=</option>
-                    <option value=">=">>=</option>
-                    <option value="<="><=</option>
-                    <option value="<"><</option>
-                    <option value=">">></option>
+                    <option value="AND">AND</option>
                   </select>
                 </label>
 
-                <span>defenderTH</span>
+                <div class="more">
+                  <span>attackerTH</span>
+                  <label>
+                    <select name="comparison_operator[]" class="comparison_operator" aria-label="Comparaison operator">
+                      <option value=" "></option>
+                      <option value="=">=</option>
+                      <option value=">=">>=</option>
+                      <option value="<="><=</option>
+                      <option value="<"><</option>
+                      <option value=">">></option>
+                    </select>
+                  </label>
+
+                  <span>defenderTH</span>
+                </div>
+
+                <span>=></span>
+
+                <label class="result_box">
+                  <select name="result[]" aria-label="Resultat">
+                    <option value=" "></option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="-1" selected>-1</option>
+                  </select>
+                </label>
+                </div>
+              <div class="rule-row-btn-container">
+                <button type="button" class="remove-rule">Remove</button>
               </div>
-
-              <span>=></span>
-
-              <label class="result_box">
-                <select name="result[]" aria-label="Resultat">
-                  <option value=" "></option>
-                  <option value="0">0</option>
-                  <option value="1">1</option>
-                  <option value="-1" selected>-1</option>
-                </select>
-              </label>
-              <button type="button" class="remove-rule">Remove</button>
             </div>
 
 
             <!-- 1e ligne -->
+            <div class="rule-row-container">
             <div class="rule-row">
               <label>
                 <select name="stars[]" aria-label="Nombre d’étoiles">
@@ -127,10 +130,14 @@
                   <option value="-1" selected>-1</option>
                 </select>
               </label>
-              <button type="button" class="remove-rule">Remove</button>
+            </div>
+              <div class="rule-row-btn-container">
+                <button type="button" class="remove-rule">Remove</button>
+              </div>
             </div>
 
             <!-- 2e ligne -->
+            <div class="rule-row-container">
             <div class="rule-row">
               <label>
                 <select name="stars[]" aria-label="Nombre d’étoiles">
@@ -177,10 +184,14 @@
                   <option value="-1" selected>-1</option>
                 </select>
               </label>
-              <button type="button" class="remove-rule">Remove</button>
+            </div>
+              <div class="rule-row-btn-container">
+                <button type="button" class="remove-rule">Remove</button>
+              </div>
             </div>
 
             <!-- 3e ligne -->
+            <div class="rule-row-container">
             <div class="rule-row">
               <label>
                 <select name="stars[]" aria-label="Nombre d’étoiles">
@@ -227,11 +238,15 @@
                   <option value="-1">-1</option>
                 </select>
               </label>
-              <button type="button" class="remove-rule">Remove</button>
+            </div>
+              <div class="rule-row-btn-container">
+                <button type="button" class="remove-rule">Remove</button>
+              </div>
             </div>
 
 
             <!-- 4e ligne -->
+            <div class="rule-row-container">
             <div class="rule-row">
               <label>
                 <select name="stars[]" aria-label="Nombre d’étoiles">
@@ -278,10 +293,14 @@
                   <option value="-1">-1</option>
                 </select>
               </label>
-              <button type="button" class="remove-rule">Remove</button>
+            </div>
+              <div class="rule-row-btn-container">
+                <button type="button" class="remove-rule">Remove</button>
+              </div>
             </div>
 
             <!-- 5e ligne -->
+            <div class="rule-row-container">
             <div class="rule-row">
               <label>
                 <select name="stars[]" aria-label="Nombre d’étoiles">
@@ -328,7 +347,10 @@
                   <option value="-1">-1</option>
                 </select>
               </label>
-              <button type="button" class="remove-rule">Remove</button>
+            </div>
+              <div class="rule-row-btn-container">
+                <button type="button" class="remove-rule">Remove</button>
+              </div>
             </div>
           </div>
         </div>
@@ -338,10 +360,11 @@
       </div>
 
       <div class="exceptions_rules_container green">
-        <H1>Rules exceptions:</H1>
+        <H2>Rules exceptions:</H2>
 
         <div id="exceptions-rules-container">
           <!-- 6e ligne -->
+          <div class="rule-row-container">
           <div class="rule-row">
             <label>
               <select name="exceptions_stars[]" aria-label="Nombre d’étoiles">
@@ -353,7 +376,6 @@
               </select>
             </label>
             <span class="star">⭐</span>
-            <span>and</span>
 
             <span>attackerTH</span>
 
@@ -380,7 +402,7 @@
             </label>
 
 
-            <span>and defenderTH</span>
+            <span>defenderTH</span>
             <label>
               <select name="exceptions_townhalllevels_D[]" class="townhalllevels_D" aria-label="hotel de ville">
                 <option value="1">1</option>
@@ -412,7 +434,10 @@
                 <option value="-1">-1</option>
               </select>
             </label>
-            <button type="button" class="remove-rule">Remove</button>
+          </div>
+            <div class="rule-row-btn-container">
+              <button type="button" class="remove-rule">Remove</button>
+            </div>
           </div>
         </div>
         <button type="button" id="add-exception-rule">Add Rule</button>
@@ -456,7 +481,7 @@
 
     document.querySelectorAll('.remove-rule').forEach(function(button) {
       button.addEventListener('click', function() {
-        this.parentElement.remove();
+        this.parentElement.parentElement.remove();
       });
     });
 
@@ -554,7 +579,6 @@
               </select>
             </label>
             <span class="star">⭐</span>
-            <span>and</span>
 
 
             <span>attackerTH</span>
@@ -582,7 +606,7 @@
             </label>
 
 
-            <span>and defenderTH</span>
+            <span>defenderTH</span>
             <label>
               <select name="exceptions_townhalllevels_D[]" class="exceptions_townhalllevels_D" aria-label="hotel de ville">
                 <option value="1">1</option>

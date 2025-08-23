@@ -111,7 +111,7 @@ class CwlController extends AbstractController
             $needPersist = true;
           }
 
-          // champs ajoutés (on met à jour si différents)
+
           if (array_key_exists('tag', $contest) && $attack->getTag() !== $contest['tag']) {
             $attack->setTag($contest['tag']);
             $needPersist = true;
@@ -141,12 +141,10 @@ class CwlController extends AbstractController
           // Création
           $attack = new Attack();
           $attack->setPseudo($playerName);
-          $attack->setDate($date);            // ⚠ utilise bien le $date reçu en paramètre
+          $attack->setDate($date);
           $attack->setDay($dayNumber);
           $attack->setResult($bonusValue);
           $attack->setMapPosition((int)$mapPosition);
-
-          // liaison FK
           $attack->setClan($clan);
 
           // champs forum
@@ -166,7 +164,6 @@ class CwlController extends AbstractController
         if ($pending >= $batchSize) {
           $entityManager->flush();
           $entityManager->clear(); // si tu clears, pense à re-récupérer $clan !
-          // ⚠️ après clear(), il faut ré-attacher $clan pour la suite
           $clan = $clanRepo->findOneBy(['clan_id' => $clanID]);
           $pending = 0;
         }
@@ -187,7 +184,7 @@ class CwlController extends AbstractController
 
 
   #[\Symfony\Component\Routing\Attribute\Route('/bonusdata', name: 'view_cwl_bonus_data', methods: ['POST'])]
-  public function displayData(
+  public function bonusdata_submit(
       Request $request,
       EntityManagerInterface $entityManager,
   ): ?Response
@@ -245,16 +242,16 @@ class CwlController extends AbstractController
     if ($clanID[0] === "#") {
       $clanID = substr($clanID, 1);
     }
-
     if (!$clanID) {
       return new Response('Le clan ID est manquant.', 400); // //@todo : vérifier si le clan ID est présent.
     }
+
+
 
     $last_request = $entityManager->getRepository(ParamRequest::class)->findOneBy([
         'clanId' => $clanID,
         'date' => "2501",
     ]);
-
 
     $new_request = True;
     if (!$last_request) {
@@ -262,91 +259,87 @@ class CwlController extends AbstractController
       $last_request->setClanId($clanID);
       $last_request->setDate("2501");
       $last_request->setParameters($jsonRules);
-      $entityManager->persist($last_request);
-      $entityManager->flush();
       $new_request = True;
     } else {
       if ($last_request->getParameters() !== $jsonRules) {
         $last_request->setParameters($jsonRules);
-        $entityManager->persist($last_request);
-        $entityManager->flush();
         $new_request = True;
       } else {
         $new_request = False;
       }
     }
+    $entityManager->persist($last_request);
+    $entityManager->flush();
 
 
-    if ($new_request){
-      $rr = $this->check_and_store_data($clanID, $jsonRules, "2501", $entityManager); //@todo
-      $membersInCWL = $rr[0];
-      //$excelData = $rr[1];
-    } else{
-      $query = $entityManager->getRepository(Attack::class)
-          ->createQueryBuilder('a')
-          ->select('DISTINCT a.pseudo')  // Sélectionner les pseudos distincts
-          ->where('a.date = 2501')
-          ->orderBy('a.mapPosition', 'ASC')  // Trier par mapPosition
-          ->getQuery();
-      $pseudos= $query->getResult();
-      $membersInCWL = array_map(function ($row) {
-        return $row['pseudo'];
-      }, $pseudos);
-    }
+    return $this->redirectToRoute('view_cwl_bonus_data_show', [
+        'clanId' => $clanID
+    ]);
+  }
 
 
-    $clan = $entityManager->getRepository(Clan::class)
-        ->findOneBy(['clan_id' => $clanID]);
 
-    $clanName = "Undefined";
+
+  #[Route('/bonusdata/{clanId}', name: 'view_cwl_bonus_data_show', methods: ['GET'])]
+  public function bonusdata_show(
+      string $clanId,
+      EntityManagerInterface $em
+  ): Response
+  {
+    $dateKey = "2501";
+
+    $clan = $em->getRepository(Clan::class)->findOneBy(['clan_id' => $clanId]);
     if (!$clan) {
-      // si aucun clan trouvé
-      $results = [];
-    } else {
-      $clanName = $clan->getName();
-      $results = $entityManager->getRepository(Attack::class)->findBy([
-          'clan' => $clan,
-          'date' => "2501",
+      // rien en base → page vide (ou redir /cwl)
+      return $this->render('./cwl/view_cwl.html.twig', [
+          'membersInCWL'   => [],
+          'length_members' => 0,
+          'data_All_Players' => [],
+          'form'           => $this->createForm(CellIndexType::class)->createView(),
+          'clanId'         => $clanId,
+          'clanName'       => 'Undefined',
       ]);
     }
 
 
-    $data_Per_Player = [];
-    foreach ($results as $attack) {
-      $playerName = $attack->getPseudo();
-      if (!isset($data_Per_Player[$playerName])) {
-        $data_Per_Player[$playerName] = [];
-      }
-      $data_Per_Player[$playerName][] = $attack;
-    }
+    $pseudos = $em->getRepository(Attack::class)->createQueryBuilder('a')
+        ->select('DISTINCT a.pseudo, a.mapPosition')
+        ->where('a.clan = :clan')->andWhere('a.date = :date')
+        ->setParameter('clan', $clan)->setParameter('date', $dateKey)
+        ->orderBy('a.mapPosition', 'ASC')
+        ->getQuery()->getArrayResult();
+    $membersInCWL = array_map(static fn(array $row) => $row['pseudo'], $pseudos);
 
-    uksort($data_Per_Player, function($a, $b) use ($data_Per_Player) {
-      $mapPositionA = $data_Per_Player[$a][0]->getMapPosition();
-      $mapPositionB = $data_Per_Player[$b][0]->getMapPosition();
-      if ($mapPositionA == $mapPositionB) {
-        return 0;
-      }
-      return ($mapPositionA < $mapPositionB) ? -1 : 1;
+    // Attaques du clan + date
+    $attacks = $em->getRepository(Attack::class)->findBy(['clan' => $clan, 'date' => $dateKey]);
+
+    // Groupement par joueur + tri par mapPosition
+    $byPlayer = [];
+    foreach ($attacks as $attack) {
+      $byPlayer[$attack->getPseudo()][] = $attack;
+    }
+    uksort($byPlayer, function (string $a, string $b) use ($byPlayer) {
+      return $byPlayer[$a][0]->getMapPosition() <=> $byPlayer[$b][0]->getMapPosition();
     });
 
-    //dump($data_Per_Player['Ancien Piou']);
-
-
-
-    $form = $this->createForm(CellIndexType::class);
-
-
     return $this->render('./cwl/view_cwl.html.twig', [
-        'membersInCWL' => $membersInCWL,
-        'length_members' => count($membersInCWL) -1,
-        'data_All_Players' => $data_Per_Player,
-        'form' => $form->createView(),
-        'clanId' => $clanID,
-        'clanName' => $clanName
+        'membersInCWL'     => $membersInCWL,
+        'length_members'   => max(count($membersInCWL) - 1, 0),
+        'data_All_Players' => $byPlayer,
+        'form'             => $this->createForm(CellIndexType::class)->createView(),
+        'clanId'           => $clanId,
+        'clanName'         => $clan->getName() ?? 'Undefined',
+        'cwlDate'         => $dateKey,
     ]);
-
-
   }
+
+
+
+
+
+
+
+
 
 
   #[\Symfony\Component\Routing\Attribute\Route('forum/{clanId}/{url}', name: 'contest')]

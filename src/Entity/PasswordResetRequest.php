@@ -5,6 +5,17 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\User;
 
+/**
+ * Class PasswordResetRequest
+ *
+ * This entity manages the reset of a user password.
+ * It stores a unique selector, a hashed token, request date, expiry date,
+ * and whether the request has been used.
+ *
+ * Relations:
+ * - Each request is linked to exactly one user.
+ */
+
 #[ORM\Entity]
 class PasswordResetRequest
 {

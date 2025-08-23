@@ -169,30 +169,3 @@ function back_at_beginning(clanId, date, firstarg, secondarg){
   //console.log(url);
   window.location.href = url;
 }
-
-/**
- * Change le titre en fonction du lien
- */
-function change_title() {
-  const months_FR = [
-    'Janvier','Février','Mars','Avril','Mai','Juin',
-    'Juillet','Août','Septembre','Octobre','Novembre','Décembre'
-  ];
-  const path = window.location.pathname;
-  const last = path.split('/').filter(Boolean).pop() || '';
-  const code = last.slice(0, 4);                 // "2501"
-  if (code.length < 4) return;
-
-  const yy = Number(code.slice(0, 2));           // 25
-  const mm = Number(code.slice(2, 4));           // 01
-  if (mm < 1 || mm > 12) return;
-
-  const year = 2000 + yy;                        // 2025 (base 2000)
-  const date = `${months_FR[mm - 1]} ${year}`;
-
-  document.querySelector('.main_title').textContent+= " - " + date;
-}
-
-
-
-change_title();

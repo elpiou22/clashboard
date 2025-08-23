@@ -1,3 +1,38 @@
+:root{
+  --nav-item-w: 120px;
+  --nav-item-h: 50px;
+  --nav_margin: 2%;
+  --nav_width : 12%;
+  --nav-font-size : 120%;
+}
+
+@media (max-width: 1800px) {
+  :root{
+    --nav-item-h: 50px;
+    --nav_margin: 4%;
+    --nav_width : 16%;
+    --nav-font-size : 110%;
+  }
+}
+
+@media (max-width: 768px) {
+  :root{
+    --nav-item-h: 33px;
+    --nav_margin: 1.5%;
+    --nav_width : 25%;
+    --nav-font-size : 0.6rem;
+  }
+  .navbar{
+    padding: 8px 1px !important;
+  }
+  .nav-right{
+    right: 2px !important;
+    width: auto !important;
+  }
+}
+
+
+
 .navbar {
   width: 100%;
   background-color: #1a1a1a;
@@ -34,10 +69,6 @@
   justify-content: flex-end;
 }
 
-:root{
-  --nav-item-w: 120px;
-  --nav-item-h: 50px;
-}
 .nav-item{
   box-sizing: border-box;
   width: var(--nav-item-w);
@@ -66,7 +97,7 @@
 
 .nav-item a{
   font-weight: bold;
-  font-size: 120%;
+  font-size: var(--nav-font-size);
   text-align: center;
   line-height: 1;
 }
@@ -84,10 +115,7 @@
   border: none;
 }
 
-:root{
-  --nav_margin: 2%;
-  --nav_width : 12%;
-}
+
 .nav-left div{
   margin-left: var(--nav_margin);
   width: var(--nav_width);

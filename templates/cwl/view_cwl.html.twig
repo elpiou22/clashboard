@@ -11,6 +11,7 @@
   <script src="{{ asset('js/fades-in-out.js') }}" defer></script>
   <script src="{{ asset('js/hide_show_th.js') }}" defer></script>
   <script src="{{ asset('js/total_col.js') }}" defer></script>
+  <script src="{{ asset('js/change_title.js') }}" defer></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     let clanId = {{ clanId|json_encode|raw }};
@@ -23,6 +24,7 @@
 {% block body %}
 
   <div id="clanId" style="display: none;">{{ clanId }}</div>
+  <div id="cwlDate" style="display: none;">{{ cwlDate }}</div>
 
   <div class="body_container">
 
@@ -30,7 +32,7 @@
       <span class="underline">{{ clanName }}</span>
       <span class="underline">(#{{ clanId }})</span>
       <span> - </span>
-      <span class="underline">Mois</span>
+      <span class="underline" id ="title_date">Mois</span>
     </div>
     <div class="data_container">
 

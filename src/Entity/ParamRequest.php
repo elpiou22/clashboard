@@ -5,6 +5,14 @@ namespace App\Entity;
 use App\Repository\ParamRequestRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * Class ParamRequest
+ *
+ * This entity stores information about API requests made to Clash of Clans.
+ * It is used to control the number of requests and avoid overloading the API.
+ * It keeps the clan tag, the request date, and the parameters used.
+ */
+
 #[ORM\Entity(repositoryClass: ParamRequestRepository::class)]
 class ParamRequest
 {

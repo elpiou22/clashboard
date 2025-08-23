@@ -1,36 +1,119 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title %} Mentions Légales {% endblock title %}
-{% block head %}
+{% block title %}Mentions légales{% endblock title %}
+
+{% block extra_styles %}
   <link rel="stylesheet" href="{{ asset('css/margins.css') }}">
-{% endblock head %}
+{% endblock extra_styles %}
+
 {% block body %}
-
-
   <div class="body_container">
     <h1>Mentions légales</h1>
+    <p><em>Dernière mise à jour : 22/08/2025</em></p>
 
-    <p>Le site <strong>CWL</strong> est édité par :<br>
-      Nom : [Ton nom ou raison sociale]<br>
-      Adresse : [Ton adresse complète]<br>
-      Téléphone : [Ton numéro de téléphone]<br>
-      Email : [ton.email@example.com]</p>
+    <h2>1. Éditeur du site</h2>
+    <p>
+      Nom du site : <strong>ClashBoard</strong><br>
+      Éditeur : <strong>[Ton prénom + NOM]</strong><br>
+      Particulier – site personnel non commercial, sans publicité ni monétisation.<br>
+      Email de contact : <a href="mailto:ton.email@example.com">ton.email@example.com</a>
+    </p>
+    <p style="font-size:0.95em;">
+      <!-- Optionnel si tu ne veux pas publier ton adresse perso -->
+      L’identité complète de l’éditeur peut être communiquée par l’hébergeur sur réquisition judiciaire (LCEN).
+    </p>
 
-    <p>Numéro d’immatriculation : [SIRET ou équivalent]</p>
+    <h2>2. Directeur de la publication</h2>
+    <p>
+      Directeur de la publication : <!-- [Ton nom] -->
+    </p>
 
-    <p>Hébergement du site :<br>
-      [Nom de l’hébergeur]<br>
-      Adresse : [Adresse de l’hébergeur]<br>
-      Téléphone : [Numéro de téléphone de l’hébergeur]</p>
+    <h2>3. Hébergeur</h2>
+    <p>
+      Hébergeur : <!-- [Nom de l’hébergeur – ex. OVH, Scaleway…] --><br>
+      Adresse : <!-- [Adresse complète de l’hébergeur] --><br>
+      Téléphone : <!-- [Numéro de l’hébergeur] --><br>
+      Site : <a href="<!-- [URL de l’hébergeur] -->" rel="noopener" target="_blank"><!-- [URL] --></a>
+    </p>
 
-    <h2>Propriété intellectuelle</h2>
-    <p>Tous les contenus (textes, images, logos, vidéos…) présents sur ce site sont la propriété exclusive de <strong>CWL</strong> ou de leurs auteurs respectifs.<br>
-      Toute reproduction, distribution, modification ou utilisation sans autorisation est interdite.</p>
+    <h2>4. Objet du site</h2>
+    <p>
+      <strong>ClashBoard</strong> est une application web destinée à automatiser et faciliter la
+      distribution des bonus des ligues de clans du jeu <em>Clash of Clans</em>, proposer un espace
+      communautaire (forum) et offrir des outils de suivi des performances.
+      <br>Le site est mis à disposition du public sans vocation commerciale.
+    </p>
 
-    <h2>Responsabilité</h2>
-    <p><strong>CWL</strong> ne saurait être tenu responsable des éventuels dommages liés à l’utilisation du site ou des informations qui y sont présentes.</p>
+    <h2>5. Propriété intellectuelle</h2>
+    <p>
+      L’ensemble des contenus présents sur le site (textes, images, logos, icônes, interfaces,
+      codes sources et bases de données) sont protégés par le droit d’auteur et/ou le droit des marques.
+      Sauf mention contraire, ils sont la propriété de l’éditeur ou de leurs auteurs respectifs.
+      Toute reproduction, représentation, modification, adaptation, redistribution ou exploitation,
+      totale ou partielle, sans autorisation préalable est interdite.
+    </p>
+    <p>
+      <strong>Clash of Clans</strong> et les marques associées sont des marques déposées de
+      <strong>Supercell</strong>. Ce site n’est ni affilié, ni sponsorisé, ni approuvé par Supercell.
+    </p>
+
+    <h2>6. Données personnelles (RGPD)</h2>
+    <p>
+      Les données traitées via le site (création de compte, connexion, forum,
+      demande de réinitialisation de mot de passe) sont utilisées uniquement pour
+      fournir les fonctionnalités proposées et assurer la sécurité du service.
+    </p>
+    <p>
+      Bases légales : exécution du contrat (gestion du compte), intérêt légitime
+      (sécurité, lutte contre la fraude), obligations légales le cas échéant.
+    </p>
+    <p>
+      Droits des personnes (RGPD) : accès, rectification, effacement, limitation, opposition,
+      portabilité. Contact : <a href="mailto:ton.email@example.com">ton.email@example.com</a>.
+    </p>
+    <p>
+      Durées de conservation : limitées aux finalités poursuivies et/ou aux obligations légales
+      (ex. traces techniques de sécurité pour une durée restreinte).
+    </p>
+    <p>
+      Destinataires : éditeur et prestataires techniques (hébergeur, service de messagerie).
+      Aucune vente de données à des tiers à des fins commerciales.
+    </p>
+
+    <h2>7. Cookies et traceurs</h2>
+    <p>
+      Le site peut déposer des cookies strictement nécessaires (session, sécurité, préférences).
+      Aucun cookie non essentiel (mesure d’audience, publicité) n’est déposé sans consentement préalable.
+    </p>
+    <p>
+      Vous pouvez gérer vos préférences via le bandeau/gestionnaire de cookies (si présent)
+      ou via votre navigateur. Voir la <a href="{{ path('app_privacy_policy') }}">Politique de confidentialité</a>.
+    </p>
+
+    <h2>8. Sécurité</h2>
+    <p>
+      Mesures en place : mots de passe hachés, tokens temporaires pour la réinitialisation,
+      limitation de débit sur les routes sensibles, protection CSRF, requêtes préparées,
+      gestion des rôles et des autorisations.
+    </p>
+
+    <h2>9. Liens hypertextes</h2>
+    <p>
+      Des liens vers des sites tiers peuvent être proposés. L’éditeur n’exerce aucun contrôle
+      sur ces sites et décline toute responsabilité quant à leurs contenus et pratiques.
+    </p>
+
+    <h2>10. Limitation de responsabilité</h2>
+    <p>
+      L’éditeur s’efforce d’assurer l’exactitude des informations mais ne peut garantir l’absence
+      d’erreurs ou d’indisponibilités. L’utilisation du site se fait sous la responsabilité de l’utilisateur.
+      L’éditeur ne pourra être tenu responsable des dommages indirects liés à l’utilisation du site.
+    </p>
+
+    <h2>11. Droit applicable et juridiction compétente</h2>
+    <p>
+      Les présentes mentions légales sont régies par le droit français. En cas de litige et à
+      défaut de résolution amiable, compétence est attribuée aux tribunaux français compétents.
+    </p>
   </div>
-
-
-
 {% endblock body %}

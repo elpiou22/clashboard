@@ -5,6 +5,18 @@ namespace App\Entity;
 use App\Repository\AttackRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+
+/**
+ * Class Attack
+ *
+ * This entity represents an attack during a Clan War League.
+ * It stores attacker pseudo, map position, result, number of stars,
+ * percentage of destruction, attacker and defender Town Hall levels, and the day of the war.
+ *
+ * Relations:
+ * - Each attack is linked to exactly one clan.
+ */
+
 #[ORM\Entity(repositoryClass: AttackRepository::class)]
 class Attack
 {

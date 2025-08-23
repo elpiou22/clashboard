@@ -10,6 +10,18 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+/**
+ * Class User
+ *
+ * This entity stores all information about a registered user.
+ * Each user has a unique email, a pseudo, a hashed password and one or more roles.
+ * The entity also manages optional profile information like birthdate and profile picture.
+ *
+ * Relations:
+ * - One user can create many forum posts.
+ * - One user can have many password reset requests.
+ */
+
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 #[Vich\Uploadable]

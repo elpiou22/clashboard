@@ -32,7 +32,7 @@ function find_send_button() {
         clanId = clanId.slice(1);
       }
 
-      window.location.href = `forum/${clanId}/2501${lastRowIndex}${lastCellIndex-1}`;
+      window.location.href = `/forum/${clanId}/2501${lastRowIndex}${lastCellIndex-1}`;
     }
   });
 }

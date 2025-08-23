@@ -5,6 +5,18 @@ namespace App\Entity;
 use App\Repository\ClansRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+
+/**
+ * Class Clan
+ *
+ * This entity represents a Clash of Clans clan.
+ * It stores the clan identifier (tag) and the clan name.
+ *
+ * Relations:
+ * - One clan can have many attacks.
+ * - One clan can have many forum posts.
+ */
+
 #[ORM\Entity(repositoryClass: ClansRepository::class)]
 class Clan
 {

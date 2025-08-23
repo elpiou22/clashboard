@@ -1,7 +1,57 @@
+:root{
+  --all_container-width: 85%;
+  --clan_tag-container-font-size: 210%;
+  --btn-icon-size: 20%;
+  --rule_row-font_size: 100%;
+  --remove_rule-padding: 5px;
+  --title_container-font_size: 300%;*
+  --rule_row_children-width: 5%;
+  --generate_btn_container-font_size: 300%;
+}
+
+@media (max-width: 1800px) {
+  :root{
+    --all_container-width: 92%;
+    --clan_tag-container-font-size: 200%;
+    --btn-icon-size: 35%;
+  }
+}
+
+@media (max-width: 768px) {
+  :root{
+    --all_container-width: 100%;
+    --clan_tag-container-font-size: 0.9rem;
+    --btn-icon-size: 50%;
+    --remove_rule-padding: 5px;
+    --title_container-font_size: 2rem;
+    --rule_row_children-width: 8%;
+    --generate_btn_container-font_size: 280%;
+  }
+  .btn_container, .rule-row{
+    font-size: 0.8rem !important;
+  }
+  .rule-row-btn-container{
+    margin-left: 1%;
+    margin-bottom: 0.9rem !important;
+  }
+  .main_rules_container{
+    margin-bottom: 5% !important;
+  }
+  h1 {
+    margin-top: 0.1rem !important;
+  }
+
+  .generate_btn_container button{
+    width: 70% !important;
+  }
+
+
+}
+
+
 .body_container{
   display: flex;
   height: 100%;
-  justify-content: center;
   align-items: center;
 
   flex-direction: column;
@@ -12,7 +62,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  width: 85%;
+  width: var(--all_container-width);
   border-radius: 8px;
   font-weight: bold;
 
@@ -31,7 +81,7 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 1%;
-  font-size: 300%;
+  font-size: var(--title_container-font_size);
   color: black;
   font-weight: bold;
 }
@@ -41,9 +91,42 @@
   padding: 1%;
 }
 
-.clan_tag_container{
-
+.clan_tag_container {
+  display: flex;                 /* un conteneur flex */
+  align-items: center;           /* centre verticalement */
+  gap: 0.75rem;                  /* petit espace entre le texte et le champ */
+  font-size: var(--clan_tag-container-font-size, 1rem);
 }
+
+.clan_tag_container label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.clan_tag_container label span {
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.clan_tag_container textarea {
+  flex: 1;                       /* occupe tout l’espace restant */
+  min-height: 3rem;
+  resize: vertical;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font: 1rem/1.4 system-ui, sans-serif;
+  box-sizing: border-box;
+  background: #fff;
+  color: #333;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+
+
 
 .rules_container{
   display: flex;
@@ -71,8 +154,9 @@
   padding-bottom: 0.5%;
   padding-top: 0.5%;
 
-  justify-content: center;
+
   align-items: center;
+  font-size: var(--rule_row-font_size);
 }
 
 .rule-row > *:first-child{
@@ -103,14 +187,15 @@
 /* box */
 .remove-rule{
   margin-left: auto;
-  padding: 5px;
+  padding: var(--remove_rule-padding);
   border-radius: 5px;
   font-weight: bold;
   cursor: pointer;
+  font-size: 100%;
 }
 
 .result_box, .operator_box, .rule-row > *:first-child{
-  width: 5%;
+  width: var(--rule_row_children-width);
   display: flex;
   font-weight: bold;
 }
@@ -149,6 +234,9 @@
 }
 
  */
+.operator_box{
+  width: auto !important;
+}
 
 .logical_operator, .remove-rule, .comparison_operator, [name="exceptions_townhalllevels_A[]"], [name="exceptions_townhalllevels_D[]"]{
   background: linear-gradient(to bottom, #c74b1d 50%, #af4219 50%);
@@ -167,7 +255,7 @@ select{
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 300%;
+  font-size: var(--generate_btn_container-font_size);
   margin-top: 1%;
 }
 [name="stars[]"], [name="exceptions_stars[]"]{
@@ -178,7 +266,7 @@ select{
   background: linear-gradient(to bottom, #70b422 50%, #5e9d15 50%);
   border: 2px solid #49652a !important;
   font-size: 100%;
-  width: 20%;
+  width: var(--btn-icon-size);
   border-radius: 5px;
   font-weight: bold;
   padding:4px;
@@ -209,3 +297,4 @@ select{
   background: linear-gradient(to bottom, #3f913f 50%, #276c27 50%);
   border: 2px solid #024f02;
 }
+

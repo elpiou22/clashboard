@@ -1,3 +1,22 @@
+:root{
+  --all_container-width: 50%;
+  --buttons_container-gap:15%;
+
+}
+
+@media (max-width: 1800px) {
+  :root{
+
+  }
+}
+
+@media (max-width: 768px) {
+  :root{
+    --all_container-width: 99%;
+    --buttons_container-gap:2%;
+  }
+
+}
 
 
 
@@ -15,7 +34,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 50%;
+  width: var(--all_container-width);
   background-color: #2a2828;
   border-radius: 2px;
 }
@@ -60,7 +79,7 @@
   display: flex;
   justify-content: center;
   align-items: stretch;
-  gap: 15%;
+  gap: var(--buttons_container-gap);
   margin-bottom: 2%;
   margin-top: 1%;
 }

@@ -8,6 +8,19 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Clan;
 
+
+/**
+ * Class Post
+ *
+ * This entity represents a message posted in the forum.
+ * It contains the message text, author, creation date, votes (upvotes/downvotes),
+ * replies, and optional link to a parent post.
+ *
+ * Relations:
+ * - Each post is linked to one user (author).
+ * - Each post is linked to one clan.
+ */
+
 #[ORM\Entity(repositoryClass: TweetRepository::class)]
 class Post
 {
