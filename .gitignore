@@ -9,7 +9,7 @@
 /vendor/
 /backup.sql
 /back.sql
-.idea/
+.idea
 
 ###> phpunit/phpunit ###
 /phpunit.xml
