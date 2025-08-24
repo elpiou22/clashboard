@@ -209,10 +209,21 @@ class PostController extends AbstractController
         'reply_of' => $post->getId(),
     ]);
 
-    $clanId = $post->getClanId();
+    $clanId = $post->getClan()->getClanId();
+    $clanName = $post->getClan()->getName();
     $date   = $post->getCwlId();
     $firstarg = $post->getPlayerMapPosition();
     $secondarg = $post->getDay();
+
+    $attack = $entityManager->getRepository(Attack::class)->findOneBy([
+        'clan' => $post->getClan(),
+        'date' => $date,
+        'mapPosition' => $firstarg,
+        'day' => $secondarg
+    ]);
+
+    $clanInfos = $clanName . " (#". $clanId . ")";
+    $attackInfos = "th" . $attack->getAttackerTH(). " vs ". "th". $attack->getDefenderTH() . "\n " .$attack->getAttackStars() . " ⭐ - " . $attack->getPercentage() . "%";
 
     return $this->render('post/show.html.twig', [
       'post' => $post,
@@ -225,6 +236,11 @@ class PostController extends AbstractController
       'date' => $date,
       'firstarg' => $firstarg,
       'secondarg' => $secondarg,
+      'clanInfos' => $clanInfos,
+      'attackInfos' => $attackInfos,
+      'attackResult' => $attack->getResult(),
+      'attackerName' => $attack->getPseudo(),
+      'attackDay' => $secondarg,
 
     ]);
   }

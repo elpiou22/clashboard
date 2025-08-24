@@ -1,10 +1,21 @@
 {% extends 'layouts/base.html.twig' %}
 {% block title %}Nouveau mot de passe{% endblock %}
+{% block extra_styles %}
+  <link rel="stylesheet" href="{{ asset('css/colors.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/style_legis.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/margins.css') }}">
+{% endblock extra_styles %}
 {% block body %}
+  <div class="body_container">
+  <div class="beige">
+  <div class="green underline">
   <h1>Nouveau mot de passe</h1>
   <form method="post" action="{{ path('password_check', {selector: selector, token: token}) }}">
     <label>Nouveau mot de passe</label>
     <input type="password" name="password" required minlength="8" autocomplete="new-password">
     <button type="submit">Valider</button>
   </form>
+  </div>
+  </div>
+  </div>
 {% endblock %}

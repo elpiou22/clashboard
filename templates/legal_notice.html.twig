@@ -4,11 +4,17 @@
 
 {% block extra_styles %}
   <link rel="stylesheet" href="{{ asset('css/margins.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/colors.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/style_legis.css') }}">
 {% endblock extra_styles %}
 
 {% block body %}
   <div class="body_container">
+    <div class="beige">
+      <div class="green underline">
     <h1>Mentions légales</h1>
+      </div>
+      <div class="green">
     <p><em>Dernière mise à jour : 22/08/2025</em></p>
 
     <h2>1. Éditeur du site</h2>
@@ -16,7 +22,7 @@
       Nom du site : <strong>ClashBoard</strong><br>
       Éditeur : <strong>[Ton prénom + NOM]</strong><br>
       Particulier – site personnel non commercial, sans publicité ni monétisation.<br>
-      Email de contact : <a href="mailto:ton.email@example.com">ton.email@example.com</a>
+      Email de contact : <a href="mailto:clashboard.contact@gmail.com">clashboard.contact@gmail.com</a>
     </p>
     <p style="font-size:0.95em;">
       <!-- Optionnel si tu ne veux pas publier ton adresse perso -->
@@ -25,7 +31,7 @@
 
     <h2>2. Directeur de la publication</h2>
     <p>
-      Directeur de la publication : <!-- [Ton nom] -->
+      Directeur de la publication : Razor
     </p>
 
     <h2>3. Hébergeur</h2>
@@ -69,7 +75,7 @@
     </p>
     <p>
       Droits des personnes (RGPD) : accès, rectification, effacement, limitation, opposition,
-      portabilité. Contact : <a href="mailto:ton.email@example.com">ton.email@example.com</a>.
+      portabilité. Contact : <a href="mailto:clashboard.contact@gmail.com">clashboard.contact@gmail.com</a>.
     </p>
     <p>
       Durées de conservation : limitées aux finalités poursuivies et/ou aux obligations légales
@@ -87,7 +93,7 @@
     </p>
     <p>
       Vous pouvez gérer vos préférences via le bandeau/gestionnaire de cookies (si présent)
-      ou via votre navigateur. Voir la <a href="{{ path('app_privacy_policy') }}">Politique de confidentialité</a>.
+      ou via votre navigateur. Voir la <a href="{{ path('confidentiality') }}">Politique de confidentialité</a>.
     </p>
 
     <h2>8. Sécurité</h2>
@@ -115,5 +121,7 @@
       Les présentes mentions légales sont régies par le droit français. En cas de litige et à
       défaut de résolution amiable, compétence est attribuée aux tribunaux français compétents.
     </p>
+  </div>
+    </div>
   </div>
 {% endblock body %}

@@ -12,15 +12,19 @@ function change_title() {
   const last = path.split('/').filter(Boolean).pop() || '';
   let yy, mm, code;
   let title;
+
   if (path.split('/')[1] === "forum") {
     code = last.slice(0, 4);                 // "2501"
-    title = document.querySelector('.main_title')
+    title = document.querySelector('.main_title');
     title.textContent += " - ";
   } else if (path.split('/')[1] === "bonusdata") {
     code = document.getElementById("cwlDate").textContent;
     title = document.querySelector('#title_date')
-
     title.textContent = "";
+  } else if (path.split('/')[1] === "post") {
+    code = document.querySelector('#date').textContent;
+    title = document.querySelector('.main_title');
+    title.textContent += " - ";
   }
   if (code.length < 4) return;
   yy = Number(code.slice(0, 2));           // 25

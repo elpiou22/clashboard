@@ -1,4 +1,64 @@
-/* Style général de la page */
+:root{
+  --cwl_td-padding: 5px;
+  --data_container-flex_direction: row;
+  --td_nth_child_1-width: 4%;
+  --td_nth_child_2-width: 20%;
+  --td_nth_child_n_3-width:calc(80% / 9);
+  --hide_icon-width: 50%;
+  --title_container-font_size: 300%;
+  --message_icon-size: 15px;
+  --message_icon-padding: 2px;
+  --cwl_table-border:2px solid #3a2a1e;
+}
+
+@media (max-width: 1800px) {
+  :root{
+
+  }
+}
+
+@media (max-width: 768px) {
+  :root{
+    --cwl_td-padding: 1px;
+    --data_container-flex_direction: column;
+    --td_nth_child_1-width: 0.1%;
+    --td_nth_child_2-width: 3%;
+    --td_nth_child_n_3-width: 0.1%;
+    --hide_icon-width: 90%;
+    --title_container-font_size: 120%;
+    --message_icon-size: 9px;
+    --message_icon-padding: 1px;
+    --cwl_table-border:1px solid #3a2a1e;
+  }
+  .table_container{
+    margin: 0 !important;
+  }
+  .hide_text{
+    display: none;
+  }
+  body, .td_total{
+    font-size: 90% !important;
+  }
+  td:nth-last-child(1), th:nth-last-child(1) {
+    width: 1%;
+
+  }
+  .small_box{
+    font-size: 100% !important;
+  }
+  .result_day_data{
+    font-size: 85%;
+  }
+  .options_container{
+    margin-top: 3% !important;
+    width: 80% !important;
+  }
+  td:nth-child(1), th:nth-child(1){
+    display: none;
+  }
+
+}
+
 
 
 body {
@@ -25,7 +85,7 @@ body {
 
 .data_container{
   display: flex;
-  flex-direction: row;
+  flex-direction: var(--data_container-flex_direction);
 }
 
 
@@ -126,11 +186,11 @@ h3 {
 
 #cwl_table, th, td {
   font-weight: bold;
-  border: 2px solid #3a2a1e;
+  border: var(--cwl_table-border);
 }
 
 th{
-  padding: 5px;
+  padding: var(--cwl_td-padding);
   text-align: center;
   background: linear-gradient(to bottom, #c74b1d 50%, #af4219 50%);
 
@@ -141,11 +201,14 @@ th{
 .td_member, .td_value, .td_icon, .td_more, .td_total{
   padding: 0;
   background: linear-gradient(to bottom, #c9c1ad 50%, #b4a981 50%);
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 
 .cwl_td, .td_more{
-  padding: 5px;
+  padding: var(--cwl_td-padding);
   text-align: center;
   transition: padding 0.3s ease;
   position: relative;
@@ -184,7 +247,7 @@ th{
   right: 2px;
   border-radius: 50%;
   background-color: white;
-  padding: 2px;
+  padding: var(--message_icon-padding);
 }
 
 /* pop up //////////////////////////////////////////////////////////// */
@@ -243,7 +306,7 @@ th{
 
 .hide_icon {
   height: 50%;
-  width: 50%;
+  width: var(--hide_icon-width);
   max-height: 100%;
   max-width: 100%;
   object-fit: contain;
@@ -353,9 +416,11 @@ input[type="checkbox"], label {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 85%;
+  width: 100%;
   font-weight: bold;
-  font-size: 300%;
+  font-size: var(--title_container-font_size);
   color: black;
   margin-bottom: 2%;
+
+  border-radius: 5px;
 }

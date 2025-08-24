@@ -75,5 +75,11 @@ class HomeController extends AbstractController
     return $this->render('./legal_notice.html.twig');
   }
 
+  #[Route('/confidentiality', name: 'confidentiality')]
+  public function confidentiality(): ?Response
+  {
+    return $this->render('./security/confidentiality.html.twig');
+  }
+
 
 }

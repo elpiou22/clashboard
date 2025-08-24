@@ -5,23 +5,24 @@
   <link rel="stylesheet" href="{{ asset('css/forum_cwl.css') }}">
   <link rel="stylesheet" href="{{ asset('css/colors.css') }}">
   <script src="{{ asset('js/forum.js') }}" defer></script>
+  <script src="{{ asset('js/change_title.js') }}" defer></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 {% endblock head %}
 
 
 {% block body %}
-
+  <div style="display: none" id="date">{{ date }}</div>
   <div class="body_container">
   <div class="all_container">
-    <h1>Apologize CWL January 2025</h1>
+    <span class="main_title">{{ clanInfos }}</span>
     <div class="data_container beige">
       <div class="title_container green">
-        <h2>TinkyWinky Day 1</h2>
+        <h2>{{ attackerName }} Day {{ attackDay }}</h2>
 
         <div class="result">
-          <strong>Résultat actuel:</strong> 1
+          <strong>Résultat actuel:</strong> {{ attackResult }}
         </div>
-        <p>Résultat expliqué: Il a 2 étoiles un th17 alors qu'il est th16</p>
+        <p style="font-weight: bold;">{{ attackInfos|nl2br }}</p>
       </div>
 
       <hr class="separator">

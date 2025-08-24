@@ -48,8 +48,8 @@ tr{
 
 .message_icon {
   /* @todo */
-  width: 15px;
-  height: 15px;
+  width: var(--message_icon-size);
+  height: var(--message_icon-size);
 }
 /*
 .label_more{
@@ -59,24 +59,25 @@ tr{
  */
 
 .th_days_container{
-  width: 70%;
+  width: 100%;
   height: 100%;
 }
 
 td:nth-child(1), th:nth-child(1){
-  width: 4%;
-  max-width: 4%;
+  width: var(--td_nth_child_1-width);
+  max-width: var(--td_nth_child_1-width);
   height: 100%;
 }
 
 td:nth-child(2), th:nth-child(2) {
-  width: 20%;
+  width: var(--td_nth_child_2-width);
 }
 
-td:nth-child(n+3), th:nth-child(n+3) {
-  width: calc(80% / 9);
-  max-width: calc(80% / 9);
+td:nth-child(n+3):nth-child(-n+10), th:nth-child(n+3):nth-child(-n+10) {
+  width: var(--td_nth_child_n_3-width);
+  max-width: var(--td_nth_child_n_3-width);
 }
+
 
 .result_day_data{
   height: 100%;

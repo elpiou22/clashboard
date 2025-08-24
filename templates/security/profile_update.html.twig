@@ -1,10 +1,17 @@
 {% extends './layouts/base.html.twig' %}
 
-{% block title %} Login {% endblock title %}
+{% block title %} Modifier le profil {% endblock title %}
 
+{% block extra_styles %}
+    <link rel="stylesheet" href="{{ asset('css/colors.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style_legis.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/margins.css') }}">
+{% endblock extra_styles %}
 
 {% block body %}
 
+<div class="body_container">
+    <div class="beige">
 
     {{ form_start(registrationForm, {'attr': {'enctype': 'multipart/form-data', 'class': 'formform'}}) }}
     {{ form_row(registrationForm.email) }}
@@ -14,6 +21,7 @@
     <button type="submit" class="btn-login grn_btn">Enregistrer</button>
     {{ form_end(registrationForm) }}
 
-
+    </div>
+</div>
 
 {% endblock body %}

@@ -7,6 +7,10 @@
   --title_container-font_size: 300%;*
   --rule_row_children-width: 5%;
   --generate_btn_container-font_size: 300%;
+  --box-padding: 5px 15px;
+}
+.rule-row-btn-container {
+  margin-left: 1%;
 }
 
 @media (max-width: 1800px) {
@@ -26,6 +30,7 @@
     --title_container-font_size: 2rem;
     --rule_row_children-width: 8%;
     --generate_btn_container-font_size: 280%;
+    --box-padding: 5px;
   }
   .btn_container, .rule-row{
     font-size: 0.8rem !important;
@@ -206,7 +211,7 @@
   align-items: center;
   text-align: center;
   width: 100%;
-  padding: 5px;
+  padding: var(--box-padding);
   border-radius: 5px;
   cursor: pointer;
 

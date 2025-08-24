@@ -8,7 +8,12 @@ let rows = hide_row();
 function hide_row() {
   let rows = document.querySelectorAll("#cwl_table tr")
   rows.forEach((row, row_index) => {
-    let hideIconContainer = row.querySelector('.hide_icon_container');
+    let hideIconContainer;
+    if (window.matchMedia("(max-width: 768px)").matches) {
+      hideIconContainer = row.querySelector('.td_member');
+    } else {
+      hideIconContainer = row.querySelector('.hide_icon_container');
+    }
     if (hideIconContainer) {
       hideIconContainer.addEventListener("click", () => {
         row.classList.add('fade-out');

@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="{{ asset('css/margins.css') }}">
   <link rel="stylesheet" href="{{ asset('css/widths.css') }}">
   <link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/colors.css') }}">
   <script src="{{ asset('js/change_width_td.js') }}" defer></script>
   <script src="{{ asset('js/get_cell_index.js') }}" defer></script>
   <script src="{{ asset('js/fades-in-out.js') }}" defer></script>
@@ -28,7 +29,7 @@
 
   <div class="body_container">
 
-    <div class="title_container">
+    <div class="title_container beige">
       <span class="underline">{{ clanName }}</span>
       <span class="underline">(#{{ clanId }})</span>
       <span> - </span>
@@ -43,7 +44,7 @@
       <table id="cwl_table">
         <thead>
         <tr>
-          <th>Hide</th>
+          <th><span class="hide_text">Hide</span></th>
           <th>Membre</th>
           <th>J1</th>
           <th>J2</th>
@@ -52,7 +53,7 @@
           <th>J5</th>
           <th>J6</th>
           <th>J7</th>
-          <th class="th_more">More</th>
+          <th class="th_more"><span class="hide_text">More</span></th>
           <th class="th_total">Total</th>
         </tr>
         </thead>

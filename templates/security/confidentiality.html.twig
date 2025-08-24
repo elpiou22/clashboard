@@ -4,95 +4,103 @@
 
 {% block extra_styles %}
   <link rel="stylesheet" href="{{ asset('css/margins.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/colors.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/style_legis.css') }}">
 {% endblock extra_styles %}
 
 {% block body %}
   <div class="body_container">
-    <h1>Politique de confidentialité</h1>
-    <p><em>Dernière mise à jour : {{ "now"|date("d/m/Y") }}</em></p>
+    <div class="beige">
+      <div class="green underline">
+        <h1>Politique de confidentialité</h1>
+      </div>
+      <div class="green">
+        <p><em>Dernière mise à jour : {{ "now"|date("d/m/Y") }}</em></p>
 
-    <h2>1. Responsable du traitement</h2>
-    <p>
-      Le traitement des données personnelles collectées via le site <strong>ClashBoard</strong> est assuré par l’éditeur du site,
-      identifié dans les <a href="{{ path('app_mentions_legales') }}">Mentions légales</a>.
-      Contact : <a href="mailto:ton.email@example.com">ton.email@example.com</a>
-    </p>
+        <h2>1. Responsable du traitement</h2>
+        <p>
+          Le traitement des données personnelles collectées via le site <strong>ClashBoard</strong> est assuré par l’éditeur du site,
+          identifié dans les <a href="{{ path('legal_notice') }}">Mentions légales</a>.
+          Contact : <a href="mailto:clashboard.contact@gmail.com">clashboard.contact@gmail.com</a>
+        </p>
 
-    <h2>2. Données collectées</h2>
-    <p>Les catégories de données susceptibles d’être collectées sont :</p>
-    <ul>
-      <li>Données de compte : nom d’utilisateur, adresse email, mot de passe (stocké de façon hachée).</li>
-      <li>Données de forum : messages publiés et interactions communautaires.</li>
-      <li>Données techniques : adresses IP, logs de connexion, préférences de navigation.</li>
-      <li>Données relatives aux clans et attaques (importées via l’API Clash of Clans).</li>
-    </ul>
+        <h2>2. Données collectées</h2>
+        <p>Les catégories de données susceptibles d’être collectées sont :</p>
+        <ul>
+          <li>Données de compte : nom d’utilisateur, adresse email, mot de passe (stocké de façon hachée).</li>
+          <li>Données de forum : messages publiés et interactions communautaires.</li>
+          <li>Données techniques : adresses IP, logs de connexion, préférences de navigation.</li>
+          <li>Données relatives aux clans et attaques (importées via l’API Clash of Clans).</li>
+        </ul>
 
-    <h2>3. Finalités du traitement</h2>
-    <p>Les données sont utilisées pour :</p>
-    <ul>
-      <li>Permettre l’accès au site et la gestion des comptes utilisateurs.</li>
-      <li>Assurer le bon fonctionnement du forum et la modération des contenus.</li>
-      <li>Automatiser la répartition des bonus et afficher les résultats des attaques.</li>
-      <li>Garantir la sécurité du service (authentification, anti-bruteforce, détection d’abus).</li>
-      <li>Améliorer l’expérience utilisateur et assurer le suivi technique du site.</li>
-    </ul>
+        <h2>3. Finalités du traitement</h2>
+        <p>Les données sont utilisées pour :</p>
+        <ul>
+          <li>Permettre l’accès au site et la gestion des comptes utilisateurs.</li>
+          <li>Assurer le bon fonctionnement du forum et la modération des contenus.</li>
+          <li>Automatiser la répartition des bonus et afficher les résultats des attaques.</li>
+          <li>Garantir la sécurité du service (authentification, anti-bruteforce, détection d’abus).</li>
+          <li>Améliorer l’expérience utilisateur et assurer le suivi technique du site.</li>
+        </ul>
 
-    <h2>4. Bases légales</h2>
-    <ul>
-      <li>Exécution du contrat (création et gestion du compte utilisateur).</li>
-      <li>Intérêt légitime de l’éditeur (sécurité, amélioration du service).</li>
-      <li>Respect d’obligations légales (conservation de certaines données de connexion).</li>
-    </ul>
+        <h2>4. Bases légales</h2>
+        <ul>
+          <li>Exécution du contrat (création et gestion du compte utilisateur).</li>
+          <li>Intérêt légitime de l’éditeur (sécurité, amélioration du service).</li>
+          <li>Respect d’obligations légales (conservation de certaines données de connexion).</li>
+        </ul>
 
-    <h2>5. Durée de conservation</h2>
-    <p>
-      Les données sont conservées pour une durée limitée :
-    </p>
-    <ul>
-      <li>Compte utilisateur : jusqu’à la suppression du compte.</li>
-      <li>Données de forum : tant que le compte est actif ou sur demande de suppression.</li>
-      <li>Logs techniques : quelques mois maximum pour assurer la sécurité et la maintenance.</li>
-    </ul>
+        <h2>5. Durée de conservation</h2>
+        <p>
+          Les données sont conservées pour une durée limitée :
+        </p>
+        <ul>
+          <li>Compte utilisateur : jusqu’à la suppression du compte.</li>
+          <li>Données de forum : tant que le compte est actif ou sur demande de suppression.</li>
+          <li>Logs techniques : quelques mois maximum pour assurer la sécurité et la maintenance.</li>
+        </ul>
 
-    <h2>6. Destinataires des données</h2>
-    <p>
-      Les données sont accessibles uniquement à l’éditeur du site et aux prestataires techniques
-      (hébergeur, service de mailer). Aucune donnée n’est transmise à des tiers à des fins commerciales.
-    </p>
+        <h2>6. Destinataires des données</h2>
+        <p>
+          Les données sont accessibles uniquement à l’éditeur du site et aux prestataires techniques
+          (hébergeur, service de mailer). Aucune donnée n’est transmise à des tiers à des fins commerciales.
+        </p>
 
-    <h2>7. Droits des utilisateurs</h2>
-    <p>
-      Conformément au RGPD, chaque utilisateur dispose des droits suivants :
-    </p>
-    <ul>
-      <li>Droit d’accès, de rectification et d’effacement de ses données.</li>
-      <li>Droit à la limitation du traitement et d’opposition.</li>
-      <li>Droit à la portabilité des données (export sur demande).</li>
-    </ul>
-    <p>
-      Pour exercer vos droits : <a href="mailto:ton.email@example.com">ton.email@example.com</a>
-    </p>
+        <h2>7. Droits des utilisateurs</h2>
+        <p>
+          Conformément au RGPD, chaque utilisateur dispose des droits suivants :
+        </p>
+        <ul>
+          <li>Droit d’accès, de rectification et d’effacement de ses données.</li>
+          <li>Droit à la limitation du traitement et d’opposition.</li>
+          <li>Droit à la portabilité des données (export sur demande).</li>
+        </ul>
+        <p>
+          Pour exercer vos droits : <a href="mailto:clashboard.contact@gmail.com">clashboard.contact@gmail.com</a>
+        </p>
 
-    <h2>8. Sécurité</h2>
-    <p>
-      Des mesures techniques et organisationnelles sont mises en place :
-      mots de passe hachés (bcrypt), tokens temporaires pour la réinitialisation,
-      protection CSRF, requêtes préparées, limitation de débit sur les routes sensibles,
-      gestion des rôles utilisateurs.
-    </p>
+        <h2>8. Sécurité</h2>
+        <p>
+          Des mesures techniques et organisationnelles sont mises en place :
+          mots de passe hachés (bcrypt), tokens temporaires pour la réinitialisation,
+          protection CSRF, requêtes préparées, limitation de débit sur les routes sensibles,
+          gestion des rôles utilisateurs.
+        </p>
 
-    <h2>9. Cookies</h2>
-    <p>
-      Le site utilise uniquement des cookies strictement nécessaires au fonctionnement
-      (authentification, session, préférences). Aucun cookie publicitaire n’est utilisé.
-      Un bandeau d’information s’affiche lors de la première visite pour recueillir
-      le consentement de l’utilisateur le cas échéant.
-    </p>
+        <h2>9. Cookies</h2>
+        <p>
+          Le site utilise uniquement des cookies strictement nécessaires au fonctionnement
+          (authentification, session, préférences). Aucun cookie publicitaire n’est utilisé.
+          Un bandeau d’information s’affiche lors de la première visite pour recueillir
+          le consentement de l’utilisateur le cas échéant.
+        </p>
 
-    <h2>10. Modification de la politique</h2>
-    <p>
-      La présente politique peut être mise à jour à tout moment. Les utilisateurs seront informés
-      en cas de changement substantiel. Dernière mise à jour : {{ "now"|date("d/m/Y") }}.
-    </p>
+        <h2>10. Modification de la politique</h2>
+        <p>
+          La présente politique peut être mise à jour à tout moment. Les utilisateurs seront informés
+          en cas de changement substantiel. Dernière mise à jour : {{ "now"|date("d/m/Y") }}.
+        </p>
+      </div>
+    </div>
   </div>
 {% endblock body %}

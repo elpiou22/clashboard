@@ -68,9 +68,9 @@ function updateDaySum(e, input_value, mode) {
   if (nbdays !== 0) {
     //console.log(sum + " / " + nbdays); // -> 3 / 4
     //console.log(sum / nbdays);        // -> 0.75
-    total_cell.textContent = roundToDecimals(sum / nbdays * 100, 2) + " %"; // -> 1%
+    total_cell.textContent = roundToDecimals(sum / nbdays * 100, 1) + "%"; // -> 1%
   } else {
-    total_cell.textContent = "0 %";
+    total_cell.textContent = "0%";
   }
 
 }

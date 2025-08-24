@@ -1,10 +1,23 @@
 {% extends 'layouts/base.html.twig' %}
 {% block title %}Réinitialiser le mot de passe{% endblock %}
+{% block extra_styles %}
+  <link rel="stylesheet" href="{{ asset('css/colors.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/style_legis.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/margins.css') }}">
+{% endblock extra_styles %}
 {% block body %}
-  <h1>Réinitialisation</h1>
-  <form method="post" action="{{ path('password_request') }}">
-    <label>Email</label>
-    <input type="email" name="email" required>
-    <button type="submit">Envoyer le lien</button>
-  </form>
+  <div class="body_container">
+    <div class="beige">
+      <div class="green underline">
+        <h1>Réinitialisation</h1>
+      </div>
+      <div class="green">
+        <form method="post" action="{{ path('password_request') }}">
+          <label>Email</label>
+          <input type="email" name="email" required>
+          <button type="submit">Envoyer le lien</button>
+        </form>
+      </div>
+    </div>
+  </div>
 {% endblock %}
