@@ -39,5 +39,11 @@ class BaseTests extends WebTestCase
     $this->assertSelectorTextContains($selector, $expectedText);
   }
 
+  protected function create_client(): \Symfony\Bundle\FrameworkBundle\KernelBrowser
+  {
+    return static::createClient(server: [
+        'HTTP_HOST' => '192.168.1.17:8000',
+    ]);
+  }
 
 }

@@ -84,7 +84,7 @@
   margin-top: 1%;
 }
 
-.buttons_container button {
+.buttons_container a {
   flex: 1;
   display: flex;
   justify-content: center;

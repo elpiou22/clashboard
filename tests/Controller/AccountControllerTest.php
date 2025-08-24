@@ -9,8 +9,7 @@ class AccountControllerTest extends BaseTests
 
   public function testSigninPageIsSuccessful(): void
   {
-    $client = static::createClient();
-    $crawler = $client->request('GET', '/signin');
+    $crawler = $this->create_client()->request('GET', '/signin');
 
     $this->testWebsiteAvailable();
     $this->testElementExists('form');
@@ -32,8 +31,7 @@ class AccountControllerTest extends BaseTests
 
   public function testProfilePageRequiresAuthentication(): void
   {
-    $client = static::createClient();
-    $client->request('GET', '/profile');
+    $this->create_client()->request('GET', '/profile');
     $this->assertResponseRedirects();
   }
 

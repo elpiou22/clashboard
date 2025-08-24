@@ -9,11 +9,10 @@ class CwlControllerTest extends BaseTests
 
   public function testCwlHomePageIsSuccessful(): void
   {
-    $client = static::createClient();
-    $crawler = $client->request('GET', '/cwl');
+    $crawler = $this->create_client()->request('GET', '/cwl');
 
     $this->testWebsiteAvailable();
-    $this->testElementContainsText('span', 'CWL bonus tool');
+    $this->testElementContainsText('.title_container span', 'CWL bonus tool');
   }
 
   /*

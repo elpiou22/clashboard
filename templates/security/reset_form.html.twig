@@ -11,8 +11,9 @@
   <div class="green underline">
   <h1>Nouveau mot de passe</h1>
   <form method="post" action="{{ path('password_check', {selector: selector, token: token}) }}">
-    <label>Nouveau mot de passe</label>
-    <input type="password" name="password" required minlength="8" autocomplete="new-password">
+    <label>Nouveau mot de passe
+      <input type="password" name="password" required minlength="8" autocomplete="new-password">
+    </label>
     <button type="submit">Valider</button>
   </form>
   </div>

@@ -271,6 +271,17 @@ class CwlController extends AbstractController
     $entityManager->persist($last_request);
     $entityManager->flush();
 
+    if ($new_request) {
+      $dateKey = "2501";
+      $result = $this->check_and_store_data($clanID, $jsonRules, $dateKey, $entityManager);
+
+      if ($result instanceof Response) {
+        return $result;
+      }
+    }
+
+
+
 
     return $this->redirectToRoute('view_cwl_bonus_data_show', [
         'clanId' => $clanID
@@ -321,6 +332,7 @@ class CwlController extends AbstractController
     uksort($byPlayer, function (string $a, string $b) use ($byPlayer) {
       return $byPlayer[$a][0]->getMapPosition() <=> $byPlayer[$b][0]->getMapPosition();
     });
+
 
     return $this->render('./cwl/view_cwl.html.twig', [
         'membersInCWL'     => $membersInCWL,

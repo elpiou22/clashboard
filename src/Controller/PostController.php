@@ -46,9 +46,14 @@ class PostController extends AbstractController
   {
 
     // 15/08/2025 - Ajout PhpStan: "?? ''"
-    $referrer           = $request->headers->get('referer') ?? '';
+    $referrer           = (string) $request->headers->get('referer') ?? '';
     $path               = parse_url($referrer, PHP_URL_PATH) ?? '';
+
     $segments           = explode('/', trim($path, '/')) ;
+    if (count($segments) < 3) {
+      $this->addFlash('error', 'URL invalide');
+      return $this->redirectToRoute('home');
+    }
 
     $clanId             = $segments[1];
     $cwlId              = substr($segments[2], 0, 4);
@@ -86,7 +91,7 @@ class PostController extends AbstractController
     $post->setPlayerMapPosition($playerMapPosition);
     $post->setDay($day);
     // 13/08/2025 - gestion réponse aux posts
-    $post->setReplyOf($reply_of_id !== null ? (int)$reply_of_id : 0);
+    $post->setReplyOf((int)$reply_of_id);
 
     $entityManager->persist($post);
 
@@ -101,7 +106,7 @@ class PostController extends AbstractController
       $entityManager->persist($attack);
     }
 
-    if ($reply_of_id != 0){
+    if ($reply_of_id !== 0){
       $old_post = $entityManager->getRepository(Post::class)->findOneBy([
           'id' => $reply_of_id,
       ]);
