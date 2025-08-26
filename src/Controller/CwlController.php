@@ -7,6 +7,7 @@ use App\Entity\Clan;
 use App\Entity\ParamRequest;
 use App\Entity\Post;
 use App\Form\CellIndexType;
+use App\Service\CocRequests;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -163,7 +164,7 @@ class CwlController extends AbstractController
 
         if ($pending >= $batchSize) {
           $entityManager->flush();
-          $entityManager->clear(); // si tu clears, pense à re-récupérer $clan !
+          //$entityManager->clear(); // si tu clears, pense à re-récupérer $clan !
           $clan = $clanRepo->findOneBy(['clan_id' => $clanID]);
           $pending = 0;
         }
@@ -187,6 +188,7 @@ class CwlController extends AbstractController
   public function bonusdata_submit(
       Request $request,
       EntityManagerInterface $entityManager,
+      CocRequests $coc
   ): ?Response
   {
 
@@ -201,7 +203,6 @@ class CwlController extends AbstractController
     $exceptions_thD = $request->request->all('exceptions_townhalllevels_D');
     $exceptions_results = $request->request->all('exceptions_result');
 
-    // Vérifier si les données sont bien récupérées
     //dump($stars, $logicalOperators, $comparisonOperators, $results); // Pour debug
 
     $classical_rules =[];
@@ -246,46 +247,65 @@ class CwlController extends AbstractController
       return new Response('Le clan ID est manquant.', 400); // //@todo : vérifier si le clan ID est présent.
     }
 
+    // 24/08/2025 - On vérifie si on est dans les bonnes dates pour générer les valeurs. Si non -> on affiche une popup indiquant que ce n'est pas possible mais on leur montre les vielles données pour l'aperçu du site
+    $status = $coc->getStatusCwl($clanID);
+    if (!$status['ok']) {
+      if ($this->getParameter('kernel.debug')) {
+        //dump($status['raw']);
+      }
+      if ($status['raw']['status'] == 404){
+        //dump($status['raw']);
+        $dateKey = "2501";
+        $result = $this->check_and_store_data("P990YPPV", $jsonRules, $dateKey, $entityManager);
 
-
-    $last_request = $entityManager->getRepository(ParamRequest::class)->findOneBy([
-        'clanId' => $clanID,
-        'date' => "2501",
-    ]);
-
-    $new_request = True;
-    if (!$last_request) {
-      $last_request = new ParamRequest();
-      $last_request->setClanId($clanID);
-      $last_request->setDate("2501");
-      $last_request->setParameters($jsonRules);
-      $new_request = True;
+        return $this->redirectToRoute('view_cwl_bonus_data_show', [
+          'clanId' => $clanID,
+          'popup_active' => true,
+          'message' => $status['raw']['message']
+        ]);
+      }
+      $this->addFlash('error', $status['human']);
+      return $this->redirectToRoute('cwl_home');
     } else {
-      if ($last_request->getParameters() !== $jsonRules) {
+      $last_request = $entityManager->getRepository(ParamRequest::class)->findOneBy([
+          'clanId' => $clanID,
+          'date' => "2501",
+      ]);
+
+      $new_request = True;
+      if (!$last_request) {
+        $last_request = new ParamRequest();
+        $last_request->setClanId($clanID);
+        $last_request->setDate("2501");
         $last_request->setParameters($jsonRules);
         $new_request = True;
       } else {
-        $new_request = False;
+        if ($last_request->getParameters() !== $jsonRules) {
+          $last_request->setParameters($jsonRules);
+          $new_request = True;
+        } else {
+          $new_request = False;
+        }
       }
-    }
-    $entityManager->persist($last_request);
-    $entityManager->flush();
+      $entityManager->persist($last_request);
+      $entityManager->flush();
 
-    if ($new_request) {
-      $dateKey = "2501";
-      $result = $this->check_and_store_data($clanID, $jsonRules, $dateKey, $entityManager);
+      if ($new_request) {
+        $dateKey = "2501";
+        $result = $this->check_and_store_data($clanID, $jsonRules, $dateKey, $entityManager);
 
-      if ($result instanceof Response) {
-        return $result;
+        if ($result instanceof Response) {
+          return $result;
+        }
       }
+      return $this->redirectToRoute('view_cwl_bonus_data_show', [
+          'clanId' => $clanID
+      ]);
     }
 
 
 
 
-    return $this->redirectToRoute('view_cwl_bonus_data_show', [
-        'clanId' => $clanID
-    ]);
   }
 
 
@@ -294,7 +314,8 @@ class CwlController extends AbstractController
   #[Route('/bonusdata/{clanId}', name: 'view_cwl_bonus_data_show', methods: ['GET'])]
   public function bonusdata_show(
       string $clanId,
-      EntityManagerInterface $em
+      EntityManagerInterface $em,
+      Request $request,
   ): Response
   {
     $dateKey = "2501";
@@ -334,6 +355,9 @@ class CwlController extends AbstractController
     });
 
 
+    $popupActive  = $request->query->getBoolean('popup_active', false);
+    $popupMessage = (string) $request->query->get('message', '');
+
     return $this->render('./cwl/view_cwl.html.twig', [
         'membersInCWL'     => $membersInCWL,
         'length_members'   => max(count($membersInCWL) - 1, 0),
@@ -342,6 +366,8 @@ class CwlController extends AbstractController
         'clanId'           => $clanId,
         'clanName'         => $clan->getName() ?? 'Undefined',
         'cwlDate'         => $dateKey,
+        'popup_active'  => $popupActive,
+        'message' => $popupMessage,
     ]);
   }
 

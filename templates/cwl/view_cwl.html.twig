@@ -26,9 +26,70 @@
 
   <div id="clanId" style="display: none;">{{ clanId }}</div>
   <div id="cwlDate" style="display: none;">{{ cwlDate }}</div>
+  {% if popup_active %}
+    <style>
+      /* Backdrop plein écran */
+      .overlay-backdrop{
+        position: fixed; inset: 0; background: rgba(0,0,0,.45);
+        z-index: 9998;
+      }
+      /* Modale centrée, hors flux */
+      .overlay-modal{
+        position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+        z-index: 9999;
+      }
+      /* Contenu de ta popup (réutilise ton design actuel) */
+      .overlay-modal .popup_container{
+        width: min(92vw, 640px);
+        border-radius: 12px;
+        box-shadow: 0 20px 60px rgba(0,0,0,.25);
+        padding: 24px;
+      }
+      /* Empêche la page de scroller quand la modale est ouverte */
+      body.modal-open{ overflow: hidden; }
+    </style>
+
+    <div class="overlay-backdrop" id="statusBackdrop" aria-hidden="true"></div>
+
+    <div class="overlay-modal" id="statusPopup" role="dialog" aria-modal="true"
+         aria-labelledby="statusTitle" aria-describedby="statusDesc">
+      <div class="popup_container beige">
+        <div class="infos_container green">
+          <div class="infos_title" id="statusTitle">Information</div>
+          <hr class="viewcwl_hr">
+          <div class="infos_content" id="statusDesc">
+            <H2>Une erreur est survenue lors de la récupération de la CWL.</H2>
+            <H4>{{ message }}</H4>
+            <H4>Les données de tests vont être affichées pour vous permettre d'avoir un aperçu du fonctionnement.</H4>
+          </div>
+        </div>
+        <button class="contest_button" id="statusOkButton">OK</button>
+      </div>
+    </div>
+
+    <script>
+      (function(){
+        const body = document.body;
+        const pop = document.getElementById('statusPopup');
+        const bd  = document.getElementById('statusBackdrop');
+        const ok  = document.getElementById('statusOkButton');
+
+        function open(){ body.classList.add('modal-open'); }
+        function close(){
+          body.classList.remove('modal-open');
+          pop?.remove(); bd?.remove();
+        }
+
+        open();
+        ok?.addEventListener('click', close);
+        bd?.addEventListener('click', close);                // fermer au clic extérieur
+        document.addEventListener('keydown', e => { if(e.key==='Escape') close(); }); // fermer avec Échap
+        setTimeout(() => ok?.focus(), 0);                    // focus accessible
+      })();
+    </script>
+  {% endif %}
 
   <div class="body_container">
-
     <div class="title_container beige">
       <span class="underline">{{ clanName }}</span>
       <span class="underline">(#{{ clanId }})</span>

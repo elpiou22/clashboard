@@ -11,6 +11,7 @@
         "doctrine/doctrine-bundle": "^2.15.1",
         "doctrine/doctrine-migrations-bundle": "^3.4.2",
         "doctrine/orm": "^3.5.2",
+        "phpunit/phpunit": "^11.5.34",
         "symfony/asset": "7.2.*",
         "symfony/console": "7.2.*",
         "symfony/css-selector": "7.2.*",
@@ -19,13 +20,13 @@
         "symfony/flex": "^2.8.2",
         "symfony/form": "7.2.*",
         "symfony/framework-bundle": "7.2.*",
+        "symfony/http-client": "7.2.*",
         "symfony/mailer": "7.2.*",
         "symfony/runtime": "7.2.*",
         "symfony/security-bundle": "7.2.*",
         "symfony/twig-bundle": "7.2.*",
         "symfony/yaml": "7.2.*",
-        "vich/uploader-bundle": "^2.7",
-        "phpunit/phpunit": "^11.5.34"
+        "vich/uploader-bundle": "^2.7"
     },
     "config": {
         "allow-plugins": {

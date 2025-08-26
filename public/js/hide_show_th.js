@@ -83,5 +83,13 @@ function options_checkbox_changed(checkbox_name) {
   }
 }
 
-
+(function () {
+  const ok = document.getElementById('statusOkButton');
+  const pop = document.getElementById('statusPopup');
+  const bd  = document.getElementById('statusBackdrop');
+  function close() { pop?.remove(); bd?.remove(); }
+  ok?.addEventListener('click', close);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  setTimeout(() => ok?.focus(), 0);
+})();
 
