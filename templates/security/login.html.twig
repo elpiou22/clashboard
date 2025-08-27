@@ -30,12 +30,12 @@
           <form action="{{ path('acc_login') }}" method="post" class="formform">
             <div class="credentials_container">
               <label for="username">Email :</label>
-              <input type="text" id="username" name="registration_form[email]" value="admin@admin.admin" required autofocus>
+              <input type="text" id="username" name="registration_form[email]" required autofocus>
             </div>
 
             <div class="credentials_container">
               <label for="password">Mot de passe :</label>
-              <input type="password" id="password" name="_password" value="admin" required>
+              <input type="password" id="password" name="_password" required>
               <a href="{{ path('password_request') }}" class="reset_pwd">Réinitiliser le mot de passe</a>
             </div>
             <input type="hidden" name="_csrf_token"

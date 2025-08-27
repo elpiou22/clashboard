@@ -8,7 +8,7 @@ final class CocRequests
 {
   public function __construct(
       private HttpClientInterface $http,
-      private string $token, // injecté depuis .env
+      private string $token,
   ) {}
 
   private function norm(string $tag): string

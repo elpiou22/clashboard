@@ -21,7 +21,8 @@ class RegistrationFormType extends AbstractType
             ->add('email')
             ->add('pseudo')
             ->add('birthdate', null, [
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'required' => false,
             ])
             ->add('profilePictureFile', VichImageType::class, [
                 'label' => 'Photo de profil',
