@@ -450,7 +450,7 @@ async function parseDataAndExportToExcel(allData, clanTag, rules) {
     let parsed_data = getParsedData(allData = allData, clanTag = clanTag, tostop = null);
     let dataWithBonuses = setBonusValue(parsed_data[0], rules);
 
-    //writeInFile(parsed_data[1], "letest.json");
+    //writeInFile(parsed_data[0], "letest.json");
     let membersInCWL = deleteUselessMembers(dataWithBonuses);
     //writeInFile(getParsedData(allData = allData, clanTag = clanTag, tostop = null)[0], "letest.json")
     //writeInFile(exportToExcel(dataWithBonuses), "letest.json");

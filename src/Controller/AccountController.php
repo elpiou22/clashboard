@@ -155,6 +155,7 @@ class AccountController extends AbstractController
   {
     /** @var \App\Entity\User $user */
     $user = $this->getUser();
+    //$user = $em->getRepository(User::class)->find(1);
 
     $form = $this->createForm(\App\Form\ProfileFormType::class, $user);
     $form->handleRequest($request);

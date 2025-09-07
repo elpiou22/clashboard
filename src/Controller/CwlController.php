@@ -29,7 +29,8 @@ class CwlController extends AbstractController
       EntityManagerInterface $entityManager,
   ): array|Response {
     $nodeScriptPath = realpath('../ExcelApoloBot-main/js/app.js');
-    $command = "node " . escapeshellarg($nodeScriptPath) . " " . $clanID . " " . $jsonRules;
+    $command = "node " . escapeshellarg($nodeScriptPath) . " " . $clanID . " " . $jsonRules . " " . date('y') . date('m');
+    //dd($command);
     $output = shell_exec($command); // Exécution du script
     //dd($output);
     if ($output === null) {
@@ -255,7 +256,7 @@ class CwlController extends AbstractController
       }
       if ($status['raw']['status'] == 404){
         //dump($status['raw']);
-        $dateKey = "2501";
+        $dateKey = date('y') . date('m');
         $result = $this->check_and_store_data("P990YPPV", $jsonRules, $dateKey, $entityManager);
 
         return $this->redirectToRoute('view_cwl_bonus_data_show', [
@@ -269,14 +270,14 @@ class CwlController extends AbstractController
     } else {
       $last_request = $entityManager->getRepository(ParamRequest::class)->findOneBy([
           'clanId' => $clanID,
-          'date' => "2501",
+          'date' => date('y') . date('m'),
       ]);
 
       $new_request = True;
       if (!$last_request) {
         $last_request = new ParamRequest();
         $last_request->setClanId($clanID);
-        $last_request->setDate("2501");
+        $last_request->setDate(date('y') . date('m'));
         $last_request->setParameters($jsonRules);
         $new_request = True;
       } else {
@@ -291,7 +292,7 @@ class CwlController extends AbstractController
       $entityManager->flush();
 
       if ($new_request) {
-        $dateKey = "2501";
+        $dateKey = date('y') . date('m');;
         $result = $this->check_and_store_data($clanID, $jsonRules, $dateKey, $entityManager);
 
         if ($result instanceof Response) {
@@ -318,7 +319,7 @@ class CwlController extends AbstractController
       Request $request,
   ): Response
   {
-    $dateKey = "2501";
+    $dateKey = date('y') . date('m');;
 
     $clan = $em->getRepository(Clan::class)->findOneBy(['clan_id' => $clanId]);
     if (!$clan) {

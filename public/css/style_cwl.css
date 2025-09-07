@@ -3,7 +3,7 @@
   --data_container-flex_direction: row;
   --td_nth_child_1-width: 4%;
   --td_nth_child_2-width: 20%;
-  --td_nth_child_n_3-width:calc(80% / 9);
+  /*--td_nth_child_n_3-width:calc(80% / 9);*/
   --hide_icon-width: 50%;
   --title_container-font_size: 300%;
   --message_icon-size: 15px;

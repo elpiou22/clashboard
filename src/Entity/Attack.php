@@ -51,16 +51,16 @@ class Attack
   #[ORM\Column(length: 255)]
   private ?string $tag = null;
 
-  #[ORM\Column]
+  #[ORM\Column(type: 'integer', nullable: true)]
   private ?int $attackerTH = null;
 
-  #[ORM\Column]
+  #[ORM\Column(type: 'integer', nullable: true)]
   private ?int $defenderTH = null;
 
-  #[ORM\Column]
+  #[ORM\Column(type: 'integer', nullable: true)]
   private ?int $percentage = null;
 
-  #[ORM\Column]
+  #[ORM\Column(type: 'integer', nullable: true)]
   private ?int $attackStars = null;
 
   public function getId(): ?int

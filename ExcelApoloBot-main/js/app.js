@@ -18,17 +18,20 @@ let excelPath   = "../export/v0.xlsx";
 
 
 
-async function run(clanID, rules) {
+async function run(clanID, rules, date) {
   try {
+    let brutClanID
     if (clanID[0] === "#") {
+      brutClanID = clanID.slice(1);
       clanID = "%23" + clanID.slice(1);
     } else {
+      brutClanID = clanID;
       clanID = "%23" + clanID;
     }
 
     let data;
     //let path = "../json/2503_apo.json";
-    let path = "../ExcelApoloBot-main/json/2501_apo.json"
+    let path = "../ExcelApoloBot-main/json/"+date+"_"+brutClanID+".json"
     if (fs.existsSync(path)) {
       const fileData = fs.readFileSync(path, 'utf-8');
       data = JSON.parse(fileData);
@@ -49,7 +52,7 @@ async function run(clanID, rules) {
 }
 
 const args = process.argv.slice(2);
-if (args.length > 2) {
+if (args.length > 3) {
   process.stdout.write(JSON.stringify("Error, too many arguments"));
 } else if (args.length === 0) {
   process.stdout.write(JSON.stringify("Error, 0 argument given"));
@@ -64,5 +67,5 @@ else if (args[0].length > 9 || args[0].length < 8) {
 }
 */
 else {
-  run(args[0], args[1]);
+  run(args[0], args[1], args[2]);
 }
