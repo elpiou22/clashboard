@@ -24,7 +24,7 @@
 
 {% block body %}
 
-  {% if app.request.query.get('debugg') == '1' %}
+  {% if app.request.query.get('debug') == '1' %}
     <div style="padding:8px;background:#222;color:#eee;font-family:monospace;">
       <div>players = {{ players|length }}</div>
       <ul>
