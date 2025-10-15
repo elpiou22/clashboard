@@ -23,25 +23,7 @@
 
 
 {% block body %}
-
-    <h1> V2</h1>
-    <div style="padding:8px;background:#222;color:#eee;font-family:monospace;">
-      <div>players = {{ players|length }}</div>
-      <ul>
-        {% for p in players %}
-          {% set key = p.key %}
-          {% set arr = data_All_Players[key] ?? [] %}
-          <li>#{{ loop.index }} key={{ key }} | name={{ p.name }} | attaques={{ arr|length }}
-            {% if arr|length > 0 %}
-              jours:
-              {% for a in arr %}[J{{ a.getDay() }}={{ a.getResult() }}]{% endfor %}
-            {% endif %}
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
-
-
+  
   <div id="clanId" style="display: none;">{{ clanId }}</div>
   <div id="cwlDate" style="display: none;">{{ cwlDate }}</div>
   {% if popup_active %}
