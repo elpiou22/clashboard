@@ -121,9 +121,9 @@
         <tbody>
 
 
-        {% set index = 0 %}
-
-        {% for index in 0..length_members %}
+        {% for p in players %}
+          {% set key = p.key %}
+          {% set name = p.name %}
           <tr>
             <td class="td_icon">
               <div class="hide_icon_container">
@@ -131,11 +131,11 @@
               </div>
             </td>
 
-            <td class="td_member cwl_td">{{ membersInCWL[index] }}</td>
+            <td class="td_member cwl_td">{{ name }}</td>
             {# @todo ici changer l'index par un tag et non un pseudo #}
 
             {% set day = 1 %}
-            {% set data_Per_Player = data_All_Players[membersInCWL[index]] %}
+            {% set data_Per_Player = data_All_Players[key] ?? [] %}
             {% for attack in data_Per_Player %}
 
               {% for index_i in 1 .. 8 %}

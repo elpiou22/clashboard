@@ -79,7 +79,11 @@ class CwlController extends AbstractController
     // index [pseudo][day] => Attack
     $existingIndex = [];
     foreach ($existingAttacks as $attack) {
-      $existingIndex[$attack->getPseudo()][$attack->getDay()] = $attack;
+      // 15/10/25 - deb
+      //$existingIndex[$attack->getPseudo()][$attack->getDay()] = $attack;
+      $key = $attack->getTag() ?: $attack->getPseudo();
+      $existingIndex[$key][$attack->getDay()] = $attack;
+      // 15/10/25 - fin
     }
 
     $batchSize = 50;
@@ -92,6 +96,7 @@ class CwlController extends AbstractController
         // expected keys: playerName, bonusValue, mapPosition, tag, attackerTH, defenderTH, percentage, attackStars
         $playerName  = $contest['playerName']  ?? '';
         $bonusValue  = $contest['bonusValue']  ?? '';
+        $tag         = $contest['tag']         ?? ''; // 15/10/2025
         $mapPosition = $contest['mapPosition'] ?? 0;
 
         if ($playerName === '') {
@@ -143,6 +148,7 @@ class CwlController extends AbstractController
           // Création
           $attack = new Attack();
           $attack->setPseudo($playerName);
+          $attack->setTag($tag ?: null); // 15/10/25
           $attack->setDate($date);
           $attack->setDay($dayNumber);
           $attack->setResult($bonusValue);
@@ -344,7 +350,10 @@ class CwlController extends AbstractController
     $membersInCWL = array_map(static fn(array $row) => $row['pseudo'], $pseudos);
 
     // Attaques du clan + date
-    $attacks = $em->getRepository(Attack::class)->findBy(['clan' => $clan, 'date' => $dateKey]);
+    $attacks = $em->getRepository(Attack::class)->findBy(
+        ['clan' => $clan, 'date' => $dateKey],
+        ['mapPosition' => 'ASC', 'day' => 'ASC']
+    );
 
     // Groupement par joueur + tri par mapPosition
     $byPlayer = [];
@@ -359,7 +368,38 @@ class CwlController extends AbstractController
     $popupActive  = $request->query->getBoolean('popup_active', false);
     $popupMessage = (string) $request->query->get('message', '');
 
+
+    $byPlayer = [];               // key => Attack[]
+    $displayNameByKey = [];       // key => string (pseudo à afficher)
+    $mapPosByKey = [];            // key => int (pour trier)
+
+    foreach ($attacks as $a) {
+      $key = $a->getTag() ?: $a->getPseudo(); // clé unique
+      $byPlayer[$key][] = $a;
+
+      // on préfère le pseudo le plus récent rencontré
+      $displayNameByKey[$key] = $a->getPseudo() ?: $displayNameByKey[$key] ?? $key;
+
+      // mapPosition pour trier les joueurs (prend la première connue)
+      if (!isset($mapPosByKey[$key])) {
+        $mapPosByKey[$key] = (int)$a->getMapPosition();
+      }
+    }
+
+// Ordre d’affichage par mapPosition, puis alpha
+    uksort($byPlayer, function (string $ka, string $kb) use ($mapPosByKey, $displayNameByKey) {
+      $cmp = ($mapPosByKey[$ka] <=> $mapPosByKey[$kb]);
+      return $cmp !== 0 ? $cmp : strcasecmp($displayNameByKey[$ka], $displayNameByKey[$kb]);
+    });
+
+    $players = [];
+    foreach (array_keys($byPlayer) as $k) {
+      $players[] = ['key' => $k, 'name' => $displayNameByKey[$k]];
+    }
+
+
     return $this->render('./cwl/view_cwl.html.twig', [
+        'players'          => $players,              // 15/10/2025
         'membersInCWL'     => $membersInCWL,
         'length_members'   => max(count($membersInCWL) - 1, 0),
         'data_All_Players' => $byPlayer,
