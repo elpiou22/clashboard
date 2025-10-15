@@ -244,19 +244,18 @@
           </span>
         </div>
         <div class="show_members_name_container">
-          {% for index in 0..length_members %}
-            <div class="member member_number_{{ index }}">
+          {% for p in players %}
+            <div class="member member_number_{{ loop.index0 }}">
               <div class="show_members_selector">
                 <img src="{{ asset('./svg/hide.svg') }}" class="show_icon" alt="hide icon">
               </div>
               <div class="show_members_text">
-                <span>
-                  {{ membersInCWL[index] }}
-                </span>
+                <span>{{ p.name ?? p.key }}</span>
               </div>
             </div>
           {% endfor %}
         </div>
+
       </div>
 
     </div>

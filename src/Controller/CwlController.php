@@ -138,8 +138,8 @@ class CwlController extends AbstractController
           }
 
 
-          if (array_key_exists('tag', $contest) && $attack->getTag() !== $contest['tag']) {
-            $attack->setTag($contest['tag']);
+          if ($tag !== '' && $attack->getTag() !== $tag) {
+            $attack->setTag($tag);
             $needPersist = true;
           }
           if (array_key_exists('attackerTH', $contest) && $attack->getAttackerTH() !== (int)$contest['attackerTH']) {
