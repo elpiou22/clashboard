@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CwlController extends AbstractController
 {
@@ -444,6 +445,22 @@ class CwlController extends AbstractController
       $players[] = ['key' => $k, 'name' => $displayNameByKey[$k]];
     }
 
+    if ($request->query->getBoolean('debug', false)) {
+      // quelques stats utiles
+      $byPlayerCounts = [];
+      foreach ($byPlayer as $k => $arr) {
+        $byPlayerCounts[$k] = count($arr);
+      }
+
+      return new JsonResponse([
+          'clanId'      => $clanId,
+          'dateKey'     => $dateKey,
+          'players_count' => count($players),
+          'players_sample' => array_slice($players, 0, 5),
+          'byPlayer_keys'  => array_keys($byPlayer),
+          'byPlayer_counts'=> $byPlayerCounts,
+      ]);
+    }
 
     return $this->render('./cwl/view_cwl.html.twig', [
         'players'          => $players,              // 15/10/2025
