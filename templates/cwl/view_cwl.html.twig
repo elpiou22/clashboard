@@ -133,15 +133,18 @@
 
             <td class="td_member cwl_td">{{ name ?? key }}</td>
 
-            {# Attaques de ce joueur (déjà triées par jour côté contrôleur) #}
             {% set data_Per_Player = data_All_Players[key] ?? [] %}
             {% set currentDay = 1 %}
 
             {% for attack in data_Per_Player %}
-              {# Remplir les jours vides avant cette attaque #}
-              {% for _ in currentDay..(attack.getDay() - 1) %}
-                <td class="td_value"></td>
-              {% endfor %}
+              {% set targetDay = attack.getDay()|default(1) %}
+
+              {# remplir les trous UNIQUEMENT si targetDay > currentDay #}
+              {% if targetDay > currentDay %}
+                {% for _ in currentDay..(targetDay - 1) %}
+                  <td class="td_value"></td>
+                {% endfor %}
+              {% endif %}
 
               {% set value = attack.getResult() is defined ? attack.getResult() : '?' %}
               <td class="td_value cwl_td">
@@ -162,9 +165,7 @@
                         {% endif %}
                 >
                   <input type="text" value="{{ value }}" class="result_day_data" data-key="{{ key }}" disabled aria-label="{{ value }}">
-
                   <div id="nbPosts" style="display: none">{{ nbPosts }}</div>
-
                   <div class="hidden_value attackerTH" style="display:none;">{{ attack.getAttackerTH() }}</div>
                   <div class="hidden_value defenderTH" style="display:none;">{{ attack.getDefenderTH() }}</div>
                   <div class="hidden_value stars" style="display:none;">{{ attack.getAttackStars() }}</div>
@@ -172,13 +173,15 @@
                 </div>
               </td>
 
-              {% set currentDay = attack.getDay() + 1 %}
+              {% set currentDay = targetDay + 1 %}
             {% endfor %}
 
-            {# Compléter jusqu'au jour 7 #}
-            {% for _ in currentDay..7 %}
-              <td class="td_value"></td>
-            {% endfor %}
+            {# compléter jusqu'à J7 uniquement si on n'a pas dépassé #}
+            {% if currentDay <= 7 %}
+              {% for _ in currentDay..7 %}
+                <td class="td_value"></td>
+              {% endfor %}
+            {% endif %}
 
             <td class="td_more">
               <label class="label_more small_box">
@@ -190,6 +193,7 @@
             </td>
           </tr>
         {% endfor %}
+
 
         </tbody>
       </table>
