@@ -114,7 +114,7 @@ class CwlController extends AbstractController
         }
 
         $key = $tag !== '' ? $tag : $playerName;
-
+        $needPersist = false;
         //if (isset($existingIndex[$playerName][$dayNumber])) {
         if (isset($existingIndex[$key][$dayNumber])) { // 15/10/25
           // MAJ si nécessaire
@@ -126,7 +126,7 @@ class CwlController extends AbstractController
             $needPersist = true;
           }
 
-          $needPersist = false;
+
 
           if ($attack->getResult() !== $bonusValue) {
             $attack->setResult($bonusValue);
@@ -383,7 +383,7 @@ class CwlController extends AbstractController
     foreach ($attacks as $attack) {
       //$byPlayer[$attack->getPseudo()][] = $attack; // 15/10/25
 
-      $key = $this->normTag($$attack->getTag());
+      $key = $this->normTag($attack->getTag());
       if ($key === '') { $key = $attack->getPseudo(); }
 
       $byPlayer[$key][] = $attack;
@@ -408,12 +408,12 @@ class CwlController extends AbstractController
     $popupActive  = $request->query->getBoolean('popup_active', false);
     $popupMessage = (string) $request->query->get('message', '');
 
-
+    /* 15/10/25
     $byPlayer = [];               // key => Attack[]
     $displayNameByKey = [];       // key => string (pseudo à afficher)
     $mapPosByKey = [];            // key => int (pour trier)
 
-    /* 15/10/25
+
     foreach ($attacks as $a) {
       $key = $a->getTag() ?: $a->getPseudo(); // clé unique
       $byPlayer[$key][] = $a;
