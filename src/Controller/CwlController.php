@@ -399,6 +399,11 @@ class CwlController extends AbstractController
       return $cmp !== 0 ? $cmp : strcasecmp($displayNameByKey[$ka], $displayNameByKey[$kb]);
     });
 
+    foreach ($byPlayer as $k => $list) {
+      usort($list, fn(Attack $a, Attack $b) => (int)$a->getDay() <=> (int)$b->getDay());
+      $byPlayer[$k] = $list;
+    }
+
     /* 15/10/25
     uksort($byPlayer, function (string $a, string $b) use ($byPlayer) {
       return $byPlayer[$a][0]->getMapPosition() <=> $byPlayer[$b][0]->getMapPosition();
