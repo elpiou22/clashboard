@@ -22,6 +22,13 @@ class CwlController extends AbstractController
     return $this->render('./cwl/home_cwl.html.twig');
   }
 
+  private function normTag(?string $t): string
+  {
+    if (!$t) return '';
+    $t = ltrim($t, "#");
+    return strtoupper($t); // ou laisse tel quel si tu préfères
+  }
+
   public function check_and_store_data(
       $clanID,
       $jsonRules,
@@ -81,7 +88,8 @@ class CwlController extends AbstractController
     foreach ($existingAttacks as $attack) {
       // 15/10/25 - deb
       //$existingIndex[$attack->getPseudo()][$attack->getDay()] = $attack;
-      $key = $attack->getTag() ?: $attack->getPseudo();
+      $key = $this->normTag($attack->getTag());
+      if ($key === '') { $key = $attack->getPseudo(); }
       $existingIndex[$key][$attack->getDay()] = $attack;
       // 15/10/25 - fin
     }
@@ -97,7 +105,8 @@ class CwlController extends AbstractController
         // expected keys: playerName, bonusValue, mapPosition, tag, attackerTH, defenderTH, percentage, attackStars
         $playerName  = $contest['playerName']  ?? '';
         $bonusValue  = $contest['bonusValue']  ?? '';
-        $tag         = $contest['tag']         ?? ''; // 15/10/2025
+        $rawTag      = $contest['tag']         ?? '';// 15/10/2025
+        $tag         = $this->normTag($rawTag);// 15/10/2025
         $mapPosition = $contest['mapPosition'] ?? 0;
 
         if ($playerName === '') {
@@ -111,6 +120,11 @@ class CwlController extends AbstractController
           // MAJ si nécessaire
           //$attack = $existingIndex[$playerName][$dayNumber];// 15/10/25
           $attack = $existingIndex[$key][$dayNumber];
+
+          if ($attack->getTag() !== $tag && $tag !== '') {
+            $attack->setTag($tag);
+            $needPersist = true;
+          }
 
           $needPersist = false;
 
@@ -346,7 +360,7 @@ class CwlController extends AbstractController
       ]);
     }
 
-
+/* 15/10/25
     $pseudos = $em->getRepository(Attack::class)->createQueryBuilder('a')
         ->select('DISTINCT a.pseudo, a.mapPosition')
         ->where('a.clan = :clan')->andWhere('a.date = :date')
@@ -354,6 +368,7 @@ class CwlController extends AbstractController
         ->orderBy('a.mapPosition', 'ASC')
         ->getQuery()->getArrayResult();
     $membersInCWL = array_map(static fn(array $row) => $row['pseudo'], $pseudos);
+*/
 
     // Attaques du clan + date
     $attacks = $em->getRepository(Attack::class)->findBy(
@@ -363,12 +378,31 @@ class CwlController extends AbstractController
 
     // Groupement par joueur + tri par mapPosition
     $byPlayer = [];
+    $displayNameByKey = [];
+    $mapPosByKey = [];
     foreach ($attacks as $attack) {
-      $byPlayer[$attack->getPseudo()][] = $attack;
+      //$byPlayer[$attack->getPseudo()][] = $attack; // 15/10/25
+
+      $key = $this->normTag($$attack->getTag());
+      if ($key === '') { $key = $attack->getPseudo(); }
+
+      $byPlayer[$key][] = $attack;
+      $displayNameByKey[$key] = $attack->getPseudo() ?: ($displayNameByKey[$key] ?? $key);
+      if (!isset($mapPosByKey[$key])) {
+        $mapPosByKey[$key] = (int)$attack->getMapPosition();
+      }
     }
+
+    uksort($byPlayer, function ($ka, $kb) use ($mapPosByKey, $displayNameByKey) {
+      $cmp = $mapPosByKey[$ka] <=> $mapPosByKey[$kb];
+      return $cmp !== 0 ? $cmp : strcasecmp($displayNameByKey[$ka], $displayNameByKey[$kb]);
+    });
+
+    /* 15/10/25
     uksort($byPlayer, function (string $a, string $b) use ($byPlayer) {
       return $byPlayer[$a][0]->getMapPosition() <=> $byPlayer[$b][0]->getMapPosition();
     });
+    */
 
 
     $popupActive  = $request->query->getBoolean('popup_active', false);
@@ -379,6 +413,7 @@ class CwlController extends AbstractController
     $displayNameByKey = [];       // key => string (pseudo à afficher)
     $mapPosByKey = [];            // key => int (pour trier)
 
+    /* 15/10/25
     foreach ($attacks as $a) {
       $key = $a->getTag() ?: $a->getPseudo(); // clé unique
       $byPlayer[$key][] = $a;
@@ -392,6 +427,7 @@ class CwlController extends AbstractController
       }
     }
 
+
 // Ordre d’affichage par mapPosition, puis alpha
     uksort($byPlayer, function (string $ka, string $kb) use ($mapPosByKey, $displayNameByKey) {
       $cmp = ($mapPosByKey[$ka] <=> $mapPosByKey[$kb]);
@@ -402,12 +438,18 @@ class CwlController extends AbstractController
     foreach (array_keys($byPlayer) as $k) {
       $players[] = ['key' => $k, 'name' => $displayNameByKey[$k]];
     }
+    */
+    $players = [];
+    foreach (array_keys($byPlayer) as $k) {
+      $players[] = ['key' => $k, 'name' => $displayNameByKey[$k]];
+    }
 
 
     return $this->render('./cwl/view_cwl.html.twig', [
         'players'          => $players,              // 15/10/2025
-        'membersInCWL'     => $membersInCWL,
-        'length_members'   => max(count($membersInCWL) - 1, 0),
+        //'membersInCWL'     => $membersInCWL,
+        //'length_members'   => max(count($membersInCWL) - 1, 0),
+        'length_members'   => max(count($players) - 1, 0),
         'data_All_Players' => $byPlayer,
         'form'             => $this->createForm(CellIndexType::class)->createView(),
         'clanId'           => $clanId,
