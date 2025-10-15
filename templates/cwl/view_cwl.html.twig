@@ -131,79 +131,66 @@
               </div>
             </td>
 
-            <td class="td_member cwl_td">{{ name }}</td>
-            {# @todo ici changer l'index par un tag et non un pseudo #}
+            <td class="td_member cwl_td">{{ name ?? key }}</td>
 
-            {% set day = 1 %}
+            {# Attaques de ce joueur (déjà triées par jour côté contrôleur) #}
             {% set data_Per_Player = data_All_Players[key] ?? [] %}
+            {% set currentDay = 1 %}
+
             {% for attack in data_Per_Player %}
+              {# Remplir les jours vides avant cette attaque #}
+              {% for _ in currentDay..(attack.getDay() - 1) %}
+                <td class="td_value"></td>
+              {% endfor %}
 
-              {% for index_i in 1 .. 8 %}
-                {# @todo  change 1 .. 8 #}
-                {% if day != attack.getday() %}
-                  {# @todo besoin de tester si afk plusieurs jours au milieu #}
-                  <td class ="td_value"></td>
-                  {% set day = day + 1 %}
+              {% set value = attack.getResult() is defined ? attack.getResult() : '?' %}
+              <td class="td_value cwl_td">
+                {% set nbPosts = attack.getNbPosts() %}
+                {% if nbPosts > 0 %}
+                  <img src="{{ asset('./svg/messages_icon.svg') }}" class="message_icon" alt="message icon">
                 {% endif %}
-              {% endfor %}
 
-                {% set value = attack.getResult() is defined ? attack.getResult() : '?' %}
+                <div
+                        {% if value == "1" %}
+                          class="value-1 small_box show_popup"
+                        {% elseif value == "0" or value == "-1" %}
+                          class="value-0 small_box show_popup"
+                        {% elseif value == "?" %}
+                          class="value-no small_box show_popup"
+                        {% elseif value == "1.1" %}
+                          class="value-11 small_box show_popup"
+                        {% endif %}
+                >
+                  <input type="text" value="{{ value }}" class="result_day_data" data-key="{{ key }}" disabled aria-label="{{ value }}">
 
-                <td class="td_value cwl_td">
+                  <div id="nbPosts" style="display: none">{{ nbPosts }}</div>
 
-                  {% set nbPosts = attack.getNbPosts() %}
-                  {% if nbPosts > 0 %}
-                    <img src="{{ asset('./svg/messages_icon.svg') }}" class="message_icon" alt="message icon">
-                  {% endif %}
-                  <div
-                    {% if value == "1" %}
-                      class="value-1 small_box show_popup"
-                    {% elseif value == "0" %}
-                      class="value-0 small_box show_popup"
-                    {% elseif value == "-1" %}
-                      class="value-0 small_box show_popup"
-                    {% elseif value == '?' %}
-                      class="value-no small_box show_popup"
-                    {% elseif value == '1.1' %}
-                      class="value-11 small_box show_popup"
-                    {% endif %}
-                  >
-                    <input type="text" value="{{ value }}" class="result_day_data" data-key="name" disabled aria-label={{ value }}>
+                  <div class="hidden_value attackerTH" style="display:none;">{{ attack.getAttackerTH() }}</div>
+                  <div class="hidden_value defenderTH" style="display:none;">{{ attack.getDefenderTH() }}</div>
+                  <div class="hidden_value stars" style="display:none;">{{ attack.getAttackStars() }}</div>
+                  <div class="hidden_value percentage" style="display:none;">{{ attack.getPercentage() }}</div>
+                </div>
+              </td>
 
-                    <div id="nbPosts" style="display: none">{{ nbPosts }}</div>
-
-                    {# 11/08/2025 - ajout champ pour focus les atq #}
-                    <div class="hidden_value attackerTH" style="display:none;">{{ attack.getAttackerTH() }}</div>
-                    <div class="hidden_value defenderTH" style="display:none;">{{ attack.getDefenderTH() }}</div>
-                    <div class="hidden_value stars" style="display:none;">{{ attack.getAttackStars() }}</div>
-                    <div class="hidden_value percentage" style="display:none;">{{ attack.getPercentage() }}</div>
-                  </div>
-                </td>
-                {% set day = day + 1 %}
-
+              {% set currentDay = attack.getDay() + 1 %}
             {% endfor %}
-            {%  if day < 8 %}
-              {% for index_j in day+1 .. 8 %}
-                {# @todo besoin de tester si afk plusieurs jours a la fin #}
-                <td class ="td_value"></td>
-              {% endfor %}
-            {%  endif %}
 
-            <td class ="td_more">
+            {# Compléter jusqu'au jour 7 #}
+            {% for _ in currentDay..7 %}
+              <td class="td_value"></td>
+            {% endfor %}
+
+            <td class="td_more">
               <label class="label_more small_box">
                 <input class="input_more small_box" id="input_more" aria-label="more">
               </label>
             </td>
-            <td class ="td_total">
-              {# 11/08/2025 - ajout cursor default pour ecraser le cursor pointer du smallbox #}
-              <div class="small_box sum_days" style="cursor: default;">
-
-              </div>
+            <td class="td_total">
+              <div class="small_box sum_days" style="cursor: default;"></div>
             </td>
-
           </tr>
-          {% set index = index + 1 %}
         {% endfor %}
+
         </tbody>
       </table>
     </div>

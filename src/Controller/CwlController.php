@@ -175,7 +175,7 @@ class CwlController extends AbstractController
           $attack->setClan($clan);
 
           // champs forum
-          if (isset($contest['tag']))         { $attack->setTag($contest['tag']); }
+          //if (isset($contest['tag']))         { $attack->setTag($contest['tag']); }
           if (isset($contest['attackerTH']))  { $attack->setAttackerTH((int)$contest['attackerTH']); }
           if (isset($contest['defenderTH']))  { $attack->setDefenderTH((int)$contest['defenderTH']); }
           if (isset($contest['percentage']))  { $attack->setPercentage((int)$contest['percentage']); }
