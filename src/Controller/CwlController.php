@@ -92,6 +92,7 @@ class CwlController extends AbstractController
     foreach ($excelData as $i => $dayData) {
       $dayNumber = $i + 1;
 
+
       foreach ($dayData as $contest) {
         // expected keys: playerName, bonusValue, mapPosition, tag, attackerTH, defenderTH, percentage, attackStars
         $playerName  = $contest['playerName']  ?? '';
@@ -103,9 +104,13 @@ class CwlController extends AbstractController
           continue; // on ignore les lignes vides
         }
 
-        if (isset($existingIndex[$playerName][$dayNumber])) {
+        $key = $tag !== '' ? $tag : $playerName;
+
+        //if (isset($existingIndex[$playerName][$dayNumber])) {
+        if (isset($existingIndex[$key][$dayNumber])) { // 15/10/25
           // MAJ si nécessaire
-          $attack = $existingIndex[$playerName][$dayNumber];
+          //$attack = $existingIndex[$playerName][$dayNumber];// 15/10/25
+          $attack = $existingIndex[$key][$dayNumber];
 
           $needPersist = false;
 
@@ -166,7 +171,8 @@ class CwlController extends AbstractController
           $pending++;
 
           // on enrichit l'index en mémoire pour éviter doublons dans la même passe
-          $existingIndex[$playerName][$dayNumber] = $attack;
+          //$existingIndex[$playerName][$dayNumber] = $attack; // 15/10/25
+          $existingIndex[$key][$dayNumber] = $attack;
         }
 
         if ($pending >= $batchSize) {
